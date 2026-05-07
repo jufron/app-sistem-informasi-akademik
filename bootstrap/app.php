@@ -13,17 +13,21 @@ return Application::configure(basePath: dirname(__DIR__))
             // auth
             Route::middleware('web', 'auth')->group(base_path('routes/auth.php'));
             // admin rouet
-            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/admin.php'));
+            Route::middleware('web', 'auth', 'role:admin')->group(base_path('routes/dashboard/admin.php'));
             // guru rouet
-            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/guru.php'));
+            Route::middleware('web', 'auth', 'role:guru')->group(base_path('routes/dashboard/guru.php'));
             // siswa rouet
-            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/siswa.php'));
+            Route::middleware('web', 'auth', 'role:siswa')->group(base_path('routes/dashboard/siswa.php'));
             // kepala sekolah rouet
-            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/kepalaSekolah.php'));
+            Route::middleware('web', 'auth', 'role:kepala-sekolah')->group(base_path('routes/dashboard/kepalaSekolah.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
