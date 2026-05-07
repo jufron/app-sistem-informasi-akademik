@@ -9,6 +9,7 @@
         "php": "^8.3",
         "laravel/framework": "^13.7",
         "laravel/tinker": "^3.0",
+        "mckenziearts/laravel-notify": "^3.2",
         "spatie/laravel-permission": "^7.4"
     },
     "require-dev": {
