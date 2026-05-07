@@ -9,6 +9,18 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
+        then: function () {
+            // auth
+            Route::middleware('web', 'auth')->group(base_path('routes/auth.php'));
+            // admin rouet
+            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/admin.php'));
+            // guru rouet
+            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/guru.php'));
+            // siswa rouet
+            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/siswa.php'));
+            // kepala sekolah rouet
+            Route::middleware('web', 'auth')->group(base_path('routes/dashboard/kepalaSekolah.php'));
+        }
     )
     ->withMiddleware(function (Middleware $middleware): void {
         //
