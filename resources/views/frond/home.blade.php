@@ -4,7 +4,7 @@
 
     <!-- Hero Section -->
     <section
-        class="relative w-full pt-36 pb-16 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-700">
+        class="relative w-full pt-36 pb-16 lg:pt-32 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-700">
         <!-- Decorative Background Elements -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
             <div
@@ -96,9 +96,12 @@
                     <div
                         class="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl z-10">
                         <!-- Gunakan gambar sekolah/siswa yang sebenarnya disini -->
-                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop"
+                        <img src="{{ asset('img/photo-1577896851231-70ef18881754 (1).jpg') }}"
                             alt="Siswa SD Katolik Weetabula"
-                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" />
+                            loading="eager"
+                            fetchpriority="high"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+                        />
 
                         <!-- Overlay Gradient -->
                         <div
@@ -160,9 +163,12 @@
                         <div
                             class="relative overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-700 aspect-[4/5]">
                             <!-- Ganti src dengan foto asli Kepala Sekolah -->
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
+                            <img 
+                                src="{{ asset('img/photo-1560250097-0b93528c311a (1).jpg') }}"
+                                loading="lazy"
                                 alt="Kepala Sekolah SD Katolik Weetabula"
-                                class="w-full h-full object-cover object-top filter contrast-125 transition-transform duration-700 group-hover:scale-105">
+                                class="w-full h-full object-cover object-top filter contrast-125 transition-transform duration-700 group-hover:scale-105" 
+                            />
 
                             <!-- Inner Gradient Overlay -->
                             <div
@@ -486,7 +492,10 @@
                                 <!-- Image Container -->
                                 <div
                                     class="relative w-full h-64 md:h-72 rounded-3xl overflow-hidden mb-6 shadow-inner">
-                                    <img :src="slide.img" :alt="slide.name"
+                                    <img 
+                                        :src="slide.img" 
+                                        :alt="slide.name"
+                                        loading="lazy"
                                         class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
 
                                     <!-- Inner Overlay -->
@@ -664,8 +673,12 @@
                             <!-- Profil Alumni -->
                             <div
                                 class="flex items-center space-x-4 border-t border-slate-200/50 dark:border-slate-700/50 pt-6">
-                                <img :src="item.image" :alt="item.name"
-                                    class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-700 object-cover shadow-sm">
+                                <img 
+                                    :src="item.image" 
+                                    :alt="item.name" 
+                                    loading="lazy"
+                                    class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-700 object-cover shadow-sm" 
+                                />
                                 <div>
                                     <h4 class="font-bold text-slate-800 dark:text-white text-sm" x-text="item.name">
                                     </h4>

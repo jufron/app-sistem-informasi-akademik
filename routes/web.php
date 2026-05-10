@@ -3,11 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::view('test', 'frond.home')->name('frond.home');
+Route::view('/', 'frond.home')->name('frond.home');
+Route::view('tentang', 'frond.tentang')->name('frond.tentang');
+Route::view('guru-dan-staf', 'frond.guruDanPengajar')->name('frond.guru-dan-staf');
+Route::view('kontak', 'frond.kontak')->name('frond.kontak');
+Route::view('detail-guru-dan-staf', 'frond.detailGuruDanStaf')->name('frond.guru-dan-staf.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

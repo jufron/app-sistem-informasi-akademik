@@ -27,29 +27,29 @@ document.documentElement.classList.toggle('dark', isDarkMode);"
 
         <!-- Desktop Menu Links -->
         <div class="hidden lg:flex items-center space-x-10 relative z-[10000]">
-            <a href="#"
-                class="text-sm font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
+            <a href="{{ route('frond.home') }}"
+                class="text-sm font-bold uppercase tracking-widest {{ request()->routeIs('frond.home') ? 'text-indigo-600' : 'text-slate-600 dark:text-slate-300' }} hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
                 Beranda
                 <span
-                    class="absolute -bottom-2 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                    class="absolute -bottom-2 left-0 {{ request()->routeIs('frond.home') ? 'w-full' : 'w-0' }} h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#"
-                class="text-sm font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
-                Akademik
+            <a href="{{ route('frond.tentang') }}"
+                class="text-sm font-bold uppercase tracking-widest {{ request()->routeIs('frond.tentang') ? 'text-indigo-600' : 'text-slate-600 dark:text-slate-300' }} hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
+                Tentang
                 <span
-                    class="absolute -bottom-2 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                    class="absolute -bottom-2 left-0 {{ request()->routeIs('frond.tentang') ? 'w-full' : 'w-0' }} h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#"
-                class="text-sm font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
-                Fasilitas
+            <a href="{{ route('frond.guru-dan-staf') }}"
+                class="text-sm font-bold uppercase tracking-widest {{ request()->routeIs('frond.guru-dan-staf') ? 'text-indigo-600' : 'text-slate-600 dark:text-slate-300' }} hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
+                Guru & Staf
                 <span
-                    class="absolute -bottom-2 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                    class="absolute -bottom-2 left-0 {{ request()->routeIs('frond.guru-dan-staf') ? 'w-full' : 'w-0' }} h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#"
-                class="text-sm font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
-                Informasi
+            <a href="{{ route('frond.kontak') }}"
+                class="text-sm font-bold uppercase tracking-widest {{ request()->routeIs('frond.kontak') ? 'text-indigo-600' : 'text-slate-600 dark:text-slate-300' }} hover:text-indigo-600 dark:hover:text-white transition-colors relative group">
+                Kontak
                 <span
-                    class="absolute -bottom-2 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                    class="absolute -bottom-2 left-0 {{ request()->routeIs('frond.kontak') ? 'w-full' : 'w-0' }} h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
         </div>
 
@@ -67,7 +67,7 @@ document.documentElement.classList.toggle('dark', isDarkMode);"
             </button>
 
             <div class="flex items-center">
-                <a href="#"
+                <a href="{{ route('login') }}"
                     class="px-10 py-3.5 text-sm font-black text-white bg-indigo-600 hover:bg-indigo-700 rounded-2xl transition-all hover:scale-105 active:scale-95">LOGIN</a>
             </div>
         </div>
@@ -90,18 +90,19 @@ document.documentElement.classList.toggle('dark', isDarkMode);"
         class="lg:hidden absolute top-full left-0 right-0 mt-4 mx-4 p-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-3xl rounded-[2.5rem] border border-white/20 dark:border-slate-700/30 shadow-2xl overflow-hidden"
         @click.away="mobileMenuOpen = false" x-cloak>
         <div class="flex flex-col space-y-6">
-            <a href="#"
-                class="text-xl font-bold text-slate-800 dark:text-white flex items-center justify-between">Beranda <i
-                    class="fas fa-chevron-right text-xs opacity-30"></i></a>
-            <a href="#"
-                class="text-xl font-bold text-slate-800 dark:text-white flex items-center justify-between">Akademik <i
-                    class="fas fa-chevron-right text-xs opacity-30"></i></a>
-            <a href="#"
-                class="text-xl font-bold text-slate-800 dark:text-white flex items-center justify-between">Fasilitas <i
-                    class="fas fa-chevron-right text-xs opacity-30"></i></a>
-            <a href="#"
-                class="text-xl font-bold text-slate-800 dark:text-white flex items-center justify-between">Informasi <i
-                    class="fas fa-chevron-right text-xs opacity-30"></i></a>
+            <a href="{{ route('frond.home') }}"
+                class="text-xl font-bold {{ request()->routeIs('frond.home') ? 'text-indigo-600' : 'text-slate-800 dark:text-white' }} flex items-center justify-between">Beranda
+                <i class="fas fa-chevron-right text-xs opacity-30"></i></a>
+            <a href="{{ route('frond.tentang') }}"
+                class="text-xl font-bold {{ request()->routeIs('frond.tentang') ? 'text-indigo-600' : 'text-slate-800 dark:text-white' }} flex items-center justify-between">Tentang
+                <i class="fas fa-chevron-right text-xs opacity-30"></i></a>
+            <a href="{{ route('frond.guru-dan-staf') }}"
+                class="text-xl font-bold {{ request()->routeIs('frond.guru-dan-staf') ? 'text-indigo-600' : 'text-slate-800 dark:text-white' }} flex items-center justify-between">Guru
+                & Staf
+                <i class="fas fa-chevron-right text-xs opacity-30"></i></a>
+            <a href="{{ route('frond.kontak') }}"
+                class="text-xl font-bold {{ request()->routeIs('frond.kontak') ? 'text-indigo-600' : 'text-slate-800 dark:text-white' }} flex items-center justify-between">Kontak
+                <i class="fas fa-chevron-right text-xs opacity-30"></i></a>
 
             <hr class="border-slate-200 dark:border-slate-800">
 
@@ -117,7 +118,7 @@ document.documentElement.classList.toggle('dark', isDarkMode);"
                 </button>
             </div>
 
-            <a href="#"
+            <a href=""{{ route('login') }}"
                 class="w-full py-5 text-center text-white bg-indigo-600 font-black rounded-2xl hover:bg-indigo-700 transition-colors">LOGIN</a>
         </div>
     </div>

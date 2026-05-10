@@ -50,22 +50,22 @@
                         <span class="absolute -bottom-2 left-0 w-8 h-1 bg-indigo-600 rounded-full"></span>
                     </h4>
                     <ul class="space-y-3">
-                        <li><a href="#"
+                        <li><a href="{{ route('frond.home') }}"
                                 class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors flex items-center group"><i
                                     class="fas fa-chevron-right text-[10px] mr-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all"></i>
-                                Profil Sekolah</a></li>
-                        <li><a href="#"
+                                Beranda</a></li>
+                        <li><a href="{{ route('frond.tentang') }}"
                                 class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors flex items-center group"><i
                                     class="fas fa-chevron-right text-[10px] mr-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all"></i>
-                                Tenaga Pendidik</a></li>
-                        <li><a href="#"
+                                Tentang</a></li>
+                        <li><a href="{{ route('frond.guru-dan-staf') }}"
                                 class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors flex items-center group"><i
                                     class="fas fa-chevron-right text-[10px] mr-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all"></i>
-                                Fasilitas</a></li>
-                        <li><a href="#"
+                                Gur & Stafu</a></li>
+                        <li><a href="{{ route('frond.kontak') }}"
                                 class="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors flex items-center group"><i
                                     class="fas fa-chevron-right text-[10px] mr-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all"></i>
-                                Pendaftaran (PPDB)</a></li>
+                                Kontak</a></li>
                     </ul>
                 </div>
 
