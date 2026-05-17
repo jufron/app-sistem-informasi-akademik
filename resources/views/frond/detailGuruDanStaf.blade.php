@@ -1,6 +1,6 @@
 <x-frond.layout.app title="SD Katolik Weetabula - Masa Depan Cerah Dimulai Di Sini"
     metaDescription="Website resmi SD Katolik Weetabula. Pendidikan dasar unggulan dengan konsep modern, berkarakter, dan inovatif.">
-    <x-frond.navbar />
+    <x-frond.layout.navbar />
 
     <!-- Profil Detail Guru Section (Editorial Liquid Glass) -->
     <section
@@ -178,5 +178,5 @@
         </div>
     </section>
 
-    <x-frond.footer />
+    <x-frond.layout.footer />
 </x-frond.layout.app>

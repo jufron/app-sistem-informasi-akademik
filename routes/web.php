@@ -9,6 +9,10 @@ Route::view('guru-dan-staf', 'frond.guruDanPengajar')->name('frond.guru-dan-staf
 Route::view('kontak', 'frond.kontak')->name('frond.kontak');
 Route::view('detail-guru-dan-staf', 'frond.detailGuruDanStaf')->name('frond.guru-dan-staf.show');
 
+Route::get('asd', function () {
+    return view('dashboard.admin.dashboard');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

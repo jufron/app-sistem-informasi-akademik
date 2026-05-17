@@ -2,5 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @source "../../vendor/mckenziearts/laravel-notify/resources/views/**/*.blade.php";
