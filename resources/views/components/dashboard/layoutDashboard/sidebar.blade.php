@@ -22,22 +22,28 @@
                     <h4 class="text-section">Umum</h4>
                 </li>
 
-                {{-- ? aplikasi --}}
-                {{-- @role('superadmin')
+                @role('admin')
+                {{-- ? menu mata pelajaran --}}
                 <li @class([
                     'nav-item',
-                    'active' => request()->routeIs('dashboard.pengaturan-aplikasi.index')
+                    'active' => request()->routeIs('dashboard.mata-pelajaran.index')
                     ])>
-                    <a href="{{ route('dashboard.pengaturan-aplikasi.index') }}">
+                    <a href="{{ route('dashboard.mata-pelajaran.index') }}">
                         <i class="fas fa-th-list"></i>
-                        <p>Pengaturan Aplikasi</p>
+                        <p>Mata Pelajaran</p>
                     </a>
                 </li>
-                @endrole --}}
+
+                {{-- ? siswa --}}
+                {{-- ?  guru --}}
+                {{-- ? kelas --}}
+                {{-- ? jadwal pelajaran --}}
+                {{-- ? laporan akademik --}}
+                @endrole
 
                 {{-- ? galeri foto --}}
-                {{-- @role('superadmin')
-                <li @class([
+                @role('guru')
+                {{-- <li @class([
                         'nav-item',
                         'active' => request()->routeIs('dashboard.galery-foto.index')
                     ])>
@@ -45,8 +51,34 @@
                         <i class="fas fa-th-list"></i>
                         <p>Galeri Foto</p>
                     </a>
-                </li>
-                @endrole --}}
+                </li> --}}
+                {{-- ? input nilai masing maing guru berdasarkan mata pelajaran --}}
+                @endrole
+
+                @role('kepala-sekolah')
+                {{-- <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.galery-foto.index')
+                    ])>
+                        <a href="{{ route('dashboard.galery-foto.index') }}">
+                        <i class="fas fa-th-list"></i>
+                        <p>Galeri Foto</p>
+                    </a>
+                </li> --}}
+                {{-- ? menerima laporan penilaian --}}
+                @endrole
+
+                @role('siswa')
+                {{-- <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.galery-foto.index')
+                    ])>
+                        <a href="{{ route('dashboard.galery-foto.index') }}">
+                        <i class="fas fa-th-list"></i>
+                        <p>Galeri Foto</p>
+                    </a>
+                </li> --}}
+                @endrole
 
                 {{-- ? manajement berita --}}
                 {{-- @if(auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('kesiswaan'))
