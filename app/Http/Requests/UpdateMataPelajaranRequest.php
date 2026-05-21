@@ -22,8 +22,11 @@ class UpdateMataPelajaranRequest extends FormRequest
      */
     public function rules(): array
     {
+        $mataPelajaran = $this->route('mataPelajaran') ?: $this->route('mata_pelajaran');
+        $id = is_object($mataPelajaran) ? $mataPelajaran->id : $mataPelajaran;
+
         return [
-            'nama'          => ['required', 'string', 'max:100', 'unique:mata_pelajaran,nama,' . $this->mata_pelajaran->id],
+            'nama'          => ['required', 'string', 'max:100', 'unique:mata_pelajaran,nama,' . $id],
             'deskripsi'     => ['nullable', 'string', 'max:16383'],
         ];
     }

@@ -11,16 +11,16 @@ class DashboardController extends Controller
         $userLogin = auth()->user();
         
         if ($userLogin->hasRole('admin')) {
-            notify()->success()->title('Selamat Datang Admin')->send();
+            flash()->success('Selamat Datang Admin');
             return view('dashboard.admin.dashboard', $this->getDataDashboardForAdmin());
         } else if ($userLogin->hasRole('guru')) {
-            notify()->success()->title('Selamat Datang Guru')->send();
+            flash()->success('Selamat Datang Guru');
             return view('dashboard.guru.dashboard', $this->getDataDashboardForGuru());
         } else if ($userLogin->hasRole('kepala-sekolah')) {
-            notify()->success()->title('Selamat Datang Kepala Sekolah')->send();
+            flash()->success('Selamat Datang Kepala Sekolah');
             return view('dashboard.kepala-sekolah.dashboard', $this->getDataDashboardForKepalaSekolah());
         } else if ($userLogin->hasRole('siswa')) {
-            notify()->success()->title('Selamat Datang Siswa')->send();
+            flash()->success('Selamat Datang Siswa');
             return view('dashboard.siswa.dashboard', $this->getDataDaDashboardForSiswa());
         } else {
             return view('dashboard');

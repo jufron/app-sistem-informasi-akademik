@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    
     {{-- ? Favicon --}}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/faviicon/180.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/faviicon/32.png') }}">
@@ -47,12 +47,12 @@
    {{--? CSS Just for demo purpose, don't include it in your project --}}
    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
 
-    @notifyCss
-
     <style>
-        .notify {
-            z-index: 9999 !important;
-            position: fixed !important; /* pastikan dia tidak relative */
+        /* Memaksa kontainer utama Flasher berada di lapisan paling depan */
+        fl-container,
+        .fl-main-container,
+        div[class^="fl-"] {
+            z-index: 999999 !important;
         }
     </style>
 
@@ -125,9 +125,12 @@
     {{-- ? Kaiadmin JS --}}
     <script src="{{ asset('assets/js/kaiadmin.min.js') }}"></script>
 
-    {{-- ? laravel notify 2 --}}
-    <x-notify::notify />
-    @notifyJs
+
+    <script>
+        if (window.jQuery) {
+            window.$ = window.jQuery;
+        }
+    </script>
 
     {{-- ? Script tambahan khusus halaman --}}
     {{ $myScript ?? null }}

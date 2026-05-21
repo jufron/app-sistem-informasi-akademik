@@ -4,89 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a18d5dc0804f4f0fdef998bfd4b9e578",
+    "content-hash": "004cea010e4a0641ccbf37a126b6be52",
     "packages": [
-        {
-            "name": "blade-ui-kit/blade-icons",
-            "version": "1.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/driesvints/blade-icons.git",
-                "reference": "74189a80bbaa4966aebaee54fec3a3c2ef0a5f3a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/driesvints/blade-icons/zipball/74189a80bbaa4966aebaee54fec3a3c2ef0a5f3a",
-                "reference": "74189a80bbaa4966aebaee54fec3a3c2ef0a5f3a",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-                "illuminate/filesystem": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-                "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-                "illuminate/view": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-                "php": "^7.4|^8.0",
-                "symfony/console": "^5.3|^6.0|^7.0|^8.0",
-                "symfony/finder": "^5.3|^6.0|^7.0|^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5.1",
-                "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "phpunit/phpunit": "^9.0|^10.5|^11.0"
-            },
-            "bin": [
-                "bin/blade-icons-generate"
-            ],
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "BladeUI\\Icons\\BladeIconsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "BladeUI\\Icons\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dries Vints",
-                    "homepage": "https://driesvints.com"
-                }
-            ],
-            "description": "A package to easily make use of icons in your Laravel Blade views.",
-            "homepage": "https://github.com/driesvints/blade-icons",
-            "keywords": [
-                "blade",
-                "icons",
-                "laravel",
-                "svg"
-            ],
-            "support": {
-                "issues": "https://github.com/driesvints/blade-icons/issues",
-                "source": "https://github.com/driesvints/blade-icons"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/driesvints",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.paypal.com/paypalme/driesvints",
-                    "type": "paypal"
-                }
-            ],
-            "time": "2026-04-23T19:03:45+00:00"
-        },
         {
             "name": "brick/math",
             "version": "0.14.8",
@@ -2836,154 +2755,6 @@
             "time": "2022-12-02T22:17:43+00:00"
         },
         {
-            "name": "mckenziearts/blade-untitledui-icons",
-            "version": "v1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mckenziearts/blade-untitledui-icons.git",
-                "reference": "a3cb8822a7dd95d9ae7d4a75dd4893ea67c32c90"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mckenziearts/blade-untitledui-icons/zipball/a3cb8822a7dd95d9ae7d4a75dd4893ea67c32c90",
-                "reference": "a3cb8822a7dd95d9ae7d4a75dd4893ea67c32c90",
-                "shasum": ""
-            },
-            "require": {
-                "blade-ui-kit/blade-icons": "^1.9",
-                "illuminate/support": "^9.0|^10.0|^11.0|^12.0|^13.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0|^11.0",
-                "phpunit/phpunit": "^9.0|^10.5|^11.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Mckenziearts\\BladeUntitledUIIcons\\BladeUntitledUIIconsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Mckenziearts\\BladeUntitledUIIcons\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Arthur Monney",
-                    "homepage": "https://arthurmonney.me"
-                }
-            ],
-            "description": "A package to easily make use of UntitledUI icons in your Laravel Blade views.",
-            "homepage": "https://github.com/mckenziearts/blade-untitledui-icons",
-            "keywords": [
-                "Untitled UI",
-                "blade",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/mckenziearts/blade-untitledui-icons/issues",
-                "source": "https://github.com/mckenziearts/blade-untitledui-icons/tree/v1.5.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/monneyarthur",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/mckenziearts",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-03-03T09:57:46+00:00"
-        },
-        {
-            "name": "mckenziearts/laravel-notify",
-            "version": "v3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mckenziearts/laravel-notify.git",
-                "reference": "b4a2910208cea887242736370ad453bf1e61b5f9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mckenziearts/laravel-notify/zipball/b4a2910208cea887242736370ad453bf1e61b5f9",
-                "reference": "b4a2910208cea887242736370ad453bf1e61b5f9",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^11.0|^12.0|^13.0",
-                "illuminate/session": "^11.0|^12.0|^13.0",
-                "illuminate/support": "^11.0|^12.0|^13.0",
-                "mckenziearts/blade-untitledui-icons": "v1.5.0",
-                "php": "^8.3"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.25.0",
-                "mockery/mockery": "^1.6",
-                "orchestra/testbench": "^10.6.0|^11.0",
-                "pestphp/pest": "^3.8.4|^4.4",
-                "pestphp/pest-plugin-type-coverage": "^3.6.1|^4.0",
-                "phpstan/phpstan": "^2.1.27",
-                "rector/rector": "^2.1.7"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Mckenziearts\\Notify\\NotifyServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Mckenziearts\\Notify\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Arthur Monney",
-                    "email": "monneylobe@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Flexible flash notifications for Laravel",
-            "keywords": [
-                "laravel",
-                "laravel-notify",
-                "notification"
-            ],
-            "support": {
-                "issues": "https://github.com/mckenziearts/laravel-notify/issues",
-                "source": "https://github.com/mckenziearts/laravel-notify"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/paypalme/monneyarthur",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/mckenziearts",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-03-03T10:26:29+00:00"
-        },
-        {
             "name": "monolog/monolog",
             "version": "3.10.0",
             "source": {
@@ -3585,6 +3356,142 @@
                 }
             ],
             "time": "2026-02-02T13:08:39+00:00"
+        },
+        {
+            "name": "php-flasher/flasher",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher.git",
+                "reference": "3ddc073a6dafeaa924b64dc0eca3b990b22b8bcd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/3ddc073a6dafeaa924b64dc0eca3b990b22b8bcd",
+                "reference": "3ddc073a6dafeaa924b64dc0eca3b990b22b8bcd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "yoeunes/regex-parser": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "functions.php",
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Flasher\\Prime\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The foundational PHP library for PHPFlasher, enabling the creation of framework-agnostic flash notifications. Ideal for building custom integrations or for use in PHP projects.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "custom-integrations",
+                "flash-notifications",
+                "flasher-core",
+                "framework-agnostic",
+                "open-source",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-13T08:48:01+00:00"
+        },
+        {
+            "name": "php-flasher/flasher-laravel",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher-laravel.git",
+                "reference": "8cfa3b334352c713455ca3d6fc935cc2e181c873"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher-laravel/zipball/8cfa3b334352c713455ca3d6fc935cc2e181c873",
+                "reference": "8cfa3b334352c713455ca3d6fc935cc2e181c873",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": ">=8.2",
+                "php-flasher/flasher": "^2.6.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Flasher": "Flasher\\Laravel\\Facade\\Flasher"
+                    },
+                    "providers": [
+                        "Flasher\\Laravel\\FlasherServiceProvider"
+                    ]
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flasher\\Laravel\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Seamlessly integrate flash notifications into your Laravel applications with PHPFlasher. Enhance user feedback and engagement with minimal setup.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "flash-notifications",
+                "laravel",
+                "open-source",
+                "php",
+                "phpflasher",
+                "user-feedback"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-13T08:48:01+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -7948,6 +7855,94 @@
                 }
             ],
             "time": "2026-03-18T01:20:37+00:00"
+        },
+        {
+            "name": "yoeunes/regex-parser",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yoeunes/regex-parser.git",
+                "reference": "770d1142c3c62195fbde7be6e5277da90b65d3a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yoeunes/regex-parser/zipball/770d1142c3c62195fbde7be6e5277da90b65d3a2",
+                "reference": "770d1142c3c62195fbde7be6e5277da90b65d3a2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "suggest": {
+                "phpstan/extension-installer": "To automatically enable the PHPStan rule for regex validation.",
+                "phpstan/phpstan": "To run static analysis and detect invalid regex patterns.",
+                "psr/cache": "To share AST cache via PSR-6 pools.",
+                "psr/simple-cache": "To share AST cache via PSR-16 caches."
+            },
+            "bin": [
+                "bin/regex"
+            ],
+            "type": "library",
+            "extra": {
+                "ide": {
+                    "regex.dist.json": "./regex.schema.json"
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Automata/LegacyAliases.php"
+                ],
+                "psr-4": {
+                    "RegexParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/yoeunes/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A powerful PCRE regex parser with lexer, AST builder, validation, ReDoS analysis, and syntax highlighting. Zero dependencies, blazing fast, and production-ready.",
+            "homepage": "https://github.com/yoeunes/regex-parser",
+            "keywords": [
+                "PCRE",
+                "ast",
+                "cli",
+                "lexer",
+                "parser",
+                "php",
+                "redos",
+                "regex",
+                "security",
+                "syntax-highlighting",
+                "validation"
+            ],
+            "support": {
+                "docs": "https://github.com/yoeunes/regex-parser#readme",
+                "issues": "https://github.com/yoeunes/regex-parser/issues",
+                "source": "https://github.com/yoeunes/regex-parser"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-01-12T20:49:05+00:00"
         }
     ],
     "packages-dev": [
