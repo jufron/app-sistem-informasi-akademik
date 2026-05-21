@@ -19,7 +19,7 @@
                 </li>
 
                 <li class="nav-section">
-                    <h4 class="text-section">Umum</h4>
+                    <h4 class="text-section">Akademik</h4>
                 </li>
 
                 @role('admin')
@@ -35,7 +35,18 @@
                 </li>
 
                 {{-- ? siswa --}}
+                
                 {{-- ?  guru --}}
+                <li @class([
+                    'nav-item',
+                    'active' => request()->routeIs('dashboard.guru.*')
+                    ])>
+                    <a href="{{ route('dashboard.guru.index') }}">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <p>Guru</p>
+                    </a>
+                </li>
+
                 {{-- ? kelas --}}
                 {{-- ? jadwal pelajaran --}}
                 {{-- ? laporan akademik --}}

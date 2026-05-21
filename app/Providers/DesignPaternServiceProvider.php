@@ -11,6 +11,7 @@ class DesignPaternServiceProvider extends ServiceProvider
      */
     public $singletons = [
         // your service class
+        \App\Services\Interfaces\GuruServiceInterface::class => \App\Services\GuruService::class,
 
         // your repository class
 

@@ -19,7 +19,23 @@ Route::resource('mata-pelajaran', MataPelajaranController::class)
         ]);
 
 // * siswa
-// * guru
+Route::post('guru/import', [\App\Http\Controllers\GuruController::class, 'import'])
+        ->name('dashboard.guru.import');
+Route::get('guru/template', [\App\Http\Controllers\GuruController::class, 'template'])
+        ->name('dashboard.guru.template');
+Route::post('guru/bulk-destroy', [\App\Http\Controllers\GuruController::class, 'bulkDestroy'])
+        ->name('dashboard.guru.bulk-destroy');
+Route::resource('guru', \App\Http\Controllers\GuruController::class)
+        ->parameters(['guru' => 'guru'])
+        ->names([
+            'index'     => 'dashboard.guru.index',
+            'create'    => 'dashboard.guru.create',
+            'store'     => 'dashboard.guru.store',
+            'show'      => 'dashboard.guru.show',
+            'edit'      => 'dashboard.guru.edit',
+            'update'    => 'dashboard.guru.update',
+            'destroy'   => 'dashboard.guru.destroy',
+        ]);
 // * kelas
 // * jadwal pelajaran
 // *laporan akademik
