@@ -23,6 +23,13 @@ class DatabaseSeeder extends Seeder
             MataPelajaranSeeder::class,
             UserSeeder::class,
             GuruSeeder::class,
+            SemesterSeeder::class,
+            KelasSeeder::class,
+            RombelSeeder::class,
+            JadwalPelajaranSeeder::class,
+            RuanganKelasSeeder::class,
+            SiswaSeeder::class,
+            AnggotaKelasSeeder::class,
         ]);
     }
 }

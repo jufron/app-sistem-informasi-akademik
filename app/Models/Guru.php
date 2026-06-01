@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Table('guru')]
 #[Fillable([
@@ -46,6 +47,14 @@ class Guru extends Model
     }
 
     /**
+     * Get the lesson schedules for the teacher.
+     */
+    public function jadwalPelajaran(): HasMany
+    {
+        return $this->hasMany(JadwalPelajaran::class, 'guru_id');
+    }
+
+    /**
      * Get the gender that belongs to the teacher.
      */
     public function jenisKelamin(): BelongsTo
@@ -60,4 +69,14 @@ class Guru extends Model
     {
         return $this->belongsTo(Agama::class, 'agama_id');
     }
+
+    /**
+     * Get the ruangan kelas entries managed by this teacher (as wali kelas).
+     */
+    public function ruanganKelas(): HasMany
+    {
+        return $this->hasMany(RuanganKelas::class, 'guru_id');
+    }
 }
+
+

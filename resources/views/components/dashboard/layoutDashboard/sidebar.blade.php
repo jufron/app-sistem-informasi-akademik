@@ -8,10 +8,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 {{-- ? dashboard --}}
-                <li @class([
-                    'nav-item',
-                    'active' => request()->routeIs('dashboard')
-                ])>
+                <li @class(['nav-item', 'active' => request()->routeIs('dashboard')])>
                     <a href="{{ route('dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashobard</p>
@@ -23,38 +20,58 @@
                 </li>
 
                 @role('admin')
-                {{-- ? menu mata pelajaran --}}
-                <li @class([
-                    'nav-item',
-                    'active' => request()->routeIs('dashboard.mata-pelajaran.index')
+                    {{-- ? menu mata pelajaran --}}
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.mata-pelajaran.index'),
                     ])>
-                    <a href="{{ route('dashboard.mata-pelajaran.index') }}">
-                        <i class="fas fa-th-list"></i>
-                        <p>Mata Pelajaran</p>
-                    </a>
-                </li>
+                        <a href="{{ route('dashboard.mata-pelajaran.index') }}">
+                            <i class="fas fa-th-list"></i>
+                            <p>Mata Pelajaran</p>
+                        </a>
+                    </li>
 
-                {{-- ? siswa --}}
-                
-                {{-- ?  guru --}}
-                <li @class([
-                    'nav-item',
-                    'active' => request()->routeIs('dashboard.guru.*')
+                    {{-- ? siswa --}}
+
+                    {{-- ?  guru --}}
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.guru.*'),
                     ])>
-                    <a href="{{ route('dashboard.guru.index') }}">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <p>Guru</p>
-                    </a>
-                </li>
+                        <a href="{{ route('dashboard.guru.index') }}">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>Guru</p>
+                        </a>
+                    </li>
 
-                {{-- ? kelas --}}
-                {{-- ? jadwal pelajaran --}}
-                {{-- ? laporan akademik --}}
+                    {{-- ? kelas --}}
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.ruangan-kelas.*'),
+                    ])>
+                        <a href="{{ route('dashboard.ruangan-kelas.index') }}">
+                            <i class="fas fa-school"></i>
+                            <p>Ruangan Kelas</p>
+                        </a>
+                    </li>
+
+
+                    {{-- ? jadwal pelajaran --}}
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.jadwal-pelajaran.*'),
+                    ])>
+                        <a href="{{ route('dashboard.jadwal-pelajaran.index') }}">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>Jadwal Pelajaran</p>
+                        </a>
+                    </li>
+                    {{-- ? laporan akademik --}}
                 @endrole
 
                 {{-- ? galeri foto --}}
                 @role('guru')
-                {{-- <li @class([
+                    {{-- <li @class([
                         'nav-item',
                         'active' => request()->routeIs('dashboard.galery-foto.index')
                     ])>
@@ -63,11 +80,11 @@
                         <p>Galeri Foto</p>
                     </a>
                 </li> --}}
-                {{-- ? input nilai masing maing guru berdasarkan mata pelajaran --}}
+                    {{-- ? input nilai masing maing guru berdasarkan mata pelajaran --}}
                 @endrole
 
                 @role('kepala-sekolah')
-                {{-- <li @class([
+                    {{-- <li @class([
                         'nav-item',
                         'active' => request()->routeIs('dashboard.galery-foto.index')
                     ])>
@@ -76,11 +93,11 @@
                         <p>Galeri Foto</p>
                     </a>
                 </li> --}}
-                {{-- ? menerima laporan penilaian --}}
+                    {{-- ? menerima laporan penilaian --}}
                 @endrole
 
                 @role('siswa')
-                {{-- <li @class([
+                    {{-- <li @class([
                         'nav-item',
                         'active' => request()->routeIs('dashboard.galery-foto.index')
                     ])>
@@ -92,7 +109,7 @@
                 @endrole
 
                 {{-- ? manajement berita --}}
-                {{-- @if(auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('kesiswaan'))
+                {{-- @if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('kesiswaan'))
                 <x-dashboard.linkMenu-dropdown
                     id="manajement-berita"
                     title="Manajement Berita"
