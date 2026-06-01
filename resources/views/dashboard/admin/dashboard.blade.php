@@ -1,350 +1,423 @@
-<x-dashboard.layoutDashboard.app title="Home">
-    {{-- * my style --}}
+<x-dashboard.layoutDashboard.app title="Dashboard Admin">
     <x-slot:myStyle>
+        {{-- ? ApexCharts CSS / Styling --}}
+        <style>
+            .welcome-card {
+                background: linear-gradient(135deg, #1572e8 0%, #00c6ff 100%);
+                color: #ffffff;
+                border-radius: 16px;
+                border: none;
+                position: relative;
+                overflow: hidden;
+            }
 
+            .welcome-card::after {
+                content: '';
+                position: absolute;
+                width: 250px;
+                height: 250px;
+                background: rgba(255, 255, 255, 0.15);
+                border-radius: 50%;
+                top: -60px;
+                right: -60px;
+                z-index: 1;
+            }
+
+            .welcome-card::before {
+                content: '';
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                bottom: -40px;
+                right: 80px;
+                z-index: 1;
+            }
+
+            .welcome-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .stat-card {
+                border-radius: 16px;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                border: 1px solid #ebedf2;
+            }
+
+            .stat-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+            }
+
+            .icon-wrapper {
+                width: 54px;
+                height: 54px;
+                border-radius: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .chart-card {
+                border-radius: 16px;
+                border: 1px solid #ebedf2;
+            }
+
+            .theme-chart {
+                min-height: 330px;
+            }
+        </style>
     </x-slot:myStyle>
 
-    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-        <div>
-            <h1 class="fw-bold mb-3 text-uppercase">Dashboard</h1>
+    <!-- Welcome Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card welcome-card shadow-sm p-4">
+                <div class="welcome-content py-2">
+                    <h2 class="font-weight-bold mb-2">Selamat Datang Kembali, {{ $user->name }}!</h2>
+                    <p class="mb-0 opacity-80" style="font-size: 0.95rem;">
+                        Panel manajemen akademik terpusat. Anda memiliki kendali penuh atas manajemen guru, penjadwalan
+                        kelas, pendaftaran siswa, dan kurikulum sekolah secara dinamis.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    {{-- ? mini card --}}
+
+    <!-- Section 1: 6 Core Dynamic Stats Cards -->
+    <div class="row g-3 mb-4">
+        <!-- Card 1: Siswa -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card stat-card border-0 shadow-sm bg-white h-100">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-wrapper bg-primary-light text-primary mx-auto mb-3"
+                        style="background-color: rgba(21, 114, 232, 0.1);">
+                        <i class="fas fa-user-graduate fa-2x"></i>
+                    </div>
+                    <h3 class="font-weight-bold text-dark mb-1" style="font-size: 1.5rem;">{{ $totalSiswa }}</h3>
+                    <p class="text-secondary font-weight-bold mb-0"
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Siswa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Guru -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card stat-card border-0 shadow-sm bg-white h-100">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-wrapper bg-success-light text-success mx-auto mb-3"
+                        style="background-color: rgba(40, 167, 69, 0.1);">
+                        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                    </div>
+                    <h3 class="font-weight-bold text-dark mb-1" style="font-size: 1.5rem;">{{ $totalGuru }}</h3>
+                    <p class="text-secondary font-weight-bold mb-0"
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Guru & Staf</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Mata Pelajaran -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card stat-card border-0 shadow-sm bg-white h-100">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-wrapper bg-warning-light text-warning mx-auto mb-3"
+                        style="background-color: rgba(255, 193, 7, 0.15);">
+                        <i class="fas fa-book fa-2x"></i>
+                    </div>
+                    <h3 class="font-weight-bold text-dark mb-1" style="font-size: 1.5rem;">{{ $totalMapel }}</h3>
+                    <p class="text-secondary font-weight-bold mb-0"
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Mata Pelajaran</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: Ruangan Kelas -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card stat-card border-0 shadow-sm bg-white h-100">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-wrapper bg-info-light text-info mx-auto mb-3"
+                        style="background-color: rgba(23, 162, 184, 0.1);">
+                        <i class="fas fa-school fa-2x"></i>
+                    </div>
+                    <h3 class="font-weight-bold text-dark mb-1" style="font-size: 1.5rem;">{{ $totalRuangan }}</h3>
+                    <p class="text-secondary font-weight-bold mb-0"
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Ruangan Kelas</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5: Rombongan Belajar -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card stat-card border-0 shadow-sm bg-white h-100">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-wrapper bg-danger-light text-danger mx-auto mb-3"
+                        style="background-color: rgba(220, 53, 69, 0.1);">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                    <h3 class="font-weight-bold text-dark mb-1" style="font-size: 1.5rem;">{{ $totalRombel }}</h3>
+                    <p class="text-secondary font-weight-bold mb-0"
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Rombel</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6: Jadwal Pelajaran -->
+        <div class="col-md-4 col-sm-6">
+            <div class="card stat-card border-0 shadow-sm bg-white h-100">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-wrapper bg-secondary-light text-secondary mx-auto mb-3"
+                        style="background-color: rgba(108, 117, 125, 0.1);">
+                        <i class="fas fa-calendar-alt fa-2x"></i>
+                    </div>
+                    <h3 class="font-weight-bold text-dark mb-1" style="font-size: 1.5rem;">{{ $totalJadwal }}</h3>
+                    <p class="text-secondary font-weight-bold mb-0"
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">Jadwal Pelajaran
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Dynamic Charts (ApexCharts) -->
+    <div class="row g-4 mb-4">
+        <!-- Left Chart: Status Keanggotaan Siswa (Spline Area / Column) -->
+        <div class="col-lg-7">
+            <div class="card chart-card border-0 shadow-sm bg-white h-100">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="card-title text-dark font-weight-bold m-0">
+                        <i class="fas fa-chart-area text-primary me-2"></i> Laporan Keanggotaan Siswa (Status)
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div id="statusSiswaChart" class="theme-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Chart: Penyebaran Gender Siswa (Donut Chart) -->
+        <div class="col-lg-5">
+            <div class="card chart-card border-0 shadow-sm bg-white h-100">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="card-title text-dark font-weight-bold m-0">
+                        <i class="fas fa-chart-pie text-success me-2"></i> Penyebaran Gender Siswa
+                    </h5>
+                </div>
+                <div class="card-body p-4 d-flex align-items-center justify-content-center">
+                    <div id="genderSiswaChart" class="w-100 theme-chart" style="max-width: 380px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Full Width Religion Bar Chart -->
     <div class="row">
-        {{-- ? count kategory berita --}}
-        <div class="col-6 col-sm-4 col-lg-2 col-xl-3">
-          <div class="card">
-            <div class="card-body p-3 text-center">
-              <div class="h1 m-0">asd</div>
-              <div class="text-muted mb-3">Kategori Berita</div>
-            </div>
-          </div>
-        </div>
-        {{-- ? count foto galeri --}}
-        <div class="col-6 col-sm-4 col-lg-2 col-xl-3">
-          <div class="card">
-            <div class="card-body p-3 text-center">
-              <div class="h1 m-0">asd</div>
-              <div class="text-muted mb-3">Foto Galeri</div>
-            </div>
-          </div>
-        </div>
-        {{-- ? count guru & staf --}}
-        <div class="col-6 col-sm-4 col-lg-2 col-xl-3">
-          <div class="card">
-            <div class="card-body p-3 text-center">
-              <div class="h1 m-0">asd</div>
-              <div class="text-muted mb-3">Guru & Staf</div>
-            </div>
-          </div>
-        </div>
-        {{-- ? count siswa prestasi --}}
-        <div class="col-6 col-sm-4 col-lg-2 col-xl-3">
-          <div class="card">
-            <div class="card-body p-3 text-center">
-              <div class="h1 m-0">asd</div>
-              <div class="text-muted mb-3">Siswa Prestasi</div>
-            </div>
-          </div>
-        </div>
-    </div>
-
-    {{-- todo count beita --}}
-    <div class="row row-card-no-pd">
-        {{-- ? count all berita --}}
-        <div class="col-sm-6 col-md-4">
-            <div class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-newspaper text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Total Berita</p>
-                                <h4 class="card-title">asd</h4>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-md-12">
+            <div class="card chart-card border-0 shadow-sm bg-white">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="card-title text-dark font-weight-bold m-0">
+                        <i class="fas fa-chart-bar text-warning me-2"></i> Grafik Penyebaran Agama Siswa
+                    </h5>
                 </div>
-            </div>
-        </div>
-        {{-- ? count berita publish --}}
-        <div class="col-sm-6 col-md-4">
-            <div class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-newspaper text-success"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Berita Publish</p>
-                                <h4 class="card-title">asd</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- ? count berita draft --}}
-        <div class="col-sm-6 col-md-4">
-            <div class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-newspaper text-danger"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Berita Draft</p>
-                                <h4 class="card-title">asd</h4>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-body p-4">
+                    <div id="religionSiswaChart" style="min-height: 280px;"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- todo count testimoni --}}
-    <div class="row row-card-no-pd">
-        {{-- ? count all testimoni --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-comments text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Total Testimoni</p>
-                                <h4 class="card-title">asd</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- ? count testimoni masuk bulan --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-comments text-info"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Testimoni Masuk</p>
-                                <h4 class="card-title">asd</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- ? count testimoni publish --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-comments text-success"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Testimoni Publish</p>
-                                <h4 class="card-title">asd</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- ? count testimoni draft --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-comments text-danger"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Testimoni Draft</p>
-                                <h4 class="card-title">asd</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- todo count ppdb --}}
-    <div class="row">
-        {{-- ? count all ppdb --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-primary card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">Seluruh PPDB</p>
-                                <h4 class="card-title">20</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- ? count ppdb gelombang 1 --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-info card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">PPDB Gelombang 1</p>
-                                <h4 class="card-title">14</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- ? count ppdb gelombang 2 --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-success card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">PPDB Gelombang 2</p>
-                                <h4 class="card-title">16</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- ? count ppdb gelombang 3 --}}
-        <div class="col-sm-6 col-md-3">
-            <div class="card card-stats card-secondary card-round">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 col-stats">
-                            <div class="numbers">
-                                <p class="card-category">PPDB Gelombang 3</p>
-                                <h4 class="card-title">32</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- ? chart statistic --}}
-    <div class="row">
-        {{-- ? chart 1 --}}
-        <div class="col-md-8">
-            <div class="card card-round">
-                <div class="card-header">
-                    <div class="card-head-row">
-                        <div class="card-title">Statistik Tahunan PPDB</div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container" style="min-height: 375px"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                        <div id="areaChart" class="chartjs-render-monitor">
-
-                        </div>
-                    </div>
-                    {{-- <div id="myChartLegend"><ul class="0-legend html-legend"><li><span style="background-color:#f3545d"></span>Subscribers</li><li><span style="background-color:#fdaf4b"></span>New Visitors</li><li><span style="background-color:#177dff"></span>Active Users</li></ul></div> --}}
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            {{-- ? chart 3 --}}
-            <div class="card card-round">
-                <div class="card-header">
-                    <div class="card-head-row">
-                        <div class="card-title">PPDB Jenis Kelamin 2025</div>
-                    </div>
-                </div>
-                <div class="card-body pb-0">
-                    <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                        <div id="jenisKelaminChart" class="chartjs-render-monitor"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            {{-- ? chart 2 --}}
-            <div class="card card-round">
-                <div class="card-header">
-                    <div class="card-head-row">
-                        <div class="card-title">PPDB Agama 2025</div>
-                    </div>
-                </div>
-                <div class="card-body pb-0">
-                    <div class="pull-in"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                        <div id="agamaChart" class="chartjs-render-monitor"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    {{-- * my script --}}
+    <!-- Script Block -->
     <x-slot:myScript>
-
-        {{-- ? apex chart lib --}}
+        <!-- Include ApexCharts Library -->
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-        <script src="{{ asset('js/ppdbChart.js') }}"></script>
-        <script src="{{ asset('js/agamaChart.js') }}"></script>
-        <script src="{{ asset('js/jenisKelaminChart.js') }}"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // 1. Gender Donut Chart
+                var genderLabels = @json($genderData->pluck('name'));
+                var genderTotals = @json($genderData->pluck('total')->map(fn($v) => (int) $v));
 
+                var genderOptions = {
+                    series: genderTotals.length > 0 ? genderTotals : [0],
+                    labels: genderLabels.length > 0 ? genderLabels : ["Tidak Ada Data"],
+                    chart: {
+                        type: 'donut',
+                        height: 330,
+                        fontFamily: 'inherit'
+                    },
+                    colors: ['#1572e8', '#f3545d', '#ff9800', '#00e396'],
+                    legend: {
+                        position: 'bottom',
+                        fontSize: '12px'
+                    },
+                    plotOptions: {
+                        pie: {
+                            donut: {
+                                size: '70%',
+                                labels: {
+                                    show: true,
+                                    name: {
+                                        show: true,
+                                        fontSize: '14px',
+                                        fontWeight: 600
+                                    },
+                                    value: {
+                                        show: true,
+                                        fontSize: '20px',
+                                        fontWeight: 700,
+                                        formatter: function(val) {
+                                            return val + " Siswa";
+                                        }
+                                    },
+                                    total: {
+                                        show: true,
+                                        label: 'Total Siswa',
+                                        formatter: function(w) {
+                                            return w.globals.seriesTotals.reduce((a, b) => a + b, 0) + " Siswa";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            chart: {
+                                height: 280
+                            }
+                        }
+                    }]
+                };
+                var genderChart = new ApexCharts(document.querySelector("#genderSiswaChart"), genderOptions);
+                genderChart.render();
+
+
+                // 2. Status Area Chart
+                var statusLabels = @json($statusData->pluck('name'));
+                var statusTotals = @json($statusData->pluck('total')->map(fn($v) => (int) $v));
+
+                var statusOptions = {
+                    series: [{
+                        name: 'Jumlah Siswa',
+                        data: statusTotals.length > 0 ? statusTotals : [0]
+                    }],
+                    chart: {
+                        type: 'area',
+                        height: 330,
+                        toolbar: {
+                            show: false
+                        },
+                        fontFamily: 'inherit'
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        width: 3
+                    },
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.45,
+                            opacityTo: 0.05,
+                            stops: [0, 90, 100]
+                        }
+                    },
+                    colors: ['#1572e8'],
+                    dataLabels: {
+                        enabled: false
+                    },
+                    xaxis: {
+                        categories: statusLabels.length > 0 ? statusLabels : ["Tidak Ada Data"],
+                        labels: {
+                            style: {
+                                fontWeight: 500
+                            }
+                        }
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function(val) {
+                                return Math.round(val);
+                            }
+                        }
+                    },
+                    grid: {
+                        borderColor: '#f1f1f1',
+                        strokeDashArray: 4
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function(val) {
+                                return val + " Siswa";
+                            }
+                        }
+                    }
+                };
+                var statusChart = new ApexCharts(document.querySelector("#statusSiswaChart"), statusOptions);
+                statusChart.render();
+
+
+                // 3. Religion Horizontal Bar Chart
+                var religionLabels = @json($agamaData->pluck('name'));
+                var religionTotals = @json($agamaData->pluck('total')->map(fn($v) => (int) $v));
+
+                var religionOptions = {
+                    series: [{
+                        name: 'Jumlah Siswa',
+                        data: religionTotals.length > 0 ? religionTotals : [0]
+                    }],
+                    chart: {
+                        type: 'bar',
+                        height: 280,
+                        toolbar: {
+                            show: false
+                        },
+                        fontFamily: 'inherit'
+                    },
+                    colors: ['#28a745', '#17a2b8', '#ffc107', '#dc3545', '#6f42c1', '#fd7e14'],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 6,
+                            horizontal: true,
+                            barHeight: '45%',
+                            distributed: true
+                        }
+                    },
+                    legend: {
+                        show: false
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        textAnchor: 'start',
+                        style: {
+                            colors: ['#fff'],
+                            fontWeight: 600
+                        },
+                        formatter: function(val, opt) {
+                            return val + " Siswa";
+                        },
+                        offsetX: 0
+                    },
+                    xaxis: {
+                        categories: religionLabels.length > 0 ? religionLabels : ["Tidak Ada Data"]
+                    },
+                    grid: {
+                        borderColor: '#f1f1f1',
+                        strokeDashArray: 4
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function(val) {
+                                return val + " Siswa";
+                            }
+                        }
+                    }
+                };
+                var religionChart = new ApexCharts(document.querySelector("#religionSiswaChart"), religionOptions);
+                religionChart.render();
+            });
+        </script>
     </x-slot:myScript>
 </x-dashboard.layoutDashboard.app>

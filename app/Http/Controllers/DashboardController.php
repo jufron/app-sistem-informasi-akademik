@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Siswa;
+use App\Models\Guru;
+use App\Models\MataPelajaran;
+use App\Models\RuanganKelas;
+use App\Models\Rombel;
+use App\Models\JadwalPelajaran;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -31,8 +38,42 @@ class DashboardController extends Controller
     {
         $userLogin = auth()->user();
 
+        // Get total counts
+        $totalSiswa = Siswa::count();
+        $totalGuru = Guru::count();
+        $totalMapel = MataPelajaran::count();
+        $totalRombel = Rombel::count();
+        $totalRuangan = RuanganKelas::count();
+        $totalJadwal = JadwalPelajaran::count();
+
+        // Group by Gender for Donut Chart
+        $genderData = Siswa::join('jenis_kelamin', 'siswa.jenis_kelamin_id', '=', 'jenis_kelamin.id')
+            ->select('jenis_kelamin.nama as name', DB::raw('count(*) as total'))
+            ->groupBy('jenis_kelamin.nama')
+            ->get();
+
+        // Group by Religion for Bar Chart
+        $agamaData = Siswa::join('agama', 'siswa.agama_id', '=', 'agama.id')
+            ->select('agama.nama as name', DB::raw('count(*) as total'))
+            ->groupBy('agama.nama')
+            ->get();
+
+        // Group by Status for Pie/Polar Chart
+        $statusData = Siswa::select('status as name', DB::raw('count(*) as total'))
+            ->groupBy('status')
+            ->get();
+
         return [
-            'user'  => $userLogin
+            'user'          => $userLogin,
+            'totalSiswa'    => $totalSiswa,
+            'totalGuru'     => $totalGuru,
+            'totalMapel'    => $totalMapel,
+            'totalRombel'   => $totalRombel,
+            'totalRuangan'  => $totalRuangan,
+            'totalJadwal'   => $totalJadwal,
+            'genderData'    => $genderData,
+            'agamaData'     => $agamaData,
+            'statusData'    => $statusData,
         ];
     }
 

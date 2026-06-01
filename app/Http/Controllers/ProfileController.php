@@ -11,12 +11,9 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('dashboard.profile.profile', [
             'user' => $request->user(),
         ]);
     }
