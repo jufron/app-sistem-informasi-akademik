@@ -4,6 +4,16 @@ namespace Tests\Feature;
 
 use App\Http\Controllers\DashboardController;
 use App\Models\User;
+use App\Models\Siswa;
+use App\Models\Guru;
+use App\Models\MataPelajaran;
+use App\Models\RuanganKelas;
+use App\Models\Rombel;
+use App\Models\JadwalPelajaran;
+use App\Models\Agama;
+use App\Models\JenisKelamin;
+use App\Models\Kelas;
+use App\Models\Semester;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use ReflectionClass;
@@ -95,6 +105,103 @@ class DashboardControllerTest extends TestCase
      */
     public function test_dashboard_renders_admin_view_with_correct_data(): void
     {
+        // 1. Setup required lookup values
+        $agamaIslam = Agama::create(['nama' => 'Islam']);
+        $agamaKristen = Agama::create(['nama' => 'Kristen Protestan']);
+
+        $jkLaki = JenisKelamin::create(['nama' => 'Laki-laki', 'kode' => 'L']);
+        $jkPerempuan = JenisKelamin::create(['nama' => 'Perempuan', 'kode' => 'P']);
+
+        // 2. Setup Siswa data (2 siswa, different genders, religions, and status)
+        $userSiswa1 = User::factory()->create();
+        $userSiswa1->assignRole('siswa');
+        Siswa::create([
+            'user_id' => $userSiswa1->id,
+            'nisn' => '1000000001',
+            'nis' => '10001',
+            'nama_lengkap' => 'Siswa Laki Islam',
+            'nama_panggilan' => 'SiswaL',
+            'jenis_kelamin_id' => $jkLaki->id,
+            'agama_id' => $agamaIslam->id,
+            'tempat_lahir' => 'Jakarta',
+            'tanggal_lahir' => '2010-01-01',
+            'telepon' => '08123456789',
+            'alamat' => 'Jakarta',
+            'status' => 'Aktif',
+        ]);
+
+        $userSiswa2 = User::factory()->create();
+        $userSiswa2->assignRole('siswa');
+        Siswa::create([
+            'user_id' => $userSiswa2->id,
+            'nisn' => '1000000002',
+            'nis' => '10002',
+            'nama_lengkap' => 'Siswa Perempuan Kristen',
+            'nama_panggilan' => 'SiswaP',
+            'jenis_kelamin_id' => $jkPerempuan->id,
+            'agama_id' => $agamaKristen->id,
+            'tempat_lahir' => 'Surabaya',
+            'tanggal_lahir' => '2010-02-02',
+            'telepon' => '08123456780',
+            'alamat' => 'Surabaya',
+            'status' => 'Lulus',
+        ]);
+
+        // 3. Setup Guru (1 guru)
+        $userGuru = User::factory()->create();
+        $userGuru->assignRole('guru');
+        $guru = Guru::create([
+            'user_id' => $userGuru->id,
+            'nip' => '2000000001',
+            'nama_lengkap' => 'Guru Laki',
+            'nama_panggilan' => 'GuruL',
+            'jenis_kelamin_id' => $jkLaki->id,
+            'agama_id' => $agamaIslam->id,
+            'tempat_lahir' => 'Bandung',
+            'tanggal_lahir' => '1980-01-01',
+            'telepon' => '08123456788',
+            'alamat' => 'Bandung',
+            'tipe' => 'Bukan Wali Kelas',
+            'status' => 'Aktif',
+        ]);
+
+        // 4. Setup Mata Pelajaran
+        $mapel = MataPelajaran::create([
+            'nama' => 'Matematika',
+            'deskripsi' => 'Belajar matematika'
+        ]);
+
+        // 5. Setup Rombel, Kelas, Semester
+        $rombel = Rombel::create(['nama' => 'VII-A']);
+        $kelas = Kelas::create(['nama' => 'VII']);
+        $semester = Semester::create(['nama' => 'Ganjil']);
+
+        // 6. Setup Ruangan Kelas
+        $ruangan = RuanganKelas::create([
+            'kelas_id' => $kelas->id,
+            'rombel_id' => $rombel->id,
+            'semester_id' => $semester->id,
+            'guru_id' => $guru->id,
+            'tahun_angkatan' => 2026,
+            'tahun_ajaran' => '2026/2027',
+            'aktif' => 1,
+        ]);
+
+        // 7. Setup Jadwal Pelajaran
+        $jadwal = JadwalPelajaran::create([
+            'guru_id' => $guru->id,
+            'mata_pelajaran_id' => $mapel->id,
+            'kelas_id' => $kelas->id,
+            'rombel_id' => $rombel->id,
+            'semester_id' => $semester->id,
+            'ganjil_genap' => 'Ganjil',
+            'hari' => 'Senin',
+            'jam_mulai' => '07:00:00',
+            'jam_selesai' => '08:30:00',
+            'ruangan' => 'R-1',
+            'warna' => '#000000',
+        ]);
+
         // Create user and assign 'admin' role
         $admin = User::factory()->create();
         $admin->assignRole('admin');
@@ -103,8 +210,39 @@ class DashboardControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertViewIs('dashboard.admin.dashboard');
+        
+        // Assert User
         $response->assertViewHas('user', function ($viewUser) use ($admin) {
             return $viewUser->id === $admin->id;
+        });
+
+        // Assert Counts
+        $response->assertViewHas('totalSiswa', 2);
+        $response->assertViewHas('totalGuru', 1);
+        $response->assertViewHas('totalMapel', 1);
+        $response->assertViewHas('totalRombel', 1);
+        $response->assertViewHas('totalRuangan', 1);
+        $response->assertViewHas('totalJadwal', 1);
+
+        // Assert Gender Data
+        $response->assertViewHas('genderData', function ($genderData) {
+            $laki = $genderData->firstWhere('name', 'Laki-laki');
+            $perempuan = $genderData->firstWhere('name', 'Perempuan');
+            return $laki && $laki->total == 1 && $perempuan && $perempuan->total == 1;
+        });
+
+        // Assert Religion Data
+        $response->assertViewHas('agamaData', function ($agamaData) {
+            $islam = $agamaData->firstWhere('name', 'Islam');
+            $kristen = $agamaData->firstWhere('name', 'Kristen Protestan');
+            return $islam && $islam->total == 1 && $kristen && $kristen->total == 1;
+        });
+
+        // Assert Status Data
+        $response->assertViewHas('statusData', function ($statusData) {
+            $aktif = $statusData->firstWhere('name', 'Aktif');
+            $lulus = $statusData->firstWhere('name', 'Lulus');
+            return $aktif && $aktif->total == 1 && $lulus && $lulus->total == 1;
         });
     }
 

@@ -28,7 +28,7 @@ class DashboardController extends Controller
             return view('dashboard.kepala-sekolah.dashboard', $this->getDataDashboardForKepalaSekolah());
         } else if ($userLogin->hasRole('siswa')) {
             flash()->success('Selamat Datang Siswa');
-            return view('dashboard.siswa.dashboard', $this->getDataDaDashboardForSiswa());
+            return view('dashboard.siswa.dashboard', $this->getDataDashboardForSiswa());
         } else {
             return view('dashboard');
         }
@@ -95,7 +95,7 @@ class DashboardController extends Controller
         ];
     }
 
-    private function getDataDaDashboardForSiswa ()
+    private function getDataDashboardForSiswa ()
     {
         $userLogin = auth()->user();
 
