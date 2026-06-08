@@ -57,11 +57,11 @@
     {{-- ? aos animation --}}
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-DBnoiAwI.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DBnoiAwI.css') }}" />
 
-    <script src="{{ asset('build/assets/app-MvBNrVg4.js') }}"></script> --}}
+    <script src="{{ asset('build/assets/app-MvBNrVg4.js') }}"></script>
 
     {{-- ? Style tambahan khusus halaman --}}
     {{ $myStyle ?? null }}
