@@ -2,7 +2,7 @@
     metaDescription="Website resmi SD Katolik Weetabula. Pendidikan dasar unggulan dengan konsep modern, berkarakter, dan inovatif.">
     <x-frond.layout.navbar />
 
-    <!-- Profil Detail Guru Section (Editorial Liquid Glass) -->
+    <!--<!-- Profil Detail Guru Section (Editorial Liquid Glass) -->
     <section
         class="relative py-24 lg:py-32 w-full min-h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-700">
 
@@ -10,10 +10,10 @@
         <div
             class="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none flex justify-center items-center">
             <div
-                class="absolute top-[10%] left-[5%] w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-cyan-400/30 to-blue-500/20 dark:from-cyan-600/10 dark:to-blue-800/10 blur-[120px] animate-pulse">
+                class="absolute top-[10%] left-[5%] w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-[#2A246B]/30 to-[#FCEE09]/20 dark:from-[#2A246B]/20 dark:to-[#FCEE09]/10 blur-[120px] animate-pulse">
             </div>
             <div
-                class="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-indigo-400/30 to-purple-500/20 dark:from-indigo-600/10 dark:to-purple-800/10 blur-[130px]">
+                class="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-[#FCEE09]/30 to-[#2A246B]/20 dark:from-[#FCEE09]/10 dark:to-[#2A246B]/20 blur-[130px]">
             </div>
         </div>
 
@@ -22,10 +22,10 @@
             <!-- Navigation / Back Button -->
             <div class="mb-8">
                 <a href="#"
-                    class="inline-flex items-center space-x-2 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors group">
+                    class="inline-flex items-center space-x-2 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-[#2A246B] dark:text-slate-400 dark:hover:text-[#FCEE09] transition-colors group">
                     <div
                         class="w-8 h-8 rounded-full bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/60 dark:border-white/10 flex items-center justify-center transform group-hover:-translate-x-1 transition-transform">
-                        <i class="fas fa-arrow-left"></i>
+                        <i class="fas fa-arrow-left text-[#2A246B] dark:text-[#FCEE09]"></i>
                     </div>
                     <span>Kembali ke Daftar Tim</span>
                 </a>
@@ -37,7 +37,7 @@
                 <div class="lg:col-span-5 relative w-full h-full">
                     <!-- Portrait Glass Frame -->
                     <div
-                        class="relative w-full aspect-[4/5] md:aspect-auto md:h-full min-h-[500px] lg:min-h-[600px] rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden sticky top-32 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+                        class="relative w-full aspect-[4/5] md:aspect-auto md:h-full min-h-[500px] lg:min-h-[600px] rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden sticky top-32 shadow-[0_20px_50px_rgba(42,36,107,0.1)]">
 
                         <!-- Liquid Glass Backing -->
                         <div
@@ -58,21 +58,21 @@
 
                                 <!-- Inner Gradient -->
                                 <div
-                                    class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent">
+                                    class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C]/80 via-[#1C1C1C]/20 to-transparent">
                                 </div>
 
                                 <!-- Social / Contact Floating Badges on Image -->
                                 <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-3">
                                     <a href="#"
-                                        class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-cyan-600 hover:border-cyan-400 transition-all shadow-lg hover:-translate-y-1">
+                                        class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-[#2A246B] hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:border-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all shadow-lg hover:-translate-y-1">
                                         <i class="fab fa-linkedin-in text-lg"></i>
                                     </a>
                                     <a href="#"
-                                        class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-emerald-500 hover:border-emerald-400 transition-all shadow-lg hover:-translate-y-1">
+                                        class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-[#2A246B] hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:border-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all shadow-lg hover:-translate-y-1">
                                         <i class="fab fa-whatsapp text-xl"></i>
                                     </a>
                                     <a href="#"
-                                        class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-pink-600 hover:border-pink-400 transition-all shadow-lg hover:-translate-y-1">
+                                        class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-[#2A246B] hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:border-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all shadow-lg hover:-translate-y-1">
                                         <i class="fas fa-envelope text-lg"></i>
                                     </a>
                                 </div>
@@ -88,19 +88,19 @@
                     <div>
                         <div class="inline-flex items-center space-x-3 mb-4">
                             <span
-                                class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 text-xs font-black uppercase tracking-widest rounded-full">Guru
+                                class="px-3 py-1 bg-[#2A246B]/10 dark:bg-[#FCEE09]/10 text-[#2A246B] dark:text-[#FCEE09] text-xs font-black uppercase tracking-widest rounded-full">Guru
                                 Tetap</span>
                             <div
                                 class="flex items-center space-x-1 text-xs font-bold text-slate-500 dark:text-slate-400">
-                                <i class="fas fa-circle text-[8px] text-emerald-500"></i>
+                                <i class="fas fa-circle text-[8px] text-[#2A246B] dark:text-[#FCEE09]"></i>
                                 <span>Aktif Mengajar</span>
                             </div>
                         </div>
 
                         <h1
-                            class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 dark:text-white leading-tight tracking-tight mb-2">
+                            class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1C1C1C] dark:text-white leading-tight tracking-tight mb-2">
                             Antonius Budi, <span
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400">S.Pd</span>
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-[#2A246B] to-blue-800 dark:from-[#FCEE09] dark:to-yellow-300">S.Pd</span>
                         </h1>
                         <h3 class="text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-300">Wali Kelas 6 &
                             Guru Matematika</h3>
@@ -108,8 +108,8 @@
 
                     <!-- 2. Tentang / Biografi -->
                     <div class="space-y-4">
-                        <h4 class="text-lg font-bold text-slate-800 dark:text-white flex items-center">
-                            <i class="fas fa-user-circle text-cyan-500 mr-2"></i> Tentang Saya
+                        <h4 class="text-lg font-bold text-[#1C1C1C] dark:text-white flex items-center">
+                            <i class="fas fa-user-circle text-[#2A246B] dark:text-[#FCEE09] mr-2"></i> Tentang Saya
                         </h4>
                         <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                             Memiliki pengalaman lebih dari 10 tahun di dunia pendidikan dasar. Lulusan Universitas Nusa
@@ -124,12 +124,12 @@
 
                         <!-- Box 1: Pendidikan -->
                         <div
-                            class="p-6 rounded-[2rem] bg-white/40 dark:bg-slate-800/50 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:bg-white/60 dark:hover:bg-slate-800/70 transition-colors">
+                            class="p-6 rounded-[2rem] bg-white/40 dark:bg-slate-800/50 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgba(42,36,107,0.03)] hover:bg-white/60 dark:hover:bg-slate-800/70 transition-colors">
                             <div
-                                class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
+                                class="w-10 h-10 rounded-xl bg-[#2A246B]/10 dark:bg-[#FCEE09]/10 flex items-center justify-center text-[#2A246B] dark:text-[#FCEE09] mb-4">
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
-                            <h4 class="font-bold text-slate-800 dark:text-white mb-1">Pendidikan Terakhir</h4>
+                            <h4 class="font-bold text-[#1C1C1C] dark:text-white mb-1">Pendidikan Terakhir</h4>
                             <p class="text-sm text-slate-600 dark:text-slate-400 font-medium">S1 Pendidikan Guru Sekolah
                                 Dasar (PGSD)</p>
                             <p class="text-xs text-slate-500 mt-1">Universitas Nusa Cendana (Lulus 2014)</p>
@@ -137,12 +137,12 @@
 
                         <!-- Box 2: Mata Pelajaran -->
                         <div
-                            class="p-6 rounded-[2rem] bg-white/40 dark:bg-slate-800/50 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:bg-white/60 dark:hover:bg-slate-800/70 transition-colors">
+                            class="p-6 rounded-[2rem] bg-white/40 dark:bg-slate-800/50 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgba(42,36,107,0.03)] hover:bg-white/60 dark:hover:bg-slate-800/70 transition-colors">
                             <div
-                                class="w-10 h-10 rounded-xl bg-cyan-100 dark:bg-cyan-900/50 flex items-center justify-center text-cyan-600 dark:text-cyan-400 mb-4">
+                                class="w-10 h-10 rounded-xl bg-[#FCEE09]/20 dark:bg-[#2A246B]/40 flex items-center justify-center text-[#2A246B] dark:text-[#FCEE09] mb-4">
                                 <i class="fas fa-book"></i>
                             </div>
-                            <h4 class="font-bold text-slate-800 dark:text-white mb-1">Mata Pelajaran</h4>
+                            <h4 class="font-bold text-[#1C1C1C] dark:text-white mb-1">Mata Pelajaran</h4>
                             <div class="flex flex-wrap gap-2 mt-2">
                                 <span
                                     class="px-2.5 py-1 rounded-lg bg-white/60 dark:bg-slate-700/50 text-xs font-bold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">Matematika</span>
@@ -155,17 +155,18 @@
 
                     <!-- 4. Filosofi / Personal Quote (Glass Banner) -->
                     <div class="relative p-8 md:p-10 rounded-[2rem] overflow-hidden group">
-                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-cyan-500 opacity-90 z-10">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-[#2A246B] to-[#1C1C1C] dark:from-[#2A246B] dark:to-blue-900 opacity-90 z-10">
                         </div>
                         <!-- Ambient Inner Glow -->
                         <div
-                            class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/30 via-transparent to-transparent z-10">
+                            class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent z-10">
                         </div>
 
                         <div class="relative z-20">
-                            <i class="fas fa-quote-left text-4xl text-white/30 absolute top-0 left-0"></i>
+                            <i class="fas fa-quote-left text-4xl text-[#FCEE09]/20 absolute top-0 left-0"></i>
                             <p
-                                class="text-lg md:text-xl text-white font-medium leading-relaxed italic relative z-10 pl-6 border-l-2 border-white/30 mt-2">
+                                class="text-lg md:text-xl text-white font-medium leading-relaxed italic relative z-10 pl-6 border-l-2 border-[#FCEE09] mt-2">
                                 "Pendidikan bukan sekadar mentransfer ilmu pengetahuan, melainkan proses membimbing
                                 anak-anak menemukan potensi terbaik dalam diri mereka dengan logika dan cinta kasih."
                             </p>

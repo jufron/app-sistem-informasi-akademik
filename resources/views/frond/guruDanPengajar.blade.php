@@ -41,10 +41,10 @@
         <div
             class="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none flex justify-center items-center">
             <div
-                class="absolute top-[20%] left-[-5%] w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-cyan-400/40 to-blue-500/30 dark:from-cyan-600/20 dark:to-blue-800/20 blur-[100px] animate-pulse">
+                class="absolute top-[20%] left-[-5%] w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-[#2A246B]/40 to-[#FCEE09]/30 dark:from-[#2A246B]/30 dark:to-[#FCEE09]/10 blur-[100px] animate-pulse">
             </div>
             <div
-                class="absolute bottom-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-indigo-400/30 to-purple-500/30 dark:from-indigo-600/10 dark:to-purple-800/10 blur-[120px]">
+                class="absolute bottom-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-[#FCEE09]/40 to-[#2A246B]/30 dark:from-[#FCEE09]/20 dark:to-[#2A246B]/20 blur-[120px]">
             </div>
         </div>
 
@@ -55,13 +55,13 @@
                 class="max-w-7xl mx-auto px-6 lg:px-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div class="max-w-xl">
                     <div class="inline-flex items-center space-x-2 mb-4">
-                        <span class="w-8 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"></span>
-                        <span class="text-sm font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">Tim
+                        <span class="w-8 h-1 bg-gradient-to-r from-[#2A246B] to-[#FCEE09] rounded-full"></span>
+                        <span class="text-sm font-bold uppercase tracking-widest text-[#2A246B] dark:text-[#FCEE09]">Tim
                             Pengajar</span>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-[#1C1C1C] dark:text-white tracking-tight">
                         Guru & <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400">Staf
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[#2A246B] to-blue-800 dark:from-[#FCEE09] dark:to-yellow-300">Staf
                             Kami</span>
                     </h2>
                 </div>
@@ -73,7 +73,7 @@
                         <i class="fas fa-chevron-left"></i>
                     </button>
                     <button @click="next(); stopAutoplay(); startAutoplay();"
-                        class="w-14 h-14 rounded-full bg-cyan-600/90 dark:bg-cyan-500/90 backdrop-blur-md border border-cyan-400/50 flex items-center justify-center text-white hover:bg-cyan-700 transition-all shadow-lg hover:scale-105 active:scale-95">
+                        class="w-14 h-14 rounded-full bg-[#2A246B]/90 dark:bg-[#FCEE09]/90 backdrop-blur-md border border-[#2A246B]/50 dark:border-[#FCEE09]/50 flex items-center justify-center text-white dark:text-[#1C1C1C] hover:bg-[#1C1C1C] dark:hover:bg-yellow-400 transition-all shadow-lg hover:scale-105 active:scale-95">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
@@ -90,7 +90,7 @@
 
                         <!-- REVISI DI SINI: Tag <div> diganti jadi <a>, dan class ditambah 'block' -->
                         <a href="{{ route('frond.guru-dan-staf.show') }}"
-                            class="block snap-start snap-always flex-none w-[75vw] sm:w-[280px] md:w-[320px] aspect-[4/5] relative group cursor-pointer rounded-[2.5rem] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.08)]">
+                            class="block snap-start snap-always flex-none w-[75vw] sm:w-[280px] md:w-[320px] aspect-[4/5] relative group cursor-pointer rounded-[2.5rem] overflow-hidden shadow-[0_15px_40px_rgba(42,36,107,0.08)]">
 
                             <!-- Full Background Image -->
                             <img :src="person.image" :alt="person.name"
@@ -98,17 +98,17 @@
 
                             <!-- Dark Gradient Overlay (Agar text di atasnya selalu terbaca) -->
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                                class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C]/90 via-[#1C1C1C]/30 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500">
                             </div>
 
                             <!-- Floating Glass Panel (Muncul dari bawah) -->
                             <div
-                                class="absolute inset-x-4 bottom-4 p-5 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/40 dark:border-white/10 transform translate-y-3 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
+                                class="absolute inset-x-4 bottom-4 p-5 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-white/10 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 transform translate-y-3 group-hover:translate-y-0 transition-all duration-500 shadow-xl">
 
                                 <div class="flex flex-col">
                                     <!-- Subject Badge -->
                                     <span
-                                        class="text-[10px] md:text-xs font-black text-cyan-400 uppercase tracking-widest mb-1.5"
+                                        class="text-[10px] md:text-xs font-black text-[#FCEE09] uppercase tracking-widest mb-1.5"
                                         x-text="person.subject"></span>
 
                                     <!-- Name -->
@@ -126,13 +126,14 @@
                                         <div
                                             class="mt-4 pt-4 border-t border-white/20 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                             <div class="flex items-center space-x-2">
+                                                <!-- Indicator Dot (Tetap menggunakan warna Emerald untuk menandakan status 'Aktif/Valid') -->
                                                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                                                 <span class="text-xs text-white font-medium"
                                                     x-text="person.status"></span>
                                             </div>
                                             <!-- Tombol Aksi (Panah) -->
                                             <div
-                                                class="w-8 h-8 rounded-full bg-cyan-500/80 backdrop-blur-sm flex items-center justify-center text-white border border-cyan-400/50">
+                                                class="w-8 h-8 rounded-full bg-[#2A246B]/80 dark:bg-[#FCEE09]/80 backdrop-blur-sm flex items-center justify-center text-white dark:text-[#1C1C1C] border border-[#2A246B]/50 dark:border-[#FCEE09]/50">
                                                 <i
                                                     class="fas fa-arrow-right text-xs transform -rotate-45 group-hover:rotate-0 transition-transform duration-500"></i>
                                             </div>

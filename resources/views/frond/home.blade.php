@@ -5,40 +5,36 @@
     <!-- Hero Section -->
     <section
         class="relative w-full pt-36 pb-16 lg:pt-32 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-700">
-        <!-- Decorative Background Elements -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
             <div
-                class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-indigo-400/20 to-purple-400/20 dark:from-indigo-600/10 dark:to-purple-600/10 blur-3xl">
+                class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#2A246B]/15 to-[#FCEE09]/20 dark:from-[#2A246B]/30 dark:to-[#FCEE09]/10 blur-3xl">
             </div>
             <div
-                class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-blue-400/20 to-indigo-400/20 dark:from-blue-600/10 dark:to-indigo-600/10 blur-3xl">
+                class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-[#FCEE09]/20 to-[#2A246B]/15 dark:from-[#FCEE09]/10 dark:to-[#2A246B]/30 blur-3xl">
             </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-                <!-- Left Content: Text & Typography -->
                 <div class="flex flex-col space-y-8 text-center lg:text-left">
-                    <!-- Badge -->
                     <div class="inline-flex items-center justify-center lg:justify-start">
                         <span
-                            class="px-4 py-1.5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 border border-indigo-200 dark:border-indigo-800 text-sm font-semibold text-indigo-700 dark:text-indigo-300 shadow-sm">
-                            <i class="fas fa-bell mr-2 animate-pulse text-indigo-500"></i> PPDB 2026/2027 Telah Dibuka
+                            class="px-4 py-1.5 rounded-full bg-[#2A246B]/10 dark:bg-[#FCEE09]/10 border border-[#2A246B]/20 dark:border-[#FCEE09]/30 text-sm font-semibold text-[#2A246B] dark:text-[#FCEE09] shadow-sm">
+                            <i class="fas fa-bell mr-2 animate-pulse text-[#2A246B] dark:text-[#FCEE09]"></i> PPDB
+                            2026/2027 Telah Dibuka
                         </span>
                     </div>
 
-                    <!-- Main Headline -->
                     <h1
-                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-800 dark:text-white leading-tight">
+                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#1C1C1C] dark:text-white leading-tight">
                         Membentuk Generasi <br class="hidden md:block">
                         <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[#2A246B] to-blue-800 dark:from-[#FCEE09] dark:to-yellow-200">
                             Cerdas & Berkarakter
                         </span>
                     </h1>
 
-                    <!-- Description -->
                     <p
                         class="text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                         SD Katolik Weetabula berkomitmen menghadirkan pendidikan berkualitas yang berakar pada
@@ -46,78 +42,68 @@
                         masa depan, dan penuh kasih.
                     </p>
 
-                    <!-- Call to Actions (Buttons) -->
                     <div
                         class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
                         <a href="#"
-                            class="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-2xl shadow-xl shadow-indigo-600/30 transition-all hover:-translate-y-1 active:translate-y-0 flex items-center justify-center group">
+                            class="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-[#2A246B] hover:bg-[#1C1C1C] dark:text-[#1C1C1C] dark:bg-[#FCEE09] dark:hover:bg-yellow-400 rounded-2xl shadow-xl shadow-[#2A246B]/30 dark:shadow-[#FCEE09]/20 transition-all hover:-translate-y-1 active:translate-y-0 flex items-center justify-center group">
                             Daftar Sekarang
                             <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                         </a>
                         <a href="#"
-                            class="w-full sm:w-auto px-8 py-4 text-base font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm transition-all flex items-center justify-center">
-                            <i class="fas fa-play-circle mr-2 text-indigo-600 dark:text-indigo-400 text-lg"></i>
+                            class="w-full sm:w-auto px-8 py-4 text-base font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm transition-all flex items-center justify-center group">
+                            <i
+                                class="fas fa-play-circle mr-2 text-[#2A246B] dark:text-[#FCEE09] text-lg group-hover:scale-110 transition-transform"></i>
                             Profil Sekolah
                         </a>
                     </div>
 
-                    <!-- Quick Stats -->
                     <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 mt-4">
                         <div class="text-center lg:text-left">
-                            <h3 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-white">A</h3>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">A</h3>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Akreditasi
                             </p>
                         </div>
                         <div class="text-center lg:text-left">
-                            <h3 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-white">40+</h3>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">40+</h3>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Guru
                                 Profesional</p>
                         </div>
                         <div class="text-center lg:text-left">
-                            <h3 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-white">1000+</h3>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">1000+</h3>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Alumni
                                 Sukses</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Content: Image/Visual -->
                 <div
                     class="relative w-full h-[400px] sm:h-[500px] lg:h-[600px] mt-10 lg:mt-0 flex justify-center items-center group">
-                    <!-- Abstract Background Shape for Image -->
                     <div
-                        class="absolute inset-0 bg-gradient-to-tr from-indigo-100 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 rounded-[3rem] transform rotate-3 group-hover:rotate-6 transition-transform duration-500">
+                        class="absolute inset-0 bg-gradient-to-tr from-[#FCEE09]/40 to-white dark:from-[#2A246B]/60 dark:to-slate-800 rounded-[3rem] transform rotate-3 group-hover:rotate-6 transition-transform duration-500">
                     </div>
                     <div
-                        class="absolute inset-0 bg-gradient-to-bl from-indigo-500 to-purple-600 rounded-[3rem] transform -rotate-3 group-hover:-rotate-6 transition-transform duration-500 opacity-20 dark:opacity-40">
+                        class="absolute inset-0 bg-gradient-to-bl from-[#2A246B] to-[#1C1C1C] rounded-[3rem] transform -rotate-3 group-hover:-rotate-6 transition-transform duration-500 opacity-20 dark:opacity-40">
                     </div>
 
-                    <!-- Main Image Container -->
                     <div
                         class="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl z-10">
-                        <!-- Gunakan gambar sekolah/siswa yang sebenarnya disini -->
                         <img src="{{ asset('img/photo-1577896851231-70ef18881754 (1).jpg') }}"
-                            alt="Siswa SD Katolik Weetabula"
-                            loading="eager"
-                            fetchpriority="high"
-                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" 
-                        />
+                            alt="Siswa SD Katolik Weetabula" loading="eager" fetchpriority="high"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" />
 
-                        <!-- Overlay Gradient -->
                         <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent">
+                            class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C]/70 via-[#1C1C1C]/20 to-transparent">
                         </div>
 
-                        <!-- Floating Card in Image -->
                         <div
-                            class="absolute bottom-6 left-6 right-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-white/20 dark:border-slate-700/50 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                            class="absolute bottom-6 left-6 right-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-white/20 dark:border-slate-700/50 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                             <div class="flex items-center space-x-4">
                                 <div
-                                    class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                                    class="w-12 h-12 bg-[#FCEE09]/30 dark:bg-[#2A246B]/60 rounded-xl flex items-center justify-center text-[#2A246B] dark:text-[#FCEE09]">
                                     <i class="fas fa-medal text-xl"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-slate-800 dark:text-white text-sm">Sekolah Berprestasi
+                                    <h4 class="font-bold text-[#1C1C1C] dark:text-white text-sm">Sekolah Berprestasi
                                     </h4>
                                     <p class="text-xs text-slate-500 dark:text-slate-400">Tingkat Kabupaten & Provinsi
                                     </p>
@@ -138,10 +124,10 @@
         <div
             class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-full overflow-hidden z-0 pointer-events-none">
             <div
-                class="absolute top-[20%] left-[-10%] w-[400px] h-[400px] rounded-full bg-purple-500/10 dark:bg-purple-600/10 blur-[80px]">
+                class="absolute top-[20%] left-[-10%] w-[400px] h-[400px] rounded-full bg-[#2A246B]/10 dark:bg-[#2A246B]/20 blur-[80px]">
             </div>
             <div
-                class="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] rounded-full bg-indigo-500/10 dark:bg-indigo-600/10 blur-[100px]">
+                class="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#FCEE09]/20 dark:bg-[#FCEE09]/10 blur-[100px]">
             </div>
         </div>
 
@@ -152,39 +138,36 @@
                 <div class="relative w-full max-w-md mx-auto lg:mx-0 group">
                     <!-- Glowing Blob behind the glass -->
                     <div
-                        class="absolute -inset-1 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-[3rem] blur-2xl opacity-30 dark:opacity-40 group-hover:opacity-50 transition-opacity duration-700">
+                        class="absolute -inset-1 bg-gradient-to-br from-[#2A246B] to-[#FCEE09] rounded-[3rem] blur-2xl opacity-30 dark:opacity-40 group-hover:opacity-50 transition-opacity duration-700">
                     </div>
 
                     <!-- Liquid Glass Container -->
                     <div
-                        class="relative rounded-[3rem] p-4 sm:p-6 bg-white/40 dark:bg-slate-800/40 backdrop-blur-2xl border border-white/60 dark:border-slate-600/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-[1.02]">
+                        class="relative rounded-[3rem] p-4 sm:p-6 bg-white/40 dark:bg-slate-800/40 backdrop-blur-2xl border border-white/60 dark:border-slate-600/40 shadow-[0_8px_32px_0_rgba(42,36,107,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:scale-[1.02]">
 
                         <!-- Inner Image -->
                         <div
                             class="relative overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-700 aspect-[4/5]">
                             <!-- Ganti src dengan foto asli Kepala Sekolah -->
-                            <img 
-                                src="{{ asset('img/photo-1560250097-0b93528c311a (1).jpg') }}"
-                                loading="lazy"
+                            <img src="{{ asset('img/photo-1560250097-0b93528c311a (1).jpg') }}" loading="lazy"
                                 alt="Kepala Sekolah SD Katolik Weetabula"
-                                class="w-full h-full object-cover object-top filter contrast-125 transition-transform duration-700 group-hover:scale-105" 
-                            />
+                                class="w-full h-full object-cover object-top filter contrast-125 transition-transform duration-700 group-hover:scale-105" />
 
                             <!-- Inner Gradient Overlay -->
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent">
+                                class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C]/60 via-transparent to-transparent">
                             </div>
                         </div>
 
                         <!-- Floating Badge (Liquid Glass Mini) -->
                         <div
-                            class="absolute -bottom-6 -right-4 sm:-right-8 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/60 dark:border-slate-600/50 p-5 rounded-3xl shadow-2xl flex items-center space-x-4 transform group-hover:-translate-y-2 transition-transform duration-500">
+                            class="absolute -bottom-6 -right-4 sm:-right-8 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-white/60 dark:border-slate-600/50 p-5 rounded-3xl shadow-2xl flex items-center space-x-4 transform group-hover:-translate-y-2 transition-transform duration-500">
                             <div
-                                class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-inner">
-                                <i class="fas fa-check-circle text-white text-xl"></i>
+                                class="w-12 h-12 rounded-full bg-[#2A246B] dark:bg-[#FCEE09] flex items-center justify-center shadow-inner">
+                                <i class="fas fa-check-circle text-white dark:text-[#1C1C1C] text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-slate-800 dark:text-white text-sm">Terakreditasi A</h4>
+                                <h4 class="font-bold text-[#1C1C1C] dark:text-white text-sm">Terakreditasi A</h4>
                                 <p class="text-xs text-slate-500 dark:text-slate-400">BAN-S/M 2024</p>
                             </div>
                         </div>
@@ -195,20 +178,20 @@
                 <div class="flex flex-col space-y-6 lg:pl-8">
                     <!-- Section Title -->
                     <div class="flex items-center space-x-3">
-                        <span class="w-12 h-1 bg-indigo-600 rounded-full"></span>
-                        <h3 class="text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-widest text-sm">
+                        <span class="w-12 h-1 bg-[#2A246B] dark:bg-[#FCEE09] rounded-full"></span>
+                        <h3 class="text-[#2A246B] dark:text-[#FCEE09] font-bold uppercase tracking-widest text-sm">
                             Sambutan Kepala Sekolah</h3>
                     </div>
 
                     <!-- Main Quote Headline -->
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 dark:text-white leading-tight">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-[#1C1C1C] dark:text-white leading-tight">
                         "Membangun Fondasi Karakter dan <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">Intelektual
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[#2A246B] to-blue-800 dark:from-[#FCEE09] dark:to-yellow-200">Intelektual
                             Sejak Dini</span>"
                     </h2>
 
                     <!-- Big Quote Icon -->
-                    <i class="fas fa-quote-left text-5xl text-indigo-100 dark:text-slate-800 my-2"></i>
+                    <i class="fas fa-quote-left text-5xl text-[#2A246B]/10 dark:text-[#FCEE09]/20 my-2"></i>
 
                     <!-- Text Content -->
                     <div
@@ -227,15 +210,16 @@
 
                     <!-- Signature Block -->
                     <div
-                        class="pt-6 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                        class="pt-6 mt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                         <div>
-                            <h4 class="text-xl font-bold text-slate-800 dark:text-white">Nama Kepala Sekolah, S.Pd.</h4>
-                            <p class="text-sm font-medium text-indigo-600 dark:text-indigo-400 mt-1">Kepala SD Katolik
+                            <h4 class="text-xl font-bold text-[#1C1C1C] dark:text-white">Nama Kepala Sekolah, S.Pd.
+                            </h4>
+                            <p class="text-sm font-medium text-[#2A246B] dark:text-[#FCEE09] mt-1">Kepala SD Katolik
                                 Weetabula</p>
                         </div>
                         <!-- Optional: Signature Image -->
                         <div class="opacity-30 dark:opacity-50">
-                            <i class="fas fa-signature text-4xl text-slate-400"></i>
+                            <i class="fas fa-signature text-4xl text-slate-400 dark:text-slate-500"></i>
                         </div>
                     </div>
                 </div>
@@ -252,20 +236,20 @@
         <div
             class="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none flex justify-center items-center">
             <div
-                class="absolute top-10 left-10 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-pink-400/40 to-purple-500/40 dark:from-pink-600/20 dark:to-purple-800/20 blur-[100px] animate-pulse">
+                class="absolute top-10 left-10 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-[#2A246B]/40 to-[#FCEE09]/30 dark:from-[#2A246B]/30 dark:to-[#FCEE09]/10 blur-[100px] animate-pulse">
             </div>
             <div
-                class="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-indigo-400/40 to-blue-500/40 dark:from-indigo-600/20 dark:to-blue-800/20 blur-[120px]">
+                class="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#FCEE09]/30 to-[#2A246B]/40 dark:from-[#FCEE09]/10 dark:to-[#2A246B]/30 blur-[120px]">
             </div>
             <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-gradient-to-r from-violet-300/30 to-fuchsia-300/30 dark:from-violet-600/10 dark:to-fuchsia-600/10 blur-[90px]">
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-gradient-to-r from-[#2A246B]/20 to-[#FCEE09]/20 dark:from-[#2A246B]/20 dark:to-[#FCEE09]/10 blur-[90px]">
             </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
             <!-- Section Title -->
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-[#1C1C1C] dark:text-white tracking-tight mb-4">
                     Fasilitas</h2>
                 <p class="text-lg text-slate-600 dark:text-slate-300">
                     Lingkungan belajar modern yang dirancang khusus untuk mengoptimalkan potensi dan kreativitas setiap
@@ -280,7 +264,7 @@
                 <div class="md:col-span-2 md:row-span-2 relative group rounded-[2.5rem] overflow-hidden">
                     <!-- Pure Glass Layer -->
                     <div
-                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] dark:shadow-none transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
+                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(42,36,107,0.07)] dark:shadow-none transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
                     </div>
                     <!-- Glossy Top Edge Reflection -->
                     <div
@@ -291,24 +275,24 @@
                     <div class="relative z-20 p-8 md:p-10 h-full flex flex-col justify-between">
                         <div>
                             <div
-                                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg mb-6 transform group-hover:scale-110 transition-transform duration-500">
-                                <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
+                                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2A246B] to-[#1C1C1C] flex items-center justify-center shadow-lg mb-6 transform group-hover:scale-110 transition-transform duration-500">
+                                <i class="fas fa-chalkboard-teacher text-[#FCEE09] text-2xl"></i>
                             </div>
-                            <h3 class="text-3xl font-bold text-slate-800 dark:text-white mb-3">Smart Classroom</h3>
+                            <h3 class="text-3xl font-bold text-[#1C1C1C] dark:text-white mb-3">Smart Classroom</h3>
                             <p class="text-slate-600 dark:text-slate-300 font-medium max-w-sm">Ruang kelas ber-AC yang
                                 dilengkapi dengan Interactive Flat Panel (IFP) dan proyektor untuk pembelajaran visual
                                 yang interaktif.</p>
                         </div>
                         <!-- Decorative subtle image behind glass -->
                         <i
-                            class="fas fa-school absolute -bottom-10 -right-10 text-[200px] text-white/20 dark:text-white/5 transform -rotate-12 group-hover:scale-110 transition-transform duration-700"></i>
+                            class="fas fa-school absolute -bottom-10 -right-10 text-[200px] text-[#2A246B]/10 dark:text-white/5 transform -rotate-12 group-hover:scale-110 transition-transform duration-700"></i>
                     </div>
                 </div>
 
                 <!-- Card 2: Lab Komputer -->
                 <div class="md:col-span-1 lg:col-span-2 relative group rounded-[2.5rem] overflow-hidden">
                     <div
-                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
+                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(42,36,107,0.07)] transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
                     </div>
                     <div
                         class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent z-20 pointer-events-none">
@@ -318,10 +302,10 @@
                         class="relative z-20 p-8 h-full flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                         <div class="flex-1">
                             <div
-                                class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center shadow-lg mb-4">
-                                <i class="fas fa-desktop text-white text-xl"></i>
+                                class="w-12 h-12 rounded-xl bg-[#FCEE09] flex items-center justify-center shadow-lg mb-4">
+                                <i class="fas fa-desktop text-[#2A246B] text-xl"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">Lab Komputer & Internet
+                            <h3 class="text-xl font-bold text-[#1C1C1C] dark:text-white mb-2">Lab Komputer & Internet
                             </h3>
                             <p class="text-sm text-slate-600 dark:text-slate-300">Fasilitas PC modern dengan koneksi
                                 internet berkecepatan tinggi.</p>
@@ -332,7 +316,7 @@
                 <!-- Card 3: Perpustakaan -->
                 <div class="md:col-span-1 lg:col-span-1 relative group rounded-[2.5rem] overflow-hidden">
                     <div
-                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
+                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(42,36,107,0.07)] transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
                     </div>
                     <div
                         class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent z-20 pointer-events-none">
@@ -341,11 +325,11 @@
                     <div class="relative z-20 p-8 h-full flex flex-col justify-end">
                         <div class="absolute top-8 right-8">
                             <div
-                                class="w-12 h-12 rounded-full bg-pink-500/20 backdrop-blur-md flex items-center justify-center border border-pink-500/30">
-                                <i class="fas fa-book-open text-pink-600 dark:text-pink-400"></i>
+                                class="w-12 h-12 rounded-full bg-[#2A246B]/10 dark:bg-[#FCEE09]/10 backdrop-blur-md flex items-center justify-center border border-[#2A246B]/20 dark:border-[#FCEE09]/20">
+                                <i class="fas fa-book-open text-[#2A246B] dark:text-[#FCEE09]"></i>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">Perpustakaan Digital</h3>
+                        <h3 class="text-xl font-bold text-[#1C1C1C] dark:text-white mb-2">Perpustakaan Digital</h3>
                         <p class="text-sm text-slate-600 dark:text-slate-300">Koleksi buku fisik dan e-book yang
                             lengkap.</p>
                     </div>
@@ -354,7 +338,7 @@
                 <!-- Card 4: Lapangan Olahraga -->
                 <div class="md:col-span-2 lg:col-span-1 relative group rounded-[2.5rem] overflow-hidden">
                     <div
-                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
+                        class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(42,36,107,0.07)] transition-all duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40 z-10">
                     </div>
                     <div
                         class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent z-20 pointer-events-none">
@@ -363,11 +347,11 @@
                     <div class="relative z-20 p-8 h-full flex flex-col justify-end">
                         <div class="absolute top-8 left-8">
                             <div
-                                class="w-12 h-12 rounded-full bg-emerald-500/20 backdrop-blur-md flex items-center justify-center border border-emerald-500/30">
-                                <i class="fas fa-basketball-ball text-emerald-600 dark:text-emerald-400"></i>
+                                class="w-12 h-12 rounded-full bg-[#FCEE09]/20 dark:bg-[#2A246B]/40 backdrop-blur-md flex items-center justify-center border border-[#FCEE09]/30 dark:border-[#2A246B]/50">
+                                <i class="fas fa-basketball-ball text-[#2A246B] dark:text-[#FCEE09]"></i>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">Area Olahraga</h3>
+                        <h3 class="text-xl font-bold text-[#1C1C1C] dark:text-white mb-2">Area Olahraga</h3>
                         <p class="text-sm text-slate-600 dark:text-slate-300">Lapangan futsal dan basket standar.</p>
                     </div>
                 </div>
@@ -414,13 +398,13 @@
         <!-- Abstract Vibrant Background Blobs (Sangat penting agar efek kaca terlihat murni) -->
         <div class="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
             <div
-                class="absolute top-[10%] left-[5%] w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-cyan-400/40 to-blue-500/40 dark:from-cyan-600/20 dark:to-blue-800/20 blur-[90px]">
+                class="absolute top-[10%] left-[5%] w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-[#2A246B]/40 to-[#FCEE09]/30 dark:from-[#2A246B]/30 dark:to-[#FCEE09]/10 blur-[90px]">
             </div>
             <div
-                class="absolute bottom-[20%] right-[5%] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-purple-400/40 to-pink-500/40 dark:from-purple-600/20 dark:to-pink-800/20 blur-[100px] animate-pulse">
+                class="absolute bottom-[20%] right-[5%] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-[#FCEE09]/40 to-[#2A246B]/30 dark:from-[#FCEE09]/20 dark:to-[#2A246B]/20 blur-[100px] animate-pulse">
             </div>
             <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-indigo-300/30 to-violet-300/30 dark:from-indigo-600/10 dark:to-violet-600/10 blur-[120px]">
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-[#2A246B]/20 to-[#FCEE09]/20 dark:from-[#2A246B]/20 dark:to-[#FCEE09]/10 blur-[120px]">
             </div>
         </div>
 
@@ -430,17 +414,17 @@
                 <!-- Left Column: Typography -->
                 <div class="flex flex-col space-y-6 text-center lg:text-left">
                     <div class="inline-flex items-center justify-center lg:justify-start space-x-2">
-                        <span class="w-8 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"></span>
+                        <span class="w-8 h-1 bg-gradient-to-r from-[#2A246B] to-[#FCEE09] rounded-full"></span>
                         <span
-                            class="text-sm font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Tenaga
+                            class="text-sm font-bold uppercase tracking-widest text-[#2A246B] dark:text-[#FCEE09]">Tenaga
                             Pendidik</span>
                     </div>
 
                     <h1
-                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-800 dark:text-white leading-tight">
+                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#1C1C1C] dark:text-white leading-tight">
                         Dedikasi Tanpa Batas <br class="hidden md:block">
                         <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[#2A246B] to-blue-800 dark:from-[#FCEE09] dark:to-yellow-200">
                             Pahlawan Tanpa Tanda Jasa
                         </span>
                     </h1>
@@ -456,7 +440,7 @@
                         <template x-for="(slide, index) in slides" :key="index">
                             <button @click="active = index; stopAutoplay(); startAutoplay();"
                                 class="h-2 rounded-full transition-all duration-500 ease-out"
-                                :class="active === index ? 'w-8 bg-indigo-600 dark:bg-indigo-500' :
+                                :class="active === index ? 'w-8 bg-[#2A246B] dark:bg-[#FCEE09]' :
                                     'w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'">
                             </button>
                         </template>
@@ -479,7 +463,7 @@
 
                             <!-- Pure Glass Layer -->
                             <div
-                                class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_20px_50px_rgba(31,38,135,0.1)] dark:shadow-none z-10 transition-colors duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40">
+                                class="absolute inset-0 bg-white/20 dark:bg-slate-900/30 backdrop-blur-3xl border border-white/40 dark:border-white/10 shadow-[0_20px_50px_rgba(42,36,107,0.1)] dark:shadow-none z-10 transition-colors duration-500 group-hover:bg-white/30 dark:group-hover:bg-slate-900/40">
                             </div>
                             <!-- Glossy Top Edge Reflection -->
                             <div
@@ -492,19 +476,16 @@
                                 <!-- Image Container -->
                                 <div
                                     class="relative w-full h-64 md:h-72 rounded-3xl overflow-hidden mb-6 shadow-inner">
-                                    <img 
-                                        :src="slide.img" 
-                                        :alt="slide.name"
-                                        loading="lazy"
+                                    <img :src="slide.img" :alt="slide.name" loading="lazy"
                                         class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
 
                                     <!-- Inner Overlay -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#1C1C1C]/60 to-transparent">
                                     </div>
 
                                     <!-- Floating Role Badge -->
                                     <div
-                                        class="absolute bottom-4 left-4 bg-white/30 dark:bg-slate-900/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/30 dark:border-slate-600/50">
+                                        class="absolute bottom-4 left-4 bg-[#2A246B]/40 dark:bg-[#1C1C1C]/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/30 dark:border-slate-600/50">
                                         <span class="text-xs font-bold text-white shadow-sm"
                                             x-text="slide.role"></span>
                                     </div>
@@ -513,23 +494,23 @@
                                 <!-- Text Content -->
                                 <div class="flex-1 flex flex-col justify-between">
                                     <div>
-                                        <h3 class="text-2xl font-extrabold text-slate-800 dark:text-white mb-2"
+                                        <h3 class="text-2xl font-extrabold text-[#1C1C1C] dark:text-white mb-2"
                                             x-text="slide.name"></h3>
                                         <!-- Quote Box -->
                                         <div class="relative mt-4">
                                             <i
-                                                class="fas fa-quote-left absolute -top-2 -left-2 text-3xl text-indigo-500/20 dark:text-indigo-400/10"></i>
-                                            <p class="text-sm font-medium text-slate-600 dark:text-slate-300 italic relative z-10 pl-4 border-l-2 border-indigo-400/50"
+                                                class="fas fa-quote-left absolute -top-2 -left-2 text-3xl text-[#2A246B]/20 dark:text-[#FCEE09]/20"></i>
+                                            <p class="text-sm font-medium text-slate-600 dark:text-slate-300 italic relative z-10 pl-4 border-l-2 border-[#2A246B]/50 dark:border-[#FCEE09]/50"
                                                 x-text="slide.quote"></p>
                                         </div>
                                     </div>
 
                                     <!-- View Profile Button -->
                                     <button
-                                        class="w-full mt-6 py-3.5 bg-white/40 dark:bg-slate-800/50 hover:bg-white/60 dark:hover:bg-slate-700/50 backdrop-blur-md border border-white/50 dark:border-slate-600/50 rounded-2xl text-sm font-bold text-slate-800 dark:text-white transition-all flex items-center justify-center group/btn">
+                                        class="w-full mt-6 py-3.5 bg-white/40 dark:bg-slate-800/50 hover:bg-white/60 dark:hover:bg-slate-700/50 backdrop-blur-md border border-white/50 dark:border-slate-600/50 rounded-2xl text-sm font-bold text-[#1C1C1C] dark:text-white transition-all flex items-center justify-center group/btn">
                                         Lihat Profil Lengkap
                                         <i
-                                            class="fas fa-arrow-right ml-2 transform group-hover/btn:translate-x-1 transition-transform"></i>
+                                            class="fas fa-arrow-right ml-2 text-[#2A246B] dark:text-[#FCEE09] transform group-hover/btn:translate-x-1 transition-transform"></i>
                                     </button>
                                 </div>
 
@@ -608,32 +589,29 @@
                 }
             ]
         }">
-
         <!-- Abstract Vibrant Background Blobs -->
         <div
             class="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none flex justify-center items-center">
             <div
-                class="absolute top-0 right-10 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-amber-400/30 to-orange-500/30 dark:from-amber-600/10 dark:to-orange-800/10 blur-[100px] animate-pulse">
+                class="absolute top-0 right-10 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-[#FCEE09]/30 to-[#2A246B]/20 dark:from-[#FCEE09]/10 dark:to-[#2A246B]/20 blur-[100px] animate-pulse">
             </div>
             <div
-                class="absolute bottom-10 left-10 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-cyan-400/30 to-emerald-500/30 dark:from-cyan-600/10 dark:to-emerald-800/10 blur-[120px]">
+                class="absolute bottom-10 left-10 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#2A246B]/30 to-[#FCEE09]/20 dark:from-[#2A246B]/20 dark:to-[#FCEE09]/10 blur-[120px]">
             </div>
         </div>
-
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-
             <!-- Header Section -->
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <div class="inline-flex items-center justify-center space-x-2 mb-4">
-                    <i class="fas fa-star text-amber-400"></i>
-                    <i class="fas fa-star text-amber-400"></i>
-                    <i class="fas fa-star text-amber-400"></i>
-                    <i class="fas fa-star text-amber-400"></i>
-                    <i class="fas fa-star text-amber-400"></i>
+                    <i class="fas fa-star text-[#FCEE09]"></i>
+                    <i class="fas fa-star text-[#FCEE09]"></i>
+                    <i class="fas fa-star text-[#FCEE09]"></i>
+                    <i class="fas fa-star text-[#FCEE09]"></i>
+                    <i class="fas fa-star text-[#FCEE09]"></i>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-[#1C1C1C] dark:text-white tracking-tight mb-4">
                     Kisah <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">Sukses
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-[#2A246B] to-blue-800 dark:from-[#FCEE09] dark:to-yellow-200">Sukses
                         Alumni</span>
                 </h2>
                 <p class="text-lg text-slate-600 dark:text-slate-300">
@@ -641,10 +619,8 @@
                     meraih masa depan.
                 </p>
             </div>
-
             <!-- Masonry / Pinterest Style Layout Container -->
             <div class="columns-1 md:columns-2 lg:columns-3 gap-6 w-full">
-
                 <!-- Looping Card menggunakan Alpine.js -->
                 <template x-for="(item, index) in testimonis" :key="index">
 
@@ -654,7 +630,7 @@
 
                         <!-- Pure Liquid Glass Layer -->
                         <div
-                            class="absolute inset-0 bg-white/30 dark:bg-slate-800/40 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-colors duration-500 group-hover:bg-white/40 dark:group-hover:bg-slate-800/50 z-10">
+                            class="absolute inset-0 bg-white/30 dark:bg-slate-800/40 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-[0_8px_30px_rgba(42,36,107,0.04)] transition-colors duration-500 group-hover:bg-white/40 dark:group-hover:bg-slate-800/50 z-10">
                         </div>
                         <!-- Glossy Top Edge -->
                         <div
@@ -664,7 +640,7 @@
                         <div class="relative z-20 p-6 md:p-8">
                             <!-- Dekorasi Quote Icon -->
                             <i
-                                class="fas fa-quote-right text-4xl text-indigo-500/20 dark:text-indigo-400/20 absolute top-6 right-8"></i>
+                                class="fas fa-quote-right text-4xl text-[#2A246B]/20 dark:text-[#FCEE09]/20 absolute top-6 right-8"></i>
 
                             <!-- Teks Dinamis Testimoni -->
                             <p class="text-base text-slate-700 dark:text-slate-200 font-medium leading-relaxed mb-6 relative z-10"
@@ -673,23 +649,18 @@
                             <!-- Profil Alumni -->
                             <div
                                 class="flex items-center space-x-4 border-t border-slate-200/50 dark:border-slate-700/50 pt-6">
-                                <img 
-                                    :src="item.image" 
-                                    :alt="item.name" 
-                                    loading="lazy"
-                                    class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-700 object-cover shadow-sm" 
-                                />
+                                <img :src="item.image" :alt="item.name" loading="lazy"
+                                    class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-700 object-cover shadow-sm" />
                                 <div>
-                                    <h4 class="font-bold text-slate-800 dark:text-white text-sm" x-text="item.name">
+                                    <h4 class="font-bold text-[#1C1C1C] dark:text-white text-sm" x-text="item.name">
                                     </h4>
-                                    <p class="text-xs text-indigo-600 dark:text-indigo-400" x-text="item.role"></p>
+                                    <p class="text-xs text-[#2A246B] dark:text-[#FCEE09]" x-text="item.role"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </template>
-
             </div>
         </div>
     </section>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,10 @@
 
     {{-- Meta dinamis --}}
     <title>{{ $title ?? config('app.name', 'SD Katolik Weetabula') }}</title>
-    <meta name="description" content="{{ $metaDescription ?? 'Profil resmi SD Katolik Weetabula. Menyediakan informasi lengkap tentang program pendidikan, kegiatan siswa, berita sekolah, dan pendaftaran siswa baru.' }}">
-    <meta name="keywords" content="{{ $metaKeywords ?? 'SD Katolik Weetabula, Sekolah Dasar Weetabula, SD di Sumba, Profil Sekolah, Pendaftaran SD, Kegiatan SD, Pendidikan Dasar' }}">
+    <meta name="description"
+        content="{{ $metaDescription ?? 'Profil resmi SD Katolik Weetabula. Menyediakan informasi lengkap tentang program pendidikan, kegiatan siswa, berita sekolah, dan pendaftaran siswa baru.' }}">
+    <meta name="keywords"
+        content="{{ $metaKeywords ?? 'SD Katolik Weetabula, Sekolah Dasar Weetabula, SD di Sumba, Profil Sekolah, Pendaftaran SD, Kegiatan SD, Pendidikan Dasar' }}">
     <meta name="author" content="SD Katolik Weetabula">
 
     {{-- Robots & SEO --}}
@@ -24,7 +27,8 @@
     <meta name="application-name" content="SD Katolik Weetabula">
 
     {{-- Open Graph --}}
-    <meta property="og:title" content="{{ $metaOgTitle ?? $title ?? 'SD Katolik Weetabula - Sekolah Dasar Katolik Terbaik di Weetabula' }}">
+    <meta property="og:title"
+        content="{{ $metaOgTitle ?? ($title ?? 'SD Katolik Weetabula - Sekolah Dasar Katolik Terbaik di Weetabula') }}">
     <meta property="og:description" content="{{ $metaOgDescription ?? $metaDescription }}">
     <meta property="og:image" content="{{ $metaImage ?? asset('img/logo.png') }}">
     <meta property="og:url" content="{{ $metaUrl ?? url()->current() }}">
@@ -46,7 +50,9 @@
     <meta name="theme-color" content="#cade14">
 
     {{-- ? Font Awesome library --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {{-- ? aos animation --}}
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -60,6 +66,7 @@
     {{-- ? Style tambahan khusus halaman --}}
     {{ $myStyle ?? null }}
 </head>
+
 <body>
     {{ $slot }}
 
@@ -68,7 +75,9 @@
     {{-- <x-frond.toTop /> --}}
 
     {{-- ? font awesome library --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"
+        integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     {{-- ? Script tambahan khusus halaman --}}
 
@@ -77,4 +86,5 @@
 
     {{ $myScript ?? null }}
 </body>
+
 </html>
