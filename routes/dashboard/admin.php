@@ -4,6 +4,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\JadwalPelajaranController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\RuanganKelasController;
+use App\Http\Controllers\AppSettingController;
 use Illuminate\Support\Facades\Route;
 
 // * mata pelajaran CRUD
@@ -74,3 +75,8 @@ Route::resource('jadwal-pelajaran', JadwalPelajaranController::class)
     ]);
 
 // *laporan akademik
+
+// * pengaturan aplikasi
+Route::get('app-setting', [AppSettingController::class, 'index'])->name('dashboard.app-setting.index');
+Route::get('app-setting/edit', [AppSettingController::class, 'edit'])->name('dashboard.app-setting.edit');
+Route::put('app-setting', [AppSettingController::class, 'update'])->name('dashboard.app-setting.update');

@@ -14,6 +14,7 @@ class DesignPaternServiceProvider extends ServiceProvider
         \App\Services\Interfaces\GuruServiceInterface::class => \App\Services\GuruService::class,
         \App\Services\Interfaces\JadwalPelajaranServiceInterface::class => \App\Services\JadwalPelajaranService::class,
         \App\Services\Interfaces\RuanganKelasServiceInterface::class => \App\Services\RuanganKelasService::class,
+        \App\Services\Interfaces\AppSettingServiceInterface::class => \App\Services\AppSettingService::class,
 
         // your repository class
 

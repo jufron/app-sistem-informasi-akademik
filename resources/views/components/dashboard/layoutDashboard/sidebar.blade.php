@@ -20,6 +20,17 @@
                 </li>
 
                 @role('admin')
+                    {{-- ? menu pengaturan app --}}
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.app-setting.*'),
+                    ])>
+                        <a href="{{ route('dashboard.app-setting.index') }}">
+                            <i class="fas fa-cogs"></i>
+                            <p>Pengaturan App</p>
+                        </a>
+                    </li>
+
                     {{-- ? menu mata pelajaran --}}
                     <li @class([
                         'nav-item',

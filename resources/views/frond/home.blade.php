@@ -42,20 +42,7 @@
                         masa depan, dan penuh kasih.
                     </p>
 
-                    <div
-                        class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
-                        <a href="#"
-                            class="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bg-[#2A246B] hover:bg-[#1C1C1C] dark:text-[#1C1C1C] dark:bg-[#FCEE09] dark:hover:bg-yellow-400 rounded-2xl shadow-xl shadow-[#2A246B]/30 dark:shadow-[#FCEE09]/20 transition-all hover:-translate-y-1 active:translate-y-0 flex items-center justify-center group">
-                            Daftar Sekarang
-                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                        <a href="#"
-                            class="w-full sm:w-auto px-8 py-4 text-base font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm transition-all flex items-center justify-center group">
-                            <i
-                                class="fas fa-play-circle mr-2 text-[#2A246B] dark:text-[#FCEE09] text-lg group-hover:scale-110 transition-transform"></i>
-                            Profil Sekolah
-                        </a>
-                    </div>
+
 
                     <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 mt-4">
                         <div class="text-center lg:text-left">
@@ -87,7 +74,11 @@
 
                     <div
                         class="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl z-10">
-                        <img src="{{ asset('img/photo-1577896851231-70ef18881754 (1).jpg') }}"
+                        @php
+                            $heroVal = $app_settings['hero_foto'] ?? '';
+                            $heroUrl = $heroVal ? (str_starts_with($heroVal, 'assets/') ? asset($heroVal) : asset('storage/' . $heroVal)) : asset('img/photo-1577896851231-70ef18881754 (1).jpg');
+                        @endphp
+                        <img src="{{ $heroUrl }}"
                             alt="Siswa SD Katolik Weetabula" loading="eager" fetchpriority="high"
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" />
 
@@ -148,8 +139,11 @@
                         <!-- Inner Image -->
                         <div
                             class="relative overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-700 aspect-[4/5]">
-                            <!-- Ganti src dengan foto asli Kepala Sekolah -->
-                            <img src="{{ asset('img/photo-1560250097-0b93528c311a (1).jpg') }}" loading="lazy"
+                            @php
+                                $kepsekFotoVal = $app_settings['foto_kepala_sekolah'] ?? '';
+                                $kepsekFotoUrl = $kepsekFotoVal ? (str_starts_with($kepsekFotoVal, 'assets/') ? asset($kepsekFotoVal) : asset('storage/' . $kepsekFotoVal)) : asset('img/photo-1560250097-0b93528c311a (1).jpg');
+                            @endphp
+                            <img src="{{ $kepsekFotoUrl }}" loading="lazy"
                                 alt="Kepala Sekolah SD Katolik Weetabula"
                                 class="w-full h-full object-cover object-top filter contrast-125 transition-transform duration-700 group-hover:scale-105" />
 
@@ -195,27 +189,18 @@
 
                     <!-- Text Content -->
                     <div
-                        class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg relative z-10">
-                        <p>
-                            Selamat datang di website resmi SD Katolik Weetabula. Puji syukur kita panjatkan kepada
-                            Tuhan Yang Maha Esa atas berkat dan rahmat-Nya, sehingga platform digital ini dapat hadir
-                            sebagai jembatan informasi antara pihak sekolah, orang tua, dan masyarakat luas.
-                        </p>
-                        <p>
-                            Kami berkomitmen untuk tidak hanya fokus pada pencapaian akademik, tetapi juga penanaman
-                            nilai-nilai moral, kedisiplinan, dan cinta kasih. Mari bersama-sama kita bentuk generasi
-                            penerus yang cerdas, beriman, dan siap menghadapi tantangan global.
-                        </p>
+                        class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg relative z-10" style="white-space: pre-line;">
+                        {{ $app_settings['sambutan_kepala_sekolah'] ?? "Selamat datang di website resmi SD Katolik Weetabula. Puji syukur kita panjatkan kepada Tuhan Yang Maha Esa atas berkat dan rahmat-Nya, sehingga platform digital ini dapat hadir sebagai jembatan informasi antara pihak sekolah, orang tua, dan masyarakat luas.\n\nKami berkomitmen untuk tidak hanya fokus pada pencapaian akademik, tetapi juga penanaman nilai-nilai moral, kedisiplinan, dan cinta kasih. Mari bersama-sama kita bentuk generasi penerus yang cerdas, beriman, dan siap menghadapi tantangan global." }}
                     </div>
 
                     <!-- Signature Block -->
                     <div
                         class="pt-6 mt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                         <div>
-                            <h4 class="text-xl font-bold text-[#1C1C1C] dark:text-white">Nama Kepala Sekolah, S.Pd.
+                            <h4 class="text-xl font-bold text-[#1C1C1C] dark:text-white">
+                                {{ $app_settings['nama_kepala_sekolah'] ?? 'Nama Kepala Sekolah, S.Pd.' }}
                             </h4>
-                            <p class="text-sm font-medium text-[#2A246B] dark:text-[#FCEE09] mt-1">Kepala SD Katolik
-                                Weetabula</p>
+                            <p class="text-sm font-medium text-[#2A246B] dark:text-[#FCEE09] mt-1">Kepala Sekolah</p>
                         </div>
                         <!-- Optional: Signature Image -->
                         <div class="opacity-30 dark:opacity-50">
