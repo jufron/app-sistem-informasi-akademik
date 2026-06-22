@@ -78,7 +78,7 @@ class AppSettingSeeder extends Seeder
             ],
             [
                 'key' => 'alamat_sekolah',
-                'value' => 'Jl. Budi Utomo No.7, Jakarta Pusat, DKI Jakarta',
+                'value' => 'Jl. Pendidikan No. 123, Weetabula, Sumba Barat Daya, NTT',
             ],
             [
                 'key' => 'link_facebook',

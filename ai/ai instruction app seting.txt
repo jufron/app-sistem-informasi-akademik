@@ -1,0 +1,45 @@
+ai instruction 
+
+buatkan migration untuk pengaturan app nama migration create_app_setting_table
+kolom key value
+
+buatkan seeder AppSettingSeeder ada pengaturan 
+logo sekolah
+nama sekolah
+hero foto
+foto kepala sekolah
+nama kepala sekolah
+sambutan kepala sekolah
+sejarah
+visi 
+misi
+struktur organisasi
+akreditasi
+foto sertifikat akreditasi
+nomor telepon kantor
+nomor telepon whatsapp
+email
+alamat sekolah
+link facebook
+link instagram
+link email
+
+buatkan view pengaturannya dan update datanya
+
+===================================================================================
+revisi Setingcontroller gunakan request form dan menggunakan service patern registrasi di paternserviceprovider
+seluruh logic dipindah dari controller ke class service jadi lebih bersih dan validasi dipindah ke class request
+
+===================================================================================
+buatkan dan tambahkan test nya app setting
+===================================================================================
+revisi untuk tampilan pengaturan appp dimana akan menampilkan seluruh pengaturan jika 
+langsung ubah dia bisa mengklik edit dan masuk ke halaman edit bukan langsung disodorkan input saat 
+tampilan pertama
+===================================================================================
+revisi halaman home bagian hero section dimana gambar dipakai dari pengaturan appp 
+hero foto bkkanner depan dan berikan gambar default jika gambar tidak ada di hero section di home
+foto kepala sekolah dibagian sambutan kepala sekolah nama kepala sekolah dan foto gunakan dari 
+pengaturan app tapi di berikan nilai default di section sambutan kepala sekolah
+===================================================================================
+hapus ke dua tombol di hero section di halaman home
