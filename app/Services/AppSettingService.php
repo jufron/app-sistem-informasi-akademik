@@ -33,6 +33,7 @@ class AppSettingService implements AppSettingServiceInterface
             'alamat_sekolah',
             'link_facebook',
             'link_instagram',
+            'link_youtube',
             'link_email',
         ];
 

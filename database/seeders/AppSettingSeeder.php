@@ -89,6 +89,10 @@ class AppSettingSeeder extends Seeder
                 'value' => 'https://instagram.com/sman1jakarta',
             ],
             [
+                'key' => 'link_youtube',
+                'value' => 'https://youtube.com/sman1jakarta',
+            ],
+            [
                 'key' => 'link_email',
                 'value' => 'mailto:info@sman1jakarta.sch.id',
             ],

@@ -24,7 +24,7 @@
                     <div class="flex items-center space-x-3 group cursor-pointer">
                         <div
                             class="w-12 h-12 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                            <img src="{{ asset('img/logo-bg.png') }}" alt="Logo SD Katolik Weetabula"
+                            <img src="{{ \App\Models\AppSetting::getImageUrl('logo_sekolah', asset('img/logo-bg.png')) }}" alt="Logo SD Katolik Weetabula"
                                 class="w-full h-full object-contain drop-shadow-md" loading="lazy" />
                         </div>
                         <span class="text-2xl font-extrabold tracking-tight text-[#1C1C1C] dark:text-white uppercase">
@@ -96,15 +96,15 @@
                         kegiatan dan prestasi sekolah.</p>
 
                     <div class="flex items-center space-x-3">
-                        <a href="#"
+                        <a href="{{ $app_settings['link_facebook'] ?? '#' }}" target="_blank"
                             class="w-10 h-10 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-md border border-white/50 dark:border-slate-700 flex items-center justify-center text-[#2A246B] dark:text-slate-400 hover:bg-[#2A246B] hover:text-white hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all transform hover:-translate-y-1 shadow-sm">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#"
+                        <a href="{{ $app_settings['link_instagram'] ?? '#' }}" target="_blank"
                             class="w-10 h-10 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-md border border-white/50 dark:border-slate-700 flex items-center justify-center text-[#2A246B] dark:text-slate-400 hover:bg-[#2A246B] hover:text-white hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all transform hover:-translate-y-1 shadow-sm">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#"
+                        <a href="{{ $app_settings['link_youtube'] ?? '#' }}" target="_blank"
                             class="w-10 h-10 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-md border border-white/50 dark:border-slate-700 flex items-center justify-center text-[#2A246B] dark:text-slate-400 hover:bg-[#2A246B] hover:text-white hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all transform hover:-translate-y-1 shadow-sm">
                             <i class="fab fa-youtube"></i>
                         </a>

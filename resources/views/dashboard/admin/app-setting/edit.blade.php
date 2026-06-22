@@ -251,8 +251,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="logo-preview-img-container">
                                                     @php
-                                                        $logoVal = $settings['logo_sekolah'] ?? '';
-                                                        $logoUrl = $logoVal ? (str_starts_with($logoVal, 'assets/') ? asset($logoVal) : asset('storage/' . $logoVal)) : 'https://via.placeholder.com/150?text=Logo';
+                                                        $logoUrl = \App\Models\AppSetting::getImageUrl('logo_sekolah');
                                                     @endphp
                                                     <img id="logo_sekolah-preview" src="{{ $logoUrl }}" alt="Logo Sekolah" class="logo-preview-img">
                                                 </div>
@@ -272,8 +271,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="logo-preview-img-container">
                                                     @php
-                                                        $fotoKepsekVal = $settings['foto_kepala_sekolah'] ?? '';
-                                                        $fotoKepsekUrl = $fotoKepsekVal ? (str_starts_with($fotoKepsekVal, 'assets/') ? asset($fotoKepsekVal) : asset('storage/' . $fotoKepsekVal)) : 'https://via.placeholder.com/150?text=Foto';
+                                                        $fotoKepsekUrl = \App\Models\AppSetting::getImageUrl('foto_kepala_sekolah');
                                                     @endphp
                                                     <img id="foto_kepala_sekolah-preview" src="{{ $fotoKepsekUrl }}" alt="Foto Kepala Sekolah" class="logo-preview-img">
                                                 </div>
@@ -293,8 +291,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="setting-preview-img-container">
                                                     @php
-                                                        $heroVal = $settings['hero_foto'] ?? '';
-                                                        $heroUrl = $heroVal ? (str_starts_with($heroVal, 'assets/') ? asset($heroVal) : asset('storage/' . $heroVal)) : 'https://via.placeholder.com/300x150?text=Hero+Banner';
+                                                        $heroUrl = \App\Models\AppSetting::getImageUrl('hero_foto');
                                                     @endphp
                                                     <img id="hero_foto-preview" src="{{ $heroUrl }}" alt="Hero Foto" class="setting-preview-img">
                                                 </div>
@@ -320,8 +317,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="setting-preview-img-container" style="max-width: 350px;">
                                                     @php
-                                                        $strukturVal = $settings['struktur_organisasi'] ?? '';
-                                                        $strukturUrl = $strukturVal ? (str_starts_with($strukturVal, 'assets/') ? asset($strukturVal) : asset('storage/' . $strukturVal)) : 'https://via.placeholder.com/350x150?text=Struktur+Organisasi';
+                                                        $strukturUrl = \App\Models\AppSetting::getImageUrl('struktur_organisasi');
                                                     @endphp
                                                     <img id="struktur_organisasi-preview" src="{{ $strukturUrl }}" alt="Struktur Organisasi" class="setting-preview-img">
                                                 </div>
@@ -341,8 +337,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="setting-preview-img-container" style="max-width: 350px;">
                                                     @php
-                                                        $akredVal = $settings['foto_sertifikat_akreditasi'] ?? '';
-                                                        $akredUrl = $akredVal ? (str_starts_with($akredVal, 'assets/') ? asset($akredVal) : asset('storage/' . $akredVal)) : 'https://via.placeholder.com/350x150?text=Sertifikat+Akreditasi';
+                                                        $akredUrl = \App\Models\AppSetting::getImageUrl('foto_sertifikat_akreditasi');
                                                     @endphp
                                                     <img id="foto_sertifikat_akreditasi-preview" src="{{ $akredUrl }}" alt="Sertifikat Akreditasi" class="setting-preview-img">
                                                 </div>
@@ -379,16 +374,24 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <x-dashboard.input
-                                            label="Tautan / Link Email (Untuk aksi klik email)"
-                                            name="link_email"
-                                            value="{{ old('link_email', $settings['link_email'] ?? '') }}"
-                                            placeholder="Contoh: mailto:info@sekolah.sch.id"
-                                        />
-                                    </div>
-                                </div>
+                                 <div class="row">
+                                     <div class="col-md-6 mb-3">
+                                         <x-dashboard.input
+                                             label="Tautan / Link Email (Untuk aksi klik email)"
+                                             name="link_email"
+                                             value="{{ old('link_email', $settings['link_email'] ?? '') }}"
+                                             placeholder="Contoh: mailto:info@sekolah.sch.id"
+                                         />
+                                     </div>
+                                     <div class="col-md-6 mb-3">
+                                         <x-dashboard.input
+                                             label="Link YouTube Sekolah"
+                                             name="link_youtube"
+                                             value="{{ old('link_youtube', $settings['link_youtube'] ?? '') }}"
+                                             placeholder="Contoh: https://youtube.com/channel/..."
+                                         />
+                                     </div>
+                                 </div>
                             </div>
 
                         </div>

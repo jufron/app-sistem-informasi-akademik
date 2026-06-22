@@ -357,11 +357,11 @@
                     <div class="relative z-20 p-8 flex flex-col items-center text-center">
                         <div
                             class="w-24 h-24 rounded-full p-1.5 bg-gradient-to-br from-[#2A246B] to-[#FCEE09] mb-4 shadow-xl transform group-hover:scale-105 transition-transform duration-500">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
+                            <img src="{{ \App\Models\AppSetting::getImageUrl('foto_kepala_sekolah', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop') }}"
                                 alt="Kepala Sekolah"
                                 class="w-full h-full rounded-full object-cover border-2 border-white dark:border-slate-800">
                         </div>
-                        <h3 class="text-xl font-bold text-[#1C1C1C] dark:text-white">Nama Kepala Sekolah, S.Pd.</h3>
+                        <h3 class="text-xl font-bold text-[#1C1C1C] dark:text-white">{{ $app_settings['nama_kepala_sekolah'] ?? 'Nama Kepala Sekolah, S.Pd.' }}</h3>
                         <p class="text-sm font-bold text-[#2A246B] dark:text-[#FCEE09] mt-1 uppercase tracking-wider">
                             Kepala Sekolah</p>
                         <div

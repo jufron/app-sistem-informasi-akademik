@@ -18,7 +18,7 @@ document.documentElement.classList.toggle('dark', isDarkMode);"
         <div class="flex items-center space-x-3 group cursor-pointer relative z-[10000]">
             <div
                 class="w-12 h-12 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <img src="{{ asset('img/logo-bg.png') }}" alt="Logo SD Katolik Weetabula"
+                <img src="{{ \App\Models\AppSetting::getImageUrl('logo_sekolah', asset('img/logo-bg.png')) }}" alt="Logo SD Katolik Weetabula"
                     class="w-full h-full object-contain drop-shadow-md" loading="lazy" />
             </div>
             <span class="text-xl font-bold tracking-tight text-[#1C1C1C] dark:text-white uppercase">

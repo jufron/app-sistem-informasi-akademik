@@ -37,6 +37,7 @@ class UpdateAppSettingRequest extends FormRequest
             'alamat_sekolah' => ['required', 'string'],
             'link_facebook' => ['nullable', 'url', 'max:255'],
             'link_instagram' => ['nullable', 'url', 'max:255'],
+            'link_youtube' => ['nullable', 'url', 'max:255'],
             'link_email' => ['nullable', 'string', 'max:255'],
             
             // Files/Images
@@ -70,6 +71,7 @@ class UpdateAppSettingRequest extends FormRequest
             'alamat_sekolah.required' => 'Alamat sekolah wajib diisi.',
             'link_facebook.url' => 'Format URL Facebook tidak valid.',
             'link_instagram.url' => 'Format URL Instagram tidak valid.',
+            'link_youtube.url' => 'Format URL YouTube tidak valid.',
             
             // Image validations
             'logo_sekolah.image' => 'Logo sekolah harus berupa gambar.',

@@ -75,8 +75,7 @@
                     <div
                         class="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl z-10">
                         @php
-                            $heroVal = $app_settings['hero_foto'] ?? '';
-                            $heroUrl = $heroVal ? (str_starts_with($heroVal, 'assets/') ? asset($heroVal) : asset('storage/' . $heroVal)) : asset('img/photo-1577896851231-70ef18881754 (1).jpg');
+                            $heroUrl = \App\Models\AppSetting::getImageUrl('hero_foto', asset('img/photo-1577896851231-70ef18881754 (1).jpg'));
                         @endphp
                         <img src="{{ $heroUrl }}"
                             alt="Siswa SD Katolik Weetabula" loading="eager" fetchpriority="high"
@@ -140,8 +139,7 @@
                         <div
                             class="relative overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-700 aspect-[4/5]">
                             @php
-                                $kepsekFotoVal = $app_settings['foto_kepala_sekolah'] ?? '';
-                                $kepsekFotoUrl = $kepsekFotoVal ? (str_starts_with($kepsekFotoVal, 'assets/') ? asset($kepsekFotoVal) : asset('storage/' . $kepsekFotoVal)) : asset('img/photo-1560250097-0b93528c311a (1).jpg');
+                                $kepsekFotoUrl = \App\Models\AppSetting::getImageUrl('foto_kepala_sekolah', asset('img/photo-1560250097-0b93528c311a (1).jpg'));
                             @endphp
                             <img src="{{ $kepsekFotoUrl }}" loading="lazy"
                                 alt="Kepala Sekolah SD Katolik Weetabula"

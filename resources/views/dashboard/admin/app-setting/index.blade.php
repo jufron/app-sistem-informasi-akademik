@@ -219,8 +219,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="logo-view-img-container">
                                             @php
-                                                $logoVal = $settings['logo_sekolah'] ?? '';
-                                                $logoUrl = $logoVal ? (str_starts_with($logoVal, 'assets/') ? asset($logoVal) : asset('storage/' . $logoVal)) : 'https://via.placeholder.com/150?text=Logo';
+                                                $logoUrl = \App\Models\AppSetting::getImageUrl('logo_sekolah');
                                             @endphp
                                             <img src="{{ $logoUrl }}" alt="Logo Sekolah" class="logo-view-img">
                                         </div>
@@ -233,8 +232,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="logo-view-img-container">
                                             @php
-                                                $fotoKepsekVal = $settings['foto_kepala_sekolah'] ?? '';
-                                                $fotoKepsekUrl = $fotoKepsekVal ? (str_starts_with($fotoKepsekVal, 'assets/') ? asset($fotoKepsekVal) : asset('storage/' . $fotoKepsekVal)) : 'https://via.placeholder.com/150?text=Foto';
+                                                $fotoKepsekUrl = \App\Models\AppSetting::getImageUrl('foto_kepala_sekolah');
                                             @endphp
                                             <img src="{{ $fotoKepsekUrl }}" alt="Foto Kepala Sekolah" class="logo-view-img">
                                         </div>
@@ -247,8 +245,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="setting-view-img-container">
                                             @php
-                                                $heroVal = $settings['hero_foto'] ?? '';
-                                                $heroUrl = $heroVal ? (str_starts_with($heroVal, 'assets/') ? asset($heroVal) : asset('storage/' . $heroVal)) : 'https://via.placeholder.com/300x150?text=Hero+Banner';
+                                                $heroUrl = \App\Models\AppSetting::getImageUrl('hero_foto');
                                             @endphp
                                             <img src="{{ $heroUrl }}" alt="Hero Foto" class="setting-view-img">
                                         </div>
@@ -267,8 +264,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="setting-view-img-container" style="max-width: 350px; height: 200px;">
                                             @php
-                                                $strukturVal = $settings['struktur_organisasi'] ?? '';
-                                                $strukturUrl = $strukturVal ? (str_starts_with($strukturVal, 'assets/') ? asset($strukturVal) : asset('storage/' . $strukturVal)) : 'https://via.placeholder.com/350x200?text=Struktur+Organisasi';
+                                                $strukturUrl = \App\Models\AppSetting::getImageUrl('struktur_organisasi');
                                             @endphp
                                             <img src="{{ $strukturUrl }}" alt="Struktur Organisasi" class="setting-view-img">
                                         </div>
@@ -281,8 +277,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="setting-view-img-container" style="max-width: 350px; height: 200px;">
                                             @php
-                                                $akredVal = $settings['foto_sertifikat_akreditasi'] ?? '';
-                                                $akredUrl = $akredVal ? (str_starts_with($akredVal, 'assets/') ? asset($akredVal) : asset('storage/' . $akredVal)) : 'https://via.placeholder.com/350x200?text=Sertifikat+Akreditasi';
+                                                $akredUrl = \App\Models\AppSetting::getImageUrl('foto_sertifikat_akreditasi');
                                             @endphp
                                             <img src="{{ $akredUrl }}" alt="Sertifikat Akreditasi" class="setting-view-img">
                                         </div>
@@ -317,6 +312,19 @@
                                                 @if(isset($settings['link_instagram']))
                                                     <a href="{{ $settings['link_instagram'] }}" target="_blank" class="text-danger font-weight-bold">
                                                         <i class="fab fa-instagram me-1"></i> {{ $settings['link_instagram'] }}
+                                                    </a>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="setting-label">YouTube Sekolah</td>
+                                            <td>:</td>
+                                            <td class="setting-value">
+                                                @if(isset($settings['link_youtube']) && $settings['link_youtube'])
+                                                    <a href="{{ $settings['link_youtube'] }}" target="_blank" class="text-danger font-weight-bold" style="color: #ff0000 !important;">
+                                                        <i class="fab fa-youtube me-1"></i> {{ $settings['link_youtube'] }}
                                                     </a>
                                                 @else
                                                     -

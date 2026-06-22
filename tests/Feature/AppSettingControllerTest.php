@@ -100,6 +100,7 @@ class AppSettingControllerTest extends TestCase
             'alamat_sekolah' => 'Alamat baru sekolah.',
             'link_facebook' => 'https://facebook.com/sekolahbaru',
             'link_instagram' => 'https://instagram.com/sekolahbaru',
+            'link_youtube' => 'https://youtube.com/sekolahbaru',
             'link_email' => 'mailto:admin.baru@sekolah.sch.id',
         ];
 
