@@ -46,17 +46,17 @@
 
                     <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 mt-4">
                         <div class="text-center lg:text-left">
-                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">A</h3>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">{{ $akreditasi }}</h3>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Akreditasi
                             </p>
                         </div>
                         <div class="text-center lg:text-left">
-                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">40+</h3>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">{{ $totalGuru }}</h3>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Guru
                                 Profesional</p>
                         </div>
                         <div class="text-center lg:text-left">
-                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">1000+</h3>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#1C1C1C] dark:text-white">{{ $totalAlumni }}</h3>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">Alumni
                                 Sukses</p>
                         </div>
@@ -74,9 +74,6 @@
 
                     <div
                         class="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl z-10">
-                        @php
-                            $heroUrl = \App\Models\AppSetting::getImageUrl('hero_foto', asset('img/photo-1577896851231-70ef18881754 (1).jpg'));
-                        @endphp
                         <img src="{{ $heroUrl }}"
                             alt="Siswa SD Katolik Weetabula" loading="eager" fetchpriority="high"
                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" />
@@ -138,9 +135,6 @@
                         <!-- Inner Image -->
                         <div
                             class="relative overflow-hidden rounded-[2.5rem] bg-slate-200 dark:bg-slate-700 aspect-[4/5]">
-                            @php
-                                $kepsekFotoUrl = \App\Models\AppSetting::getImageUrl('foto_kepala_sekolah', asset('img/photo-1560250097-0b93528c311a (1).jpg'));
-                            @endphp
                             <img src="{{ $kepsekFotoUrl }}" loading="lazy"
                                 alt="Kepala Sekolah SD Katolik Weetabula"
                                 class="w-full h-full object-cover object-top filter contrast-125 transition-transform duration-700 group-hover:scale-105" />
@@ -159,7 +153,7 @@
                                 <i class="fas fa-check-circle text-white dark:text-[#1C1C1C] text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-[#1C1C1C] dark:text-white text-sm">Terakreditasi A</h4>
+                                <h4 class="font-bold text-[#1C1C1C] dark:text-white text-sm">Terakreditasi {{ $akreditasi }}</h4>
                                 <p class="text-xs text-slate-500 dark:text-slate-400">BAN-S/M 2024</p>
                             </div>
                         </div>
@@ -188,7 +182,7 @@
                     <!-- Text Content -->
                     <div
                         class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg relative z-10" style="white-space: pre-line;">
-                        {{ $app_settings['sambutan_kepala_sekolah'] ?? "Selamat datang di website resmi SD Katolik Weetabula. Puji syukur kita panjatkan kepada Tuhan Yang Maha Esa atas berkat dan rahmat-Nya, sehingga platform digital ini dapat hadir sebagai jembatan informasi antara pihak sekolah, orang tua, dan masyarakat luas.\n\nKami berkomitmen untuk tidak hanya fokus pada pencapaian akademik, tetapi juga penanaman nilai-nilai moral, kedisiplinan, dan cinta kasih. Mari bersama-sama kita bentuk generasi penerus yang cerdas, beriman, dan siap menghadapi tantangan global." }}
+                        {{ $sambutanKepalaSekolah }}
                     </div>
 
                     <!-- Signature Block -->
@@ -196,7 +190,7 @@
                         class="pt-6 mt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                         <div>
                             <h4 class="text-xl font-bold text-[#1C1C1C] dark:text-white">
-                                {{ $app_settings['nama_kepala_sekolah'] ?? 'Nama Kepala Sekolah, S.Pd.' }}
+                                {{ $namaKepalaSekolah }}
                             </h4>
                             <p class="text-sm font-medium text-[#2A246B] dark:text-[#FCEE09] mt-1">Kepala Sekolah</p>
                         </div>
@@ -349,25 +343,7 @@
         x-data="{
             active: 0,
             autoplayInterval: null,
-            slides: [{
-                    name: 'Antonius Budi, S.Pd',
-                    role: 'Wali Kelas 6 & Guru Matematika',
-                    quote: 'Pendidikan bukan sekadar transfer ilmu, tapi pembentukan karakter dan logika bernalar.',
-                    img: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop'
-                },
-                {
-                    name: 'Maria Yosefina, S.Pd',
-                    role: 'Guru Bahasa Inggris',
-                    quote: 'Membuka jendela dunia untuk anak-anak melalui bahasa dan keberanian berekspresi.',
-                    img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop'
-                },
-                {
-                    name: 'Yohanes Don Bosco',
-                    role: 'Guru Pendidikan Agama Katolik',
-                    quote: 'Iman yang kuat adalah kompas terbaik bagi anak-anak untuk mengarungi masa depan.',
-                    img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop'
-                }
-            ],
+            slides: {{ json_encode($slides) }},
             startAutoplay() {
                 this.autoplayInterval = setInterval(() => {
                     this.active = (this.active === this.slides.length - 1) ? 0 : this.active + 1;

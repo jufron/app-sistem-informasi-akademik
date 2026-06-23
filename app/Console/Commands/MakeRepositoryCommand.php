@@ -65,7 +65,7 @@ namespace App\Repositories;
 
 use App\Repositories\Interfaces\\{$name}RepositoryInterface;
 
-class {$name}Repository extends {$name}RepositoryInterface
+class {$name}Repository implements {$name}RepositoryInterface
 {
     public function getAll()
     {

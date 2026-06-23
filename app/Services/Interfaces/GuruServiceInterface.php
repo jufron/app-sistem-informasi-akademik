@@ -51,6 +51,36 @@ interface GuruServiceInterface
      * @return array{imported: int, skipped: int}
      */
     public function importFromCsv(string $filePath): array;
+
+    /**
+     * Get form options and requirements data needed to create a new teacher.
+     *
+     * @return array
+     */
+    public function getFormDataForCreate(): array;
+
+    /**
+     * Get form options, requirements, and loaded relations needed to edit an existing teacher.
+     *
+     * @param Guru $guru
+     * @return array
+     */
+    public function getFormDataForEdit(Guru $guru): array;
+
+    /**
+     * Load relations for teacher details view.
+     *
+     * @param Guru $guru
+     * @return Guru
+     */
+    public function getGuruDetails(Guru $guru): Guru;
+
+    /**
+     * Stream CSV template writer contents directly to output.
+     *
+     * @return void
+     */
+    public function downloadCsvTemplate(): void;
 }
 
 

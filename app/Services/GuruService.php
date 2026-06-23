@@ -5,26 +5,56 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\Guru;
-use App\Models\User;
-use App\Models\JenisKelamin;
-use App\Models\Agama;
-use App\Models\MataPelajaran;
 use App\Services\Interfaces\GuruServiceInterface;
+use App\Repositories\Interfaces\GuruRepositoryInterface;
+use App\Repositories\Interfaces\JenisKelaminRepositoryInterface;
+use App\Repositories\Interfaces\AgamaRepositoryInterface;
+use App\Repositories\Interfaces\MataPelajaranRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
+use League\Csv\Writer;
 
+/**
+ * Class GuruService
+ * 
+ * Handles business logic, CSV parsing/importing, templates, and transaction management for teachers.
+ */
 class GuruService implements GuruServiceInterface
 {
     /**
+     * Create a new service instance.
+     * 
+     * Injects the required repository contracts using constructor property promotion.
+     * 
+     * @param GuruRepositoryInterface $guruRepo
+     * @param JenisKelaminRepositoryInterface $jenisKelaminRepo
+     * @param AgamaRepositoryInterface $agamaRepo
+     * @param MataPelajaranRepositoryInterface $mataPelajaranRepo
+     * @param UserRepositoryInterface $userRepo
+     */
+    public function __construct(
+        protected GuruRepositoryInterface $guruRepo,
+        protected JenisKelaminRepositoryInterface $jenisKelaminRepo,
+        protected AgamaRepositoryInterface $agamaRepo,
+        protected MataPelajaranRepositoryInterface $mataPelajaranRepo,
+        protected UserRepositoryInterface $userRepo
+    ) {}
+
+    /**
      * Store a new guru and their associated user.
+     *
+     * @param array $data
+     * @param UploadedFile|null $foto
+     * @return Guru
      */
     public function store(array $data, ?UploadedFile $foto): Guru
     {
         return DB::transaction(function () use ($data, $foto) {
             // Create user account
-            $user = User::create([
+            $user = $this->userRepo->create([
                 'name'     => $data['nama_lengkap'],
                 'email'    => $data['email'],
                 'password' => bcrypt($data['password']),
@@ -43,7 +73,7 @@ class GuruService implements GuruServiceInterface
             }
 
             // Create teacher profile
-            $guru = Guru::create([
+            $guru = $this->guruRepo->create([
                 'user_id'          => $user->id,
                 'nip'              => $data['nip'],
                 'nama_lengkap'     => $data['nama_lengkap'],
@@ -70,6 +100,11 @@ class GuruService implements GuruServiceInterface
 
     /**
      * Update an existing guru and their associated user.
+     *
+     * @param Guru $guru
+     * @param array $data
+     * @param UploadedFile|null $foto
+     * @return Guru
      */
     public function update(Guru $guru, array $data, ?UploadedFile $foto): Guru
     {
@@ -84,7 +119,7 @@ class GuruService implements GuruServiceInterface
                 $userData['password'] = bcrypt($data['password']);
             }
             if ($user) {
-                $user->update($userData);
+                $this->userRepo->update($user->id, $userData);
                 if ($data['tipe'] === 'Kepala Sekolah') {
                     $user->syncRoles(['kepala-sekolah']);
                 } else {
@@ -102,7 +137,7 @@ class GuruService implements GuruServiceInterface
             }
 
             // Update teacher profile details
-            $guru->update([
+            $this->guruRepo->update($guru->id, [
                 'nip'              => $data['nip'],
                 'nama_lengkap'     => $data['nama_lengkap'],
                 'nama_panggilan'   => $data['nama_panggilan'] ?? null,
@@ -124,12 +159,15 @@ class GuruService implements GuruServiceInterface
                 $guru->mataPelajaran()->detach();
             }
 
-            return $guru;
+            return $guru->refresh();
         });
     }
 
     /**
      * Delete a guru and their associated user.
+     *
+     * @param Guru $guru
+     * @return bool
      */
     public function destroy(Guru $guru): bool
     {
@@ -142,9 +180,9 @@ class GuruService implements GuruServiceInterface
             // Delete relationships and records
             $user = $guru->user;
             $guru->mataPelajaran()->detach();
-            $deleted = (bool) $guru->delete();
+            $deleted = $this->guruRepo->delete($guru->id);
             if ($user) {
-                $user->delete();
+                $this->userRepo->delete($user->id);
             }
 
             return $deleted;
@@ -153,6 +191,9 @@ class GuruService implements GuruServiceInterface
 
     /**
      * Bulk delete gurus and their associated users.
+     *
+     * @param array $ids
+     * @return bool
      */
     public function bulkDestroy(array $ids): bool
     {
@@ -161,16 +202,16 @@ class GuruService implements GuruServiceInterface
         }
 
         return DB::transaction(function () use ($ids) {
-            $gurus = Guru::whereIn('id', $ids)->get();
+            $gurus = $this->guruRepo->getByIds($ids);
             foreach ($gurus as $guru) {
                 if ($guru->foto && Storage::disk('public')->exists($guru->foto)) {
                     Storage::disk('public')->delete($guru->foto);
                 }
                 $user = $guru->user;
                 $guru->mataPelajaran()->detach();
-                $guru->delete();
+                $this->guruRepo->delete($guru->id);
                 if ($user) {
-                    $user->delete();
+                    $this->userRepo->delete($user->id);
                 }
             }
             return true;
@@ -191,9 +232,7 @@ class GuruService implements GuruServiceInterface
         $importedCount = 0;
         $skippedCount = 0;
 
-        // Keep track of any new principal imports within this single session
-        // to prevent importing multiple ones if none existed in DB yet.
-        $hasPrincipalInDb = Guru::where('tipe', 'Kepala Sekolah')->exists();
+        $hasPrincipalInDb = $this->guruRepo->hasPrincipal();
         $importedPrincipalInSession = false;
 
         foreach ($reader->getRecords() as $record) {
@@ -203,7 +242,6 @@ class GuruService implements GuruServiceInterface
                 $cleanRecord[trim((string)$key)] = trim((string)$val);
             }
 
-            // 1. Every required field must not be empty (except NIP and Nama Panggilan)
             $requiredColumns = [
                 'Email', 'Nama Lengkap', 'Jenis Kelamin', 'Agama', 
                 'Tempat Lahir', 'Tanggal Lahir', 'Telepon', 'Alamat', 'Tipe Jabatan'
@@ -222,21 +260,18 @@ class GuruService implements GuruServiceInterface
                 continue;
             }
 
-            // 2. Validate email is unique
             $email = $cleanRecord['Email'];
-            if (User::where('email', $email)->exists()) {
+            if ($this->userRepo->existsByEmail($email)) {
                 $skippedCount++;
                 continue;
             }
 
-            // 3. Validate NIP is unique (if provided)
             $nip = $cleanRecord['NIP'] !== '' ? $cleanRecord['NIP'] : null;
-            if ($nip !== null && Guru::where('nip', $nip)->exists()) {
+            if ($nip !== null && $this->guruRepo->existsByNip($nip)) {
                 $skippedCount++;
                 continue;
             }
 
-            // 4. Validate Tipe Jabatan enum
             $tipe = $cleanRecord['Tipe Jabatan'];
             $allowedTipe = ['Bukan Wali Kelas', 'Wali Kelas', 'Kepala Sekolah'];
             if (!in_array($tipe, $allowedTipe, true)) {
@@ -244,7 +279,6 @@ class GuruService implements GuruServiceInterface
                 continue;
             }
 
-            // 5. Validate single Principal constraint
             if ($tipe === 'Kepala Sekolah') {
                 if ($hasPrincipalInDb || $importedPrincipalInSession) {
                     $skippedCount++;
@@ -252,29 +286,26 @@ class GuruService implements GuruServiceInterface
                 }
             }
 
-            // 6. Lookups: Gender
             $jkName = $cleanRecord['Jenis Kelamin'];
-            $jk = JenisKelamin::where('nama', $jkName)->first();
+            $jk = $this->jenisKelaminRepo->findByName($jkName);
             if (!$jk) {
                 $skippedCount++;
                 continue;
             }
 
-            // 7. Lookups: Religion
             $agamaName = $cleanRecord['Agama'];
-            $agama = Agama::where('nama', $agamaName)->first();
+            $agama = $this->agamaRepo->findByName($agamaName);
             if (!$agama) {
                 $skippedCount++;
                 continue;
             }
 
-            // 8. Lookups: Subjects (comma separated, e.g. "Matematika, Bahasa Inggris")
             $subjectIds = [];
             $subjectsValid = true;
             if (isset($cleanRecord['Mata Pelajaran']) && $cleanRecord['Mata Pelajaran'] !== '') {
                 $subjectNames = array_filter(array_map('trim', explode(',', $cleanRecord['Mata Pelajaran'])));
                 foreach ($subjectNames as $name) {
-                    $sub = MataPelajaran::where('nama', $name)->first();
+                    $sub = $this->mataPelajaranRepo->findByName($name);
                     if (!$sub) {
                         $subjectsValid = false;
                         break;
@@ -288,17 +319,15 @@ class GuruService implements GuruServiceInterface
                 continue;
             }
 
-            // All validations passed! Create the records inside a transaction
             try {
                 DB::transaction(function () use ($cleanRecord, $email, $nip, $tipe, $jk, $agama, $subjectIds) {
                     // Create associated user account
-                    $user = User::create([
+                    $user = $this->userRepo->create([
                         'name'     => $cleanRecord['Nama Lengkap'],
                         'email'    => $email,
                         'password' => bcrypt('12345678'), // default password
                     ]);
 
-                    // Assign appropriate Spatie role
                     if ($tipe === 'Kepala Sekolah') {
                         $user->assignRole('kepala-sekolah');
                     } else {
@@ -306,7 +335,7 @@ class GuruService implements GuruServiceInterface
                     }
 
                     // Create teacher profile
-                    $guru = Guru::create([
+                    $guru = $this->guruRepo->create([
                         'user_id'          => $user->id,
                         'nip'              => $nip,
                         'nama_lengkap'     => $cleanRecord['Nama Lengkap'],
@@ -318,11 +347,10 @@ class GuruService implements GuruServiceInterface
                         'telepon'          => $cleanRecord['Telepon'],
                         'alamat'           => $cleanRecord['Alamat'],
                         'tipe'             => $tipe,
-                        'foto'             => null, // photo is systematically skipped
+                        'foto'             => null,
                         'status'           => $cleanRecord['Status'] !== '' ? $cleanRecord['Status'] : 'Aktif',
                     ]);
 
-                    // Sync subjects many-to-many
                     if (!empty($subjectIds)) {
                         $guru->mataPelajaran()->sync($subjectIds);
                     }
@@ -343,6 +371,79 @@ class GuruService implements GuruServiceInterface
             'skipped'  => $skippedCount,
         ];
     }
+
+    /**
+     * Get form options and requirements data needed to create a new teacher.
+     *
+     * @return array
+     */
+    public function getFormDataForCreate(): array
+    {
+        return [
+            'jenisKelamin'     => $this->jenisKelaminRepo->getAll(),
+            'agama'            => $this->agamaRepo->getAll(),
+            'mataPelajaran'    => $this->mataPelajaranRepo->getAll(),
+            'hasKepalaSekolah' => $this->guruRepo->hasPrincipal(),
+        ];
+    }
+
+    /**
+     * Get form options, requirements, and loaded relations needed to edit an existing teacher.
+     *
+     * @param Guru $guru
+     * @return array
+     */
+    public function getFormDataForEdit(Guru $guru): array
+    {
+        return [
+            'guru'             => $guru->load(['user', 'mataPelajaran']),
+            'jenisKelamin'     => $this->jenisKelaminRepo->getAll(),
+            'agama'            => $this->agamaRepo->getAll(),
+            'mataPelajaran'    => $this->mataPelajaranRepo->getAll(),
+            'hasKepalaSekolah' => $this->guruRepo->hasPrincipal($guru->id),
+        ];
+    }
+
+    /**
+     * Load relations for teacher details view.
+     *
+     * @param Guru $guru
+     * @return Guru
+     */
+    public function getGuruDetails(Guru $guru): Guru
+    {
+        return $guru->load(['user', 'jenisKelamin', 'agama', 'mataPelajaran']);
+    }
+
+    /**
+     * Stream CSV template writer contents directly to output.
+     *
+     * @return void
+     */
+    public function downloadCsvTemplate(): void
+    {
+        $writer = Writer::createFromPath('php://output', 'w');
+        
+        $writer->insertOne([
+            'Email', 'NIP', 'Nama Lengkap', 'Nama Panggilan', 'Jenis Kelamin', 
+            'Agama', 'Tempat Lahir', 'Tanggal Lahir', 'Telepon', 'Alamat', 
+            'Tipe Jabatan', 'Status', 'Mata Pelajaran'
+        ]);
+
+        $writer->insertOne([
+            'antonius@mail.com',
+            '198503122010011002',
+            'Antonius Budi, S.Pd',
+            'Anton',
+            'Laki-laki',
+            'Katolik',
+            'Weetabula',
+            '1985-03-12',
+            '081234567890',
+            'Jl. Melati No. 12, Weetabula',
+            'Wali Kelas',
+            'Aktif',
+            'Matematika, Ilmu Pengetahuan Alam dan Sosial (IPAS)'
+        ]);
+    }
 }
-
-

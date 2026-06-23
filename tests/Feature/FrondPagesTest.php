@@ -71,7 +71,7 @@ class FrondPagesTest extends TestCase
      */
     public function test_controller_methods_return_correct_views_directly(): void
     {
-        $controller = new PagesController();
+        $controller = $this->app->make(PagesController::class);
 
         // 1. index method -> frond.home
         $view = $controller->index();

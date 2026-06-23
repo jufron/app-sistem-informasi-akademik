@@ -61,6 +61,14 @@ class AppSettingSeeder extends Seeder
                 'value' => 'A',
             ],
             [
+                'key' => 'total_guru',
+                'value' => '40+',
+            ],
+            [
+                'key' => 'total_alumni',
+                'value' => '1000+',
+            ],
+            [
                 'key' => 'foto_sertifikat_akreditasi',
                 'value' => 'assets/images/foto_sertifikat_akreditasi.jpg',
             ],

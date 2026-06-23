@@ -43,3 +43,15 @@ foto kepala sekolah dibagian sambutan kepala sekolah nama kepala sekolah dan fot
 pengaturan app tapi di berikan nilai default di section sambutan kepala sekolah
 ===================================================================================
 hapus ke dua tombol di hero section di halaman home
+===================================================================================
+untuk role guru saya mau tampilkan pelajaran apa yang di ajarkan di dashboard 
+
+si guru bisa melihat profil siswa yang dia ajar dan status siswa tersebut apakah dia aktif atau tidak
+untuk data sudah ada di database 
+
+buatkan menu sidebar ruangan kelas guru cuman lihat data ruangan kelas dan siswanya saja tanpa edit dan tambah dan hapus cukup lihat cetak pun tidak
+===================================================================================
+tanggung jawab guru adalah memberikan penilaian berdasarkan kurikulum merdeka dan mata pelajaran tertentu yang diambil dari relasi mata pelajaran
+
+
+

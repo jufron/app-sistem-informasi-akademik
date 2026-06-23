@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
-use App\Models\Agama;
-use App\Models\JenisKelamin;
-use App\Models\MataPelajaran;
 use App\Http\Requests\StoreGuruRequest;
 use App\Http\Requests\UpdateGuruRequest;
 use App\DataTables\GuruDataTable;
@@ -17,20 +14,30 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use League\Csv\Writer;
 
+/**
+ * Class GuruController
+ * 
+ * Thin controller coordinating requests, validation, flash messaging, and routing for teachers.
+ */
 class GuruController extends Controller
-
 {
-    protected GuruServiceInterface $guruService;
-
-    public function __construct(GuruServiceInterface $guruService)
-    {
-        $this->guruService = $guruService;
-    }
+    /**
+     * Create a new controller instance.
+     * 
+     * Injects only the teacher service interface using PHP 8.0 constructor property promotion.
+     * 
+     * @param GuruServiceInterface $guruService
+     */
+    public function __construct(
+        protected GuruServiceInterface $guruService
+    ) {}
 
     /**
      * Display a listing of the resource.
+     * 
+     * @param GuruDataTable $dataTable
+     * @return mixed
      */
     public function index(GuruDataTable $dataTable)
     {
@@ -39,19 +46,20 @@ class GuruController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * 
+     * @return View
      */
     public function create(): View
     {
-        $jenisKelamin = JenisKelamin::all();
-        $agama = Agama::all();
-        $mataPelajaran = MataPelajaran::all();
-        $hasKepalaSekolah = Guru::where('tipe', 'Kepala Sekolah')->exists();
-        
-        return view('dashboard.admin.guru.tambah', compact('jenisKelamin', 'agama', 'mataPelajaran', 'hasKepalaSekolah'));
+        $formData = $this->guruService->getFormDataForCreate();
+        return view('dashboard.admin.guru.tambah', $formData);
     }
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param StoreGuruRequest $request
+     * @return RedirectResponse
      */
     public function store(StoreGuruRequest $request): RedirectResponse
     {
@@ -66,29 +74,34 @@ class GuruController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * @param Guru $guru
+     * @return JsonResponse
      */
     public function show(Guru $guru): JsonResponse
     {
-        $guru->load(['user', 'jenisKelamin', 'agama', 'mataPelajaran']);
-        return response()->json($guru);
+        $guruDetails = $this->guruService->getGuruDetails($guru);
+        return response()->json($guruDetails);
     }
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param Guru $guru
+     * @return View
      */
     public function edit(Guru $guru): View
     {
-        $jenisKelamin = JenisKelamin::all();
-        $agama = Agama::all();
-        $mataPelajaran = MataPelajaran::all();
-        $guru->load(['user', 'mataPelajaran']);
-        $hasKepalaSekolah = Guru::where('tipe', 'Kepala Sekolah')->where('id', '!=', $guru->id)->exists();
-        
-        return view('dashboard.admin.guru.ubah', compact('guru', 'jenisKelamin', 'agama', 'mataPelajaran', 'hasKepalaSekolah'));
+        $formData = $this->guruService->getFormDataForEdit($guru);
+        return view('dashboard.admin.guru.ubah', $formData);
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param UpdateGuruRequest $request
+     * @param Guru $guru
+     * @return RedirectResponse
      */
     public function update(UpdateGuruRequest $request, Guru $guru): RedirectResponse
     {
@@ -104,6 +117,9 @@ class GuruController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param Guru $guru
+     * @return RedirectResponse
      */
     public function destroy(Guru $guru): RedirectResponse
     {
@@ -115,6 +131,9 @@ class GuruController extends Controller
 
     /**
      * Remove the specified resources from storage in bulk.
+     * 
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function bulkDestroy(Request $request): RedirectResponse
     {
@@ -163,7 +182,6 @@ class GuruController extends Controller
         return redirect()->route('dashboard.guru.index');
     }
 
-
     /**
      * Download the CSV template for importing guru data.
      *
@@ -177,31 +195,7 @@ class GuruController extends Controller
         ];
 
         return response()->stream(function () {
-            $writer = Writer::createFromPath('php://output', 'w');
-            
-            $writer->insertOne([
-                'Email', 'NIP', 'Nama Lengkap', 'Nama Panggilan', 'Jenis Kelamin', 
-                'Agama', 'Tempat Lahir', 'Tanggal Lahir', 'Telepon', 'Alamat', 
-                'Tipe Jabatan', 'Status', 'Mata Pelajaran'
-            ]);
-
-            // Realistic mock data matching the Antonius Budi structure
-            $writer->insertOne([
-                'antonius@mail.com',
-                '198503122010011002',
-                'Antonius Budi, S.Pd',
-                'Anton',
-                'Laki-laki',
-                'Katolik',
-                'Weetabula',
-                '1985-03-12',
-                '081234567890',
-                'Jl. Melati No. 12, Weetabula',
-                'Wali Kelas',
-                'Aktif',
-                'Matematika, Ilmu Pengetahuan Alam dan Sosial (IPAS)'
-            ]);
+            $this->guruService->downloadCsvTemplate();
         }, 200, $headers);
     }
 }
-

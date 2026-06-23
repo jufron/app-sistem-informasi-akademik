@@ -82,16 +82,25 @@
 
                 {{-- ? galeri foto --}}
                 @role('guru')
-                    {{-- <li @class([
+                    <li @class([
                         'nav-item',
-                        'active' => request()->routeIs('dashboard.galery-foto.index')
+                        'active' => request()->routeIs('dashboard.guru.ruangan-kelas.index') || request()->routeIs('dashboard.guru.ruangan-kelas.show'),
                     ])>
-                        <a href="{{ route('dashboard.galery-foto.index') }}">
-                        <i class="fas fa-th-list"></i>
-                        <p>Galeri Foto</p>
-                    </a>
-                </li> --}}
-                    {{-- ? input nilai masing maing guru berdasarkan mata pelajaran --}}
+                        <a href="{{ route('dashboard.guru.ruangan-kelas.index') }}">
+                            <i class="fas fa-school"></i>
+                            <p>Ruangan Kelas</p>
+                        </a>
+                    </li>
+
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.guru.penilaian.*'),
+                    ])>
+                        <a href="{{ route('dashboard.guru.penilaian.index') }}">
+                            <i class="fas fa-edit"></i>
+                            <p>Penilaian</p>
+                        </a>
+                    </li>
                 @endrole
 
                 @role('kepala-sekolah')
@@ -158,8 +167,7 @@
                 <li class="nav-section">
                     <h4 class="text-section">Akademik</h4>
                 </li>
-
-                {{-- ? akademik --}}
+                
                 {{-- @role('superadmin')
                 <x-dashboard.linkMenu-dropdown
                     id="akademik"
@@ -229,9 +237,6 @@
                 />
                 @endrole --}}
 
-                <li class="nav-section">
-                    <h4 class="text-section">Peserta Didik Baru</h4>
-                </li>
 
                 {{-- ? ppdb --}}
                 {{-- @role('superadmin')

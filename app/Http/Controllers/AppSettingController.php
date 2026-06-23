@@ -5,38 +5,50 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAppSettingRequest;
-use App\Models\AppSetting;
+use App\Repositories\Interfaces\AppSettingRepositoryInterface;
 use App\Services\Interfaces\AppSettingServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
+/**
+ * Class AppSettingController
+ * 
+ * Manages view rendering and update orchestration for application-wide system configurations.
+ */
 class AppSettingController extends Controller
 {
-    protected AppSettingServiceInterface $appSettingService;
-
     /**
      * Create a new controller instance.
+     * 
+     * Injects the settings repository and service layers using constructor property promotion.
+     * 
+     * @param AppSettingRepositoryInterface $appSettingRepo
+     * @param AppSettingServiceInterface $appSettingService
      */
-    public function __construct(AppSettingServiceInterface $appSettingService)
-    {
-        $this->appSettingService = $appSettingService;
-    }
+    public function __construct(
+        protected AppSettingRepositoryInterface $appSettingRepo,
+        protected AppSettingServiceInterface $appSettingService
+    ) {}
 
     /**
      * Display the application settings page.
+     * 
+     * @return View
      */
     public function index(): View
     {
-        $settings = AppSetting::pluck('value', 'key')->all();
+        $settings = $this->appSettingRepo->pluckKeyValue();
         return view('dashboard.admin.app-setting.index', compact('settings'));
     }
 
     /**
      * Show the edit form for application settings.
+     * 
+     * @return View
      */
     public function edit(): View
     {
-        $settings = AppSetting::pluck('value', 'key')->all();
+        $settings = $this->appSettingRepo->pluckKeyValue();
         return view('dashboard.admin.app-setting.edit', compact('settings'));
     }
 

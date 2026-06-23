@@ -2,17 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Interfaces\SiswaRepositoryInterface;
+use App\Repositories\Interfaces\GuruRepositoryInterface;
+use App\Repositories\Interfaces\MataPelajaranRepositoryInterface;
+use App\Repositories\Interfaces\RombelRepositoryInterface;
+use App\Repositories\Interfaces\RuanganKelasRepositoryInterface;
+use App\Repositories\Interfaces\JadwalPelajaranRepositoryInterface;
+use App\Repositories\Interfaces\AnggotaKelasRepositoryInterface;
 use Illuminate\Http\Request;
-use App\Models\Siswa;
-use App\Models\Guru;
-use App\Models\MataPelajaran;
-use App\Models\RuanganKelas;
-use App\Models\Rombel;
-use App\Models\JadwalPelajaran;
-use Illuminate\Support\Facades\DB;
 
+/**
+ * Class DashboardController
+ * 
+ * Handles dashboard data routing and rendering for all active roles (Admin, Guru, Kepala Sekolah, Siswa).
+ */
 class DashboardController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     * 
+     * Injects the required repository services using PHP 8 constructor property promotion.
+     *
+     * @param SiswaRepositoryInterface $siswaRepo
+     * @param GuruRepositoryInterface $guruRepo
+     * @param MataPelajaranRepositoryInterface $mapelRepo
+     * @param RombelRepositoryInterface $rombelRepo
+     * @param RuanganKelasRepositoryInterface $ruanganRepo
+     * @param JadwalPelajaranRepositoryInterface $jadwalRepo
+     * @param AnggotaKelasRepositoryInterface $anggotaRepo
+     */
+    public function __construct(
+        protected SiswaRepositoryInterface $siswaRepo,
+        protected GuruRepositoryInterface $guruRepo,
+        protected MataPelajaranRepositoryInterface $mapelRepo,
+        protected RombelRepositoryInterface $rombelRepo,
+        protected RuanganKelasRepositoryInterface $ruanganRepo,
+        protected JadwalPelajaranRepositoryInterface $jadwalRepo,
+        protected AnggotaKelasRepositoryInterface $anggotaRepo
+    ) {}
+
+    /**
+     * Determine user role and load their respective dashboard.
+     *
+     * @return \Illuminate\View\View
+     */
     public function dashboard ()
     {
         $userLogin = auth()->user();
@@ -34,34 +67,31 @@ class DashboardController extends Controller
         }
     }
 
+    /**
+     * Compile statistical counter and demographic distribution data for the Admin dashboard.
+     *
+     * @return array
+     */
     private function getDataDashboardForAdmin ()
     {
         $userLogin = auth()->user();
 
         // Get total counts
-        $totalSiswa = Siswa::count();
-        $totalGuru = Guru::count();
-        $totalMapel = MataPelajaran::count();
-        $totalRombel = Rombel::count();
-        $totalRuangan = RuanganKelas::count();
-        $totalJadwal = JadwalPelajaran::count();
+        $totalSiswa = $this->siswaRepo->count();
+        $totalGuru = $this->guruRepo->count();
+        $totalMapel = $this->mapelRepo->count();
+        $totalRombel = $this->rombelRepo->count();
+        $totalRuangan = $this->ruanganRepo->count();
+        $totalJadwal = $this->jadwalRepo->count();
 
         // Group by Gender for Donut Chart
-        $genderData = Siswa::join('jenis_kelamin', 'siswa.jenis_kelamin_id', '=', 'jenis_kelamin.id')
-            ->select('jenis_kelamin.nama as name', DB::raw('count(*) as total'))
-            ->groupBy('jenis_kelamin.nama')
-            ->get();
+        $genderData = $this->siswaRepo->getGenderDistribution();
 
         // Group by Religion for Bar Chart
-        $agamaData = Siswa::join('agama', 'siswa.agama_id', '=', 'agama.id')
-            ->select('agama.nama as name', DB::raw('count(*) as total'))
-            ->groupBy('agama.nama')
-            ->get();
+        $agamaData = $this->siswaRepo->getReligionDistribution();
 
         // Group by Status for Pie/Polar Chart
-        $statusData = Siswa::select('status as name', DB::raw('count(*) as total'))
-            ->groupBy('status')
-            ->get();
+        $statusData = $this->siswaRepo->getStatusDistribution();
 
         return [
             'user'          => $userLogin,
@@ -77,30 +107,113 @@ class DashboardController extends Controller
         ];
     }
 
+    /**
+     * Compile homeroom classroom, classroom roster list, and schedule data for the Teacher (Guru) dashboard.
+     *
+     * @return array
+     */
     private function getDataDashboardForGuru ()
     {
         $userLogin = auth()->user();
+        $guru = $userLogin->guru;
+        
+        $ruanganWali = null;
+        $anggotaSiswa = collect();
+        $jadwalPelajaran = collect();
+        $mataPelajaran = collect();
+        $totalSiswaWali = 0;
+        $totalMapelAjar = 0;
+        
+        if ($guru) {
+            $ruanganWali = $this->ruanganRepo->findByGuruId($guru->id);
+            if ($ruanganWali) {
+                $anggotaSiswa = $this->anggotaRepo->getByRuanganKelasId($ruanganWali->id);
+                $totalSiswaWali = $anggotaSiswa->count();
+            }
+            $totalMapelAjar = $guru->mataPelajaran()->count();
+            $mataPelajaran = $guru->mataPelajaran;
+            $jadwalPelajaran = $this->jadwalRepo->getByGuruId($guru->id);
+        }
 
         return [
-            'user'  => $userLogin
+            'user'             => $userLogin,
+            'guru'             => $guru,
+            'ruanganWali'      => $ruanganWali,
+            'anggotaSiswa'     => $anggotaSiswa,
+            'totalSiswaWali'   => $totalSiswaWali,
+            'totalMapelAjar'   => $totalMapelAjar,
+            'mataPelajaran'    => $mataPelajaran,
+            'jadwalPelajaran'  => $jadwalPelajaran,
         ];
     }
 
+    /**
+     * Compile statistical counter and gender/status distributions for the Kepala Sekolah dashboard.
+     *
+     * @return array
+     */
     private function getDataDashboardForKepalaSekolah ()
     {
         $userLogin = auth()->user();
+        
+        $totalSiswa = $this->siswaRepo->count();
+        $totalGuru = $this->guruRepo->count();
+        $totalMapel = $this->mapelRepo->count();
+        $totalRombel = $this->rombelRepo->count();
+        $totalRuangan = $this->ruanganRepo->count();
+        $totalJadwal = $this->jadwalRepo->count();
+
+        // Group by Gender for Donut Chart
+        $genderData = $this->siswaRepo->getGenderDistribution();
+
+        // Group by Status for Area Chart
+        $statusData = $this->siswaRepo->getStatusDistribution();
 
         return [
-            'user'  => $userLogin
+            'user'          => $userLogin,
+            'totalSiswa'    => $totalSiswa,
+            'totalGuru'     => $totalGuru,
+            'totalMapel'    => $totalMapel,
+            'totalRombel'   => $totalRombel,
+            'totalRuangan'  => $totalRuangan,
+            'totalJadwal'   => $totalJadwal,
+            'genderData'    => $genderData,
+            'statusData'    => $statusData,
         ];
     }
 
+    /**
+     * Compile current classroom details, class schedule, and classmates' rosters for the Student (Siswa) dashboard.
+     *
+     * @return array
+     */
     private function getDataDashboardForSiswa ()
     {
         $userLogin = auth()->user();
+        $siswa = $this->siswaRepo->findByUserId($userLogin->id);
+        
+        $anggotaKelasActive = null;
+        $temanSekelas = collect();
+        $jadwalPelajaran = collect();
+        
+        if ($siswa) {
+            $anggotaKelasActive = $this->anggotaRepo->findActiveBySiswaId($siswa->id);
+                
+            if ($anggotaKelasActive && $anggotaKelasActive->ruanganKelas) {
+                $ruangan = $anggotaKelasActive->ruanganKelas;
+                
+                $temanSekelas = $this->anggotaRepo->getClassmates($ruangan->id, $siswa->id);
+                    
+                $jadwalPelajaran = $this->jadwalRepo->getByClassAndRombel($ruangan->kelas_id, $ruangan->rombel_id);
+            }
+        }
 
         return [
-            'user'  => $userLogin
+            'user'               => $userLogin,
+            'siswa'              => $siswa,
+            'anggotaKelasActive' => $anggotaKelasActive,
+            'temanSekelas'       => $temanSekelas,
+            'jadwalPelajaran'    => $jadwalPelajaran,
         ];
     }
 }
