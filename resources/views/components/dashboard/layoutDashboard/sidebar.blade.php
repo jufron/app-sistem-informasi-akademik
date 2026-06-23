@@ -101,19 +101,28 @@
                             <p>Penilaian</p>
                         </a>
                     </li>
+
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.guru.absensi.*'),
+                    ])>
+                        <a href="{{ route('dashboard.guru.absensi.index') }}">
+                            <i class="fas fa-calendar-check"></i>
+                            <p>Absensi Siswa</p>
+                        </a>
+                    </li>
                 @endrole
 
                 @role('kepala-sekolah')
-                    {{-- <li @class([
+                    <li @class([
                         'nav-item',
-                        'active' => request()->routeIs('dashboard.galery-foto.index')
+                        'active' => request()->routeIs('dashboard.kepala-sekolah.laporan.*')
                     ])>
-                        <a href="{{ route('dashboard.galery-foto.index') }}">
-                        <i class="fas fa-th-list"></i>
-                        <p>Galeri Foto</p>
-                    </a>
-                </li> --}}
-                    {{-- ? menerima laporan penilaian --}}
+                        <a href="{{ route('dashboard.kepala-sekolah.laporan.index') }}">
+                            <i class="fas fa-file-alt"></i>
+                            <p>Laporan Akademik</p>
+                        </a>
+                    </li>
                 @endrole
 
                 @role('siswa')

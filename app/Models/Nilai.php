@@ -26,10 +26,9 @@ class Nilai extends Model
         'ruangan_kelas_id',
         'mata_pelajaran_id',
         'guru_id',
-        'nilai_tugas',
-        'nilai_uh',
-        'nilai_uts',
-        'nilai_uas',
+        'nilai_formatif',
+        'nilai_sumatif_materi',
+        'nilai_sumatif_akhir',
         'nilai_akhir',
         'keterangan',
     ];
@@ -40,11 +39,10 @@ class Nilai extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'nilai_tugas' => 'float',
-        'nilai_uh'    => 'float',
-        'nilai_uts'   => 'float',
-        'nilai_uas'   => 'float',
-        'nilai_akhir' => 'float',
+        'nilai_formatif'       => 'float',
+        'nilai_sumatif_materi' => 'float',
+        'nilai_sumatif_akhir'  => 'float',
+        'nilai_akhir'          => 'float',
     ];
 
     /**
@@ -56,19 +54,15 @@ class Nilai extends Model
     protected static function booted(): void
     {
         static::saving(function (Nilai $nilai) {
-            $hasScore = ($nilai->nilai_tugas !== null) ||
-                        ($nilai->nilai_uh !== null) ||
-                        ($nilai->nilai_uts !== null) ||
-                        ($nilai->nilai_uas !== null);
+            $hasSumatifMateri = $nilai->nilai_sumatif_materi !== null;
+            $hasSumatifAkhir = $nilai->nilai_sumatif_akhir !== null;
 
-            if ($hasScore) {
-                $tugas = $nilai->nilai_tugas ?? 0.0;
-                $uh = $nilai->nilai_uh ?? 0.0;
-                $uts = $nilai->nilai_uts ?? 0.0;
-                $uas = $nilai->nilai_uas ?? 0.0;
-
-                // Standard Indonesian school grading weight formula
-                $nilai->nilai_akhir = ($tugas * 0.20) + ($uh * 0.20) + ($uts * 0.30) + ($uas * 0.30);
+            if ($hasSumatifMateri && $hasSumatifAkhir) {
+                $nilai->nilai_akhir = ($nilai->nilai_sumatif_materi + $nilai->nilai_sumatif_akhir) / 2;
+            } elseif ($hasSumatifMateri) {
+                $nilai->nilai_akhir = $nilai->nilai_sumatif_materi;
+            } elseif ($hasSumatifAkhir) {
+                $nilai->nilai_akhir = $nilai->nilai_sumatif_akhir;
             } else {
                 $nilai->nilai_akhir = null;
             }

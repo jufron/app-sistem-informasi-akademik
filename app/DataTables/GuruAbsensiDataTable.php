@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class GuruPenilaianDataTable extends DataTable
+class GuruAbsensiDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -33,10 +33,10 @@ class GuruPenilaianDataTable extends DataTable
                 return $row->semester ? $row->semester->nama : '-';
             })
             ->addColumn('action', function ($row) {
-                $gradingUrl = route('dashboard.guru.penilaian.show', $row->id);
+                $absensiUrl = route('dashboard.guru.absensi.show', $row->id);
                 return '
-                    <a href="'.$gradingUrl.'" class="btn btn-sm btn-primary btn-round px-3 py-1.5 shadow-sm d-inline-flex align-items-center gap-1 btn-grade-classroom" style="transition: all 0.2s ease;">
-                        <i class="fas fa-edit"></i> Input Nilai
+                    <a href="'.$absensiUrl.'" class="btn btn-sm btn-warning text-white btn-round px-3 py-1.5 shadow-sm d-inline-flex align-items-center gap-1" style="transition: all 0.2s ease;">
+                        <i class="fas fa-calendar-check"></i> Input Absensi
                     </a>
                 ';
             })
@@ -71,7 +71,7 @@ class GuruPenilaianDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('gurupenilaian-table')
+            ->setTableId('guruabsensi-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(4, 'desc')
@@ -113,7 +113,7 @@ class GuruPenilaianDataTable extends DataTable
                 ->title('Aksi')
                 ->exportable(false)
                 ->printable(false)
-                ->width(120)
+                ->width(140)
                 ->addClass('text-center no-export'),
         ];
     }
@@ -123,6 +123,6 @@ class GuruPenilaianDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'GuruPenilaian_'.date('YmdHis');
+        return 'GuruAbsensi_'.date('YmdHis');
     }
 }

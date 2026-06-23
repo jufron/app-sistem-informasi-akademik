@@ -120,12 +120,11 @@ class NilaiService implements NilaiServiceInterface
                 ];
 
                 $values = [
-                    'guru_id'     => $guruId,
-                    'nilai_tugas' => isset($gradeItem['nilai_tugas']) && $gradeItem['nilai_tugas'] !== '' ? (float)$gradeItem['nilai_tugas'] : null,
-                    'nilai_uh'    => isset($gradeItem['nilai_uh']) && $gradeItem['nilai_uh'] !== '' ? (float)$gradeItem['nilai_uh'] : null,
-                    'nilai_uts'   => isset($gradeItem['nilai_uts']) && $gradeItem['nilai_uts'] !== '' ? (float)$gradeItem['nilai_uts'] : null,
-                    'nilai_uas'   => isset($gradeItem['nilai_uas']) && $gradeItem['nilai_uas'] !== '' ? (float)$gradeItem['nilai_uas'] : null,
-                    'keterangan'  => $gradeItem['keterangan'] ?? null,
+                    'guru_id'              => $guruId,
+                    'nilai_formatif'       => isset($gradeItem['nilai_formatif']) && $gradeItem['nilai_formatif'] !== '' ? (float)$gradeItem['nilai_formatif'] : null,
+                    'nilai_sumatif_materi' => isset($gradeItem['nilai_sumatif_materi']) && $gradeItem['nilai_sumatif_materi'] !== '' ? (float)$gradeItem['nilai_sumatif_materi'] : null,
+                    'nilai_sumatif_akhir'  => isset($gradeItem['nilai_sumatif_akhir']) && $gradeItem['nilai_sumatif_akhir'] !== '' ? (float)$gradeItem['nilai_sumatif_akhir'] : null,
+                    'keterangan'           => $gradeItem['keterangan'] ?? null,
                 ];
 
                 $this->nilaiRepo->updateOrCreateGrade($attributes, $values);

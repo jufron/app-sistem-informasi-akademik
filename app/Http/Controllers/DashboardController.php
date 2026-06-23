@@ -123,6 +123,7 @@ class DashboardController extends Controller
         $mataPelajaran = collect();
         $totalSiswaWali = 0;
         $totalMapelAjar = 0;
+        $revisionsPending = collect();
         
         if ($guru) {
             $ruanganWali = $this->ruanganRepo->findByGuruId($guru->id);
@@ -133,6 +134,24 @@ class DashboardController extends Controller
             $totalMapelAjar = $guru->mataPelajaran()->count();
             $mataPelajaran = $guru->mataPelajaran;
             $jadwalPelajaran = $this->jadwalRepo->getByGuruId($guru->id);
+
+            // Fetch pending revisions for the classrooms and subjects where this teacher teaches
+            $revisionsPending = \App\Models\RevisiPenilaian::with(['ruanganKelas.kelas', 'ruanganKelas.rombel', 'mataPelajaran'])
+                ->where('status', 'Pending')
+                ->whereExists(function ($query) use ($guru) {
+                    $query->select(\Illuminate\Support\Facades\DB::raw(1))
+                        ->from('ruangan_kelas')
+                        ->join('jadwal_pelajaran', function ($join) {
+                            $join->on('jadwal_pelajaran.kelas_id', '=', 'ruangan_kelas.kelas_id')
+                                 ->on('jadwal_pelajaran.rombel_id', '=', 'ruangan_kelas.rombel_id')
+                                 ->on('jadwal_pelajaran.semester_id', '=', 'ruangan_kelas.semester_id');
+                        })
+                        ->whereColumn('ruangan_kelas.id', '=', 'revisi_penilaian.ruangan_kelas_id')
+                        ->whereColumn('jadwal_pelajaran.mata_pelajaran_id', '=', 'revisi_penilaian.mata_pelajaran_id')
+                        ->where('jadwal_pelajaran.guru_id', $guru->id);
+                })
+                ->latest()
+                ->get();
         }
 
         return [
@@ -144,6 +163,7 @@ class DashboardController extends Controller
             'totalMapelAjar'   => $totalMapelAjar,
             'mataPelajaran'    => $mataPelajaran,
             'jadwalPelajaran'  => $jadwalPelajaran,
+            'revisionsPending' => $revisionsPending,
         ];
     }
 
@@ -169,16 +189,69 @@ class DashboardController extends Controller
         // Group by Status for Area Chart
         $statusData = $this->siswaRepo->getStatusDistribution();
 
+        // Retrieve classrooms for select dropdown
+        $classrooms = \App\Models\RuanganKelas::with(['kelas', 'rombel', 'semester'])->get();
+
+        $selectedClassroomId = request('ruangan_kelas_id') !== null ? (int)request('ruangan_kelas_id') : null;
+        $selectedSubjectId = request('mata_pelajaran_id') !== null ? (int)request('mata_pelajaran_id') : null;
+        
+        $subjects = collect();
+        $gradesSheet = [];
+        $revisions = collect();
+
+        if ($selectedClassroomId) {
+            $classroom = \App\Models\RuanganKelas::find($selectedClassroomId);
+            if ($classroom) {
+                // Get all subjects taught in this classroom via JadwalPelajaran
+                $subjects = \App\Models\MataPelajaran::whereHas('jadwalPelajaran', function ($query) use ($classroom) {
+                    $query->where('kelas_id', $classroom->kelas_id)
+                        ->where('rombel_id', $classroom->rombel_id)
+                        ->where('semester_id', $classroom->semester_id);
+                })->get();
+
+                if ($selectedSubjectId && $subjects->pluck('id')->contains($selectedSubjectId)) {
+                    $students = \App\Models\Siswa::whereHas('anggotaKelas', function ($q) use ($selectedClassroomId) {
+                        $q->where('ruangan_kelas_id', $selectedClassroomId)
+                          ->where('status', 'Aktif');
+                    })
+                    ->orderBy('nama_lengkap', 'asc')
+                    ->get();
+
+                    $nilaiRepo = app(\App\Repositories\Interfaces\NilaiRepositoryInterface::class);
+                    $grades = $nilaiRepo->getGrades($selectedClassroomId, $selectedSubjectId)->keyBy('siswa_id');
+
+                    foreach ($students as $student) {
+                        $gradesSheet[] = [
+                            'siswa' => $student,
+                            'nilai' => $grades->get($student->id),
+                        ];
+                    }
+
+                    // Get revision requests history
+                    $revisions = \App\Models\RevisiPenilaian::where('ruangan_kelas_id', $selectedClassroomId)
+                        ->where('mata_pelajaran_id', $selectedSubjectId)
+                        ->latest()
+                        ->get();
+                }
+            }
+        }
+
         return [
-            'user'          => $userLogin,
-            'totalSiswa'    => $totalSiswa,
-            'totalGuru'     => $totalGuru,
-            'totalMapel'    => $totalMapel,
-            'totalRombel'   => $totalRombel,
-            'totalRuangan'  => $totalRuangan,
-            'totalJadwal'   => $totalJadwal,
-            'genderData'    => $genderData,
-            'statusData'    => $statusData,
+            'user'                => $userLogin,
+            'totalSiswa'          => $totalSiswa,
+            'totalGuru'           => $totalGuru,
+            'totalMapel'          => $totalMapel,
+            'totalRombel'         => $totalRombel,
+            'totalRuangan'        => $totalRuangan,
+            'totalJadwal'         => $totalJadwal,
+            'genderData'          => $genderData,
+            'statusData'          => $statusData,
+            'classrooms'          => $classrooms,
+            'selectedClassroomId' => $selectedClassroomId,
+            'selectedSubjectId'   => $selectedSubjectId,
+            'subjects'            => $subjects,
+            'gradesSheet'         => $gradesSheet,
+            'revisions'           => $revisions,
         ];
     }
 

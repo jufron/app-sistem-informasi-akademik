@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nilai', function (Blueprint $table) {
+        Schema::create('absensi', function (Blueprint $table) {
             $table->id();
-            
-            $table->foreignId('siswa_id')
-                ->constrained('siswa')
-                ->cascadeOnDelete();
 
             $table->foreignId('ruangan_kelas_id')
                 ->constrained('ruangan_kelas')
@@ -26,21 +22,25 @@ return new class extends Migration
                 ->constrained('mata_pelajaran')
                 ->cascadeOnDelete();
 
+            $table->foreignId('siswa_id')
+                ->constrained('siswa')
+                ->cascadeOnDelete();
+
             $table->foreignId('guru_id')
                 ->constrained('guru')
                 ->cascadeOnDelete();
 
-            $table->decimal('nilai_formatif', 5, 2)->nullable();
-            $table->decimal('nilai_sumatif_materi', 5, 2)->nullable();
-            $table->decimal('nilai_sumatif_akhir', 5, 2)->nullable();
-            $table->decimal('nilai_akhir', 5, 2)->nullable();
-            
+            $table->date('tanggal');
+            $table->string('status'); // Hadir, Sakit, Izin, Alpa
             $table->text('keterangan')->nullable();
 
             $table->timestamps();
 
-            // Prevent duplicate grades for a single student on a single subject in a classroom
-            $table->unique(['siswa_id', 'ruangan_kelas_id', 'mata_pelajaran_id'], 'nilai_unique_siswa_kelas_mapel');
+            // Unique constraint to prevent duplicate attendance records for a student per classroom/subject/date
+            $table->unique(
+                ['ruangan_kelas_id', 'mata_pelajaran_id', 'siswa_id', 'tanggal'],
+                'absensi_kelas_mapel_siswa_tanggal_unique'
+            );
         });
     }
 
@@ -49,6 +49,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nilai');
+        Schema::dropIfExists('absensi');
     }
 };

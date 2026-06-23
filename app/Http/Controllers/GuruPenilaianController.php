@@ -55,6 +55,8 @@ class GuruPenilaianController extends Controller
 
         $selectedSubjectId = $request->get('mata_pelajaran_id') !== null ? (int)$request->get('mata_pelajaran_id') : null;
         $gradesSheet = [];
+        $pendingRevisions = collect();
+        $allRevisions = collect();
 
         if ($selectedSubjectId !== null) {
             // Ensure teacher actually teaches this subject in this classroom
@@ -62,14 +64,41 @@ class GuruPenilaianController extends Controller
                 abort(403, 'Anda tidak mengajar mata pelajaran ini di ruangan kelas ini.');
             }
             $gradesSheet = $this->nilaiService->getGradesSheet($ruanganKelas->id, $selectedSubjectId);
+
+            // Fetch pending revisions for this classroom and subject
+            $pendingRevisions = \App\Models\RevisiPenilaian::where('ruangan_kelas_id', $ruanganKelas->id)
+                ->where('mata_pelajaran_id', $selectedSubjectId)
+                ->where('status', 'Pending')
+                ->get();
+
+            // Fetch all revisions history for this classroom and subject
+            $allRevisions = \App\Models\RevisiPenilaian::where('ruangan_kelas_id', $ruanganKelas->id)
+                ->where('mata_pelajaran_id', $selectedSubjectId)
+                ->latest()
+                ->get();
         }
 
         return view('dashboard.guru.penilaian.grade', compact(
             'ruanganKelas',
             'subjects',
             'selectedSubjectId',
-            'gradesSheet'
+            'gradesSheet',
+            'pendingRevisions',
+            'allRevisions'
         ));
+    }
+
+    /**
+     * Resolve/clear a grade revision request.
+     *
+     * @param \App\Models\RevisiPenilaian $revisi
+     * @return RedirectResponse
+     */
+    public function resolveRevisi(\App\Models\RevisiPenilaian $revisi): RedirectResponse
+    {
+        $revisi->update(['status' => 'Selesai']);
+        flash()->success('Revisi berhasil ditandai selesai.');
+        return redirect()->back();
     }
 
     /**

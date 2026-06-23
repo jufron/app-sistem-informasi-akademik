@@ -130,6 +130,46 @@
         </div>
     </div>
 
+    <!-- Section: Permintaan Revisi Nilai dari Kepala Sekolah (Jika ada) -->
+    @if(isset($revisionsPending) && $revisionsPending->isNotEmpty())
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm" style="border-radius: 16px; background-color: #fff8eb; border-left: 5px solid #ffa100 !important;">
+                    <div class="card-header bg-transparent border-0 py-3">
+                        <h5 class="card-title text-warning font-weight-bold m-0 d-flex align-items-center">
+                            <i class="fas fa-exclamation-triangle me-2"></i> Perlu Tindakan: Permintaan Revisi Nilai dari Kepala Sekolah
+                        </h5>
+                    </div>
+                    <div class="card-body p-4 pt-0">
+                        <div class="row g-3">
+                            @foreach($revisionsPending as $revisi)
+                                <div class="col-md-12">
+                                    <div class="p-3 bg-white rounded-3 border d-flex justify-content-between align-items-center flex-wrap gap-3">
+                                        <div>
+                                            <span class="badge bg-warning text-white font-weight-bold mb-2">Revisi Pending</span>
+                                            <h6 class="font-weight-bold text-dark mb-1">
+                                                Kelas: {{ $revisi->ruanganKelas->kelas->nama }} - {{ $revisi->ruanganKelas->rombel->nama }} • Mapel: {{ $revisi->mataPelajaran->nama }}
+                                            </h6>
+                                            <p class="text-secondary mb-0" style="font-size: 0.9rem;">
+                                                Catatan: "{{ $revisi->pesan }}"
+                                            </p>
+                                            <small class="text-muted d-block mt-1">Dikirim pada: {{ $revisi->created_at }}</small>
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('dashboard.guru.penilaian.show', ['ruanganKelas' => $revisi->ruangan_kelas_id, 'mata_pelajaran_id' => $revisi->mata_pelajaran_id]) }}" class="btn btn-warning btn-sm text-white font-weight-bold px-4 py-2" style="border-radius: 20px;">
+                                                <i class="fas fa-edit me-1"></i> Buka Lembar Nilai
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- Section: Pelajaran yang Diajar -->
     <div class="row mb-4">
         <div class="col-md-12">

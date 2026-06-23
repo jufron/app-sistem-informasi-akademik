@@ -25,13 +25,12 @@ class SaveNilaiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'grades'              => ['required', 'array'],
-            'grades.*.siswa_id'   => ['required', 'exists:siswa,id'],
-            'grades.*.nilai_tugas'=> ['nullable', 'numeric', 'min:0', 'max:100'],
-            'grades.*.nilai_uh'   => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'grades.*.nilai_uts'  => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'grades.*.nilai_uas'  => ['nullable', 'numeric', 'min:0', 'max:100'],
-            'grades.*.keterangan' => ['nullable', 'string', 'max:65535'],
+            'grades'                       => ['required', 'array'],
+            'grades.*.siswa_id'            => ['required', 'exists:siswa,id'],
+            'grades.*.nilai_formatif'      => ['nullable', 'numeric', 'min:0', 'max:100'],
+            'grades.*.nilai_sumatif_materi'=> ['nullable', 'numeric', 'min:0', 'max:100'],
+            'grades.*.nilai_sumatif_akhir' => ['nullable', 'numeric', 'min:0', 'max:100'],
+            'grades.*.keterangan'          => ['nullable', 'string', 'max:65535'],
         ];
     }
 
@@ -43,11 +42,10 @@ class SaveNilaiRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'grades.*.nilai_tugas' => 'Nilai Tugas',
-            'grades.*.nilai_uh'    => 'Nilai UH',
-            'grades.*.nilai_uts'   => 'Nilai UTS',
-            'grades.*.nilai_uas'   => 'Nilai UAS',
-            'grades.*.keterangan'  => 'Keterangan',
+            'grades.*.nilai_formatif'      => 'Nilai Formatif',
+            'grades.*.nilai_sumatif_materi'=> 'Nilai Sumatif Lingkup Materi',
+            'grades.*.nilai_sumatif_akhir' => 'Nilai Sumatif Akhir Semester',
+            'grades.*.keterangan'          => 'Deskripsi Capaian Kompetensi',
         ];
     }
 }
