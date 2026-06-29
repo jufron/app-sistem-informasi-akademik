@@ -5,6 +5,7 @@ use App\Http\Controllers\JadwalPelajaranController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\RuanganKelasController;
 use App\Http\Controllers\AppSettingController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 // * mata pelajaran CRUD
@@ -22,7 +23,25 @@ Route::resource('mata-pelajaran', MataPelajaranController::class)
         'destroy' => 'dashboard.mata-pelajaran.destroy',
     ]);
 
-// * siswa
+// * siswa CRUD
+Route::prefix('siswa')->controller(SiswaController::class)->group(function () {
+    Route::post('import', 'import')->name('dashboard.siswa.import');
+    Route::get('template', 'template')->name('dashboard.siswa.template');
+    Route::post('bulk-destroy', 'bulkDestroy')->name('dashboard.siswa.bulk-destroy');
+});
+Route::resource('siswa', SiswaController::class)
+    ->parameters(['siswa' => 'siswa'])
+    ->names([
+        'index' => 'dashboard.siswa.index',
+        'create' => 'dashboard.siswa.create',
+        'store' => 'dashboard.siswa.store',
+        'show' => 'dashboard.siswa.show',
+        'edit' => 'dashboard.siswa.edit',
+        'update' => 'dashboard.siswa.update',
+        'destroy' => 'dashboard.siswa.destroy',
+    ]);
+
+// * guru CRUD
 Route::post('guru/import', [GuruController::class, 'import'])
     ->name('dashboard.guru.import');
 Route::get('guru/template', [GuruController::class, 'template'])

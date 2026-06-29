@@ -43,6 +43,15 @@
                     </li>
 
                     {{-- ? siswa --}}
+                    <li @class([
+                        'nav-item',
+                        'active' => request()->routeIs('dashboard.siswa.*'),
+                    ])>
+                        <a href="{{ route('dashboard.siswa.index') }}">
+                            <i class="fas fa-user-graduate"></i>
+                            <p>Siswa</p>
+                        </a>
+                    </li>
 
                     {{-- ?  guru --}}
                     <li @class([
