@@ -72,7 +72,7 @@ class AppSettingController extends Controller
             }
         }
 
-        $this->appSettingService->updateSettings($request->validated(), $files);
+        $this->appSettingService->updateSettings(data: $request->validated(), files: $files);
 
         flash()->success('Pengaturan aplikasi berhasil diperbarui!');
         return redirect()->route('dashboard.app-setting.index');

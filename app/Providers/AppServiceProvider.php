@@ -9,12 +9,9 @@ use App\Models\AppSetting;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        require_once app_path('Helpers/helpers.php');
     }
 
     /**

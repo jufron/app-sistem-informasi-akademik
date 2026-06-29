@@ -219,7 +219,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="logo-view-img-container">
                                             @php
-                                                $logoUrl = \App\Models\AppSetting::getImageUrl('logo_sekolah');
+                                                $logoUrl = get_app_setting_url('logo_sekolah');
                                             @endphp
                                             <img src="{{ $logoUrl }}" alt="Logo Sekolah" class="logo-view-img">
                                         </div>
@@ -232,7 +232,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="logo-view-img-container">
                                             @php
-                                                $fotoKepsekUrl = \App\Models\AppSetting::getImageUrl('foto_kepala_sekolah');
+                                                $fotoKepsekUrl = get_app_setting_url('foto_kepala_sekolah');
                                             @endphp
                                             <img src="{{ $fotoKepsekUrl }}" alt="Foto Kepala Sekolah" class="logo-view-img">
                                         </div>
@@ -245,7 +245,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="setting-view-img-container">
                                             @php
-                                                $heroUrl = \App\Models\AppSetting::getImageUrl('hero_foto');
+                                                $heroUrl = get_app_setting_url('hero_foto');
                                             @endphp
                                             <img src="{{ $heroUrl }}" alt="Hero Foto" class="setting-view-img">
                                         </div>
@@ -264,7 +264,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="setting-view-img-container" style="max-width: 350px; height: 200px;">
                                             @php
-                                                $strukturUrl = \App\Models\AppSetting::getImageUrl('struktur_organisasi');
+                                                $strukturUrl = get_app_setting_url('struktur_organisasi');
                                             @endphp
                                             <img src="{{ $strukturUrl }}" alt="Struktur Organisasi" class="setting-view-img">
                                         </div>
@@ -277,7 +277,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="setting-view-img-container" style="max-width: 350px; height: 200px;">
                                             @php
-                                                $akredUrl = \App\Models\AppSetting::getImageUrl('foto_sertifikat_akreditasi');
+                                                $akredUrl = get_app_setting_url('foto_sertifikat_akreditasi');
                                             @endphp
                                             <img src="{{ $akredUrl }}" alt="Sertifikat Akreditasi" class="setting-view-img">
                                         </div>

@@ -24,7 +24,7 @@
                     <div class="flex items-center space-x-3 group cursor-pointer">
                         <div
                             class="w-12 h-12 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                            <img src="{{ \App\Models\AppSetting::getImageUrl('logo_sekolah', asset('img/logo-bg.png')) }}" alt="Logo SD Katolik Weetabula"
+                            <img src="{{ get_app_setting_url('logo_sekolah', asset('img/logo-bg.png')) }}" alt="Logo SD Katolik Weetabula"
                                 class="w-full h-full object-contain drop-shadow-md" loading="lazy" />
                         </div>
                         <span class="text-2xl font-extrabold tracking-tight text-[#1C1C1C] dark:text-white uppercase">

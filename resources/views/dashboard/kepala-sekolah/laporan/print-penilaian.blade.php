@@ -53,12 +53,12 @@
 </head>
 <body>
     @php
-        $namaSekolah = \App\Models\AppSetting::where('key', 'nama_sekolah')->first()?->value ?? 'NAMA SEKOLAH';
-        $alamatSekolah = \App\Models\AppSetting::where('key', 'alamat_sekolah')->first()?->value ?? 'Alamat Sekolah Belum Diatur';
-        $teleponSekolah = \App\Models\AppSetting::where('key', 'nomor_telepon_kantor')->first()?->value ?? '';
-        $emailSekolah = \App\Models\AppSetting::where('key', 'email')->first()?->value ?? '';
-        $logoSekolah = \App\Models\AppSetting::where('key', 'logo_sekolah')->first()?->value ?? '';
-        $namaKepsek = \App\Models\AppSetting::where('key', 'nama_kepala_sekolah')->first()?->value ?? 'Kepala Sekolah, S.Pd.';
+        $namaSekolah = get_app_setting('nama_sekolah', 'NAMA SEKOLAH');
+        $alamatSekolah = get_app_setting('alamat_sekolah', 'Alamat Sekolah Belum Diatur');
+        $teleponSekolah = get_app_setting('nomor_telepon_kantor', '');
+        $emailSekolah = get_app_setting('email', '');
+        $logoSekolah = get_app_setting('logo_sekolah', '');
+        $namaKepsek = get_app_setting('nama_kepala_sekolah', 'Kepala Sekolah, S.Pd.');
     @endphp
 
     <div class="container-fluid">

@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\AppSetting;
+use App\Repositories\Interfaces\AppSettingRepositoryInterface;
 use App\Services\Interfaces\AppSettingServiceInterface;
 use Illuminate\Support\Facades\Storage;
 
 class AppSettingService implements AppSettingServiceInterface
 {
+    /**
+     * Create a new service instance.
+     *
+     * @param AppSettingRepositoryInterface $appSettingRepo
+     */
+    public function __construct(
+        protected AppSettingRepositoryInterface $appSettingRepo
+    ) {}
+
     /**
      * Update the application settings.
      *
@@ -39,21 +48,21 @@ class AppSettingService implements AppSettingServiceInterface
 
         foreach ($textFields as $field) {
             if (array_key_exists($field, $data)) {
-                AppSetting::setValue($field, $data[$field]);
+                $this->appSettingRepo->setValue($field, $data[$field]);
             }
         }
 
         foreach ($files as $field => $file) {
             if ($file && $file->isValid()) {
                 // Delete the old file if it exists in storage (excluding default assets path)
-                $oldValue = AppSetting::getValue($field);
+                $oldValue = $this->appSettingRepo->getValue($field);
                 if ($oldValue && !str_starts_with($oldValue, 'assets/') && Storage::disk('public')->exists($oldValue)) {
                     Storage::disk('public')->delete($oldValue);
                 }
                 
                 // Store the new file
                 $path = $file->store('settings', 'public');
-                AppSetting::setValue($field, $path);
+                $this->appSettingRepo->setValue($field, $path);
             }
         }
     }

@@ -251,7 +251,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="logo-preview-img-container">
                                                     @php
-                                                        $logoUrl = \App\Models\AppSetting::getImageUrl('logo_sekolah');
+                                                        $logoUrl = get_app_setting_url('logo_sekolah');
                                                     @endphp
                                                     <img id="logo_sekolah-preview" src="{{ $logoUrl }}" alt="Logo Sekolah" class="logo-preview-img">
                                                 </div>
@@ -271,7 +271,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="logo-preview-img-container">
                                                     @php
-                                                        $fotoKepsekUrl = \App\Models\AppSetting::getImageUrl('foto_kepala_sekolah');
+                                                        $fotoKepsekUrl = get_app_setting_url('foto_kepala_sekolah');
                                                     @endphp
                                                     <img id="foto_kepala_sekolah-preview" src="{{ $fotoKepsekUrl }}" alt="Foto Kepala Sekolah" class="logo-preview-img">
                                                 </div>
@@ -291,7 +291,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="setting-preview-img-container">
                                                     @php
-                                                        $heroUrl = \App\Models\AppSetting::getImageUrl('hero_foto');
+                                                        $heroUrl = get_app_setting_url('hero_foto');
                                                     @endphp
                                                     <img id="hero_foto-preview" src="{{ $heroUrl }}" alt="Hero Foto" class="setting-preview-img">
                                                 </div>
@@ -317,7 +317,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="setting-preview-img-container" style="max-width: 350px;">
                                                     @php
-                                                        $strukturUrl = \App\Models\AppSetting::getImageUrl('struktur_organisasi');
+                                                        $strukturUrl = get_app_setting_url('struktur_organisasi');
                                                     @endphp
                                                     <img id="struktur_organisasi-preview" src="{{ $strukturUrl }}" alt="Struktur Organisasi" class="setting-preview-img">
                                                 </div>
@@ -337,7 +337,7 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="setting-preview-img-container" style="max-width: 350px;">
                                                     @php
-                                                        $akredUrl = \App\Models\AppSetting::getImageUrl('foto_sertifikat_akreditasi');
+                                                        $akredUrl = get_app_setting_url('foto_sertifikat_akreditasi');
                                                     @endphp
                                                     <img id="foto_sertifikat_akreditasi-preview" src="{{ $akredUrl }}" alt="Sertifikat Akreditasi" class="setting-preview-img">
                                                 </div>

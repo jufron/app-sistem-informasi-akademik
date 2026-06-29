@@ -103,7 +103,8 @@ class AppSettingRepository implements AppSettingRepositoryInterface
     public function getValue(string $key, ?string $default = null): ?string
     {
         return Cache::remember('app_setting_value_' . $key, now()->addDays(7), function () use ($key, $default) {
-            return AppSetting::getValue($key, $default);
+            $setting = AppSetting::where('key', $key)->first();
+            return $setting ? $setting->value : $default;
         });
     }
 
@@ -116,7 +117,10 @@ class AppSettingRepository implements AppSettingRepositoryInterface
      */
     public function setValue(string $key, string $value): AppSetting
     {
-        $setting = AppSetting::setValue($key, $value);
+        $setting = AppSetting::updateOrCreate(
+            ['key' => $key],
+            ['value' => $value]
+        );
         $this->clearCache($key);
         return $setting;
     }
@@ -131,8 +135,55 @@ class AppSettingRepository implements AppSettingRepositoryInterface
     public function getImageUrl(string $key, ?string $defaultUrl = null): string
     {
         return Cache::remember('app_setting_image_url_' . $key, now()->addDays(7), function () use ($key, $defaultUrl) {
-            return AppSetting::getImageUrl($key, $defaultUrl);
+            $value = $this->getValue($key);
+            
+            // If there is no value in settings
+            if (empty($value)) {
+                return $defaultUrl ?? $this->getDefaultPlaceholder($key);
+            }
+
+            // If it starts with 'assets/', it's a seed asset
+            if (str_starts_with($value, 'assets/')) {
+                if (file_exists(public_path($value))) {
+                    return asset($value);
+                }
+                return $defaultUrl ?? $this->getDefaultPlaceholder($key);
+            }
+
+            // Otherwise, check if the file exists in the public disk storage
+            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($value)) {
+                return asset('storage/' . $value);
+            }
+
+            // Fallback to placeholder/default if file doesn't exist
+            return $defaultUrl ?? $this->getDefaultPlaceholder($key);
         });
+    }
+
+    /**
+     * Get a default online or local placeholder for the given setting key.
+     *
+     * @param string $key
+     * @return string
+     */
+    private function getDefaultPlaceholder(string $key): string
+    {
+        switch ($key) {
+            case 'logo_sekolah':
+                return file_exists(public_path('img/logo-bg.png')) 
+                    ? asset('img/logo-bg.png') 
+                    : 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=300&auto=format&fit=crop';
+            case 'foto_kepala_sekolah':
+                return 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop';
+            case 'hero_foto':
+                return 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop';
+            case 'struktur_organisasi':
+                return 'https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?q=80&w=1974&auto=format&fit=crop';
+            case 'foto_sertifikat_akreditasi':
+                return 'https://images.unsplash.com/photo-1589330694653-ded6df53f7ee?q=80&w=1974&auto=format&fit=crop';
+            default:
+                return 'https://via.placeholder.com/300x150?text=No+Image';
+        }
     }
 
     /**
