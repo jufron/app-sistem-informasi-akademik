@@ -271,13 +271,13 @@ class SiswaService implements SiswaServiceInterface
             }
 
             $nisn = $cleanRecord['NISN'] !== '' ? $cleanRecord['NISN'] : null;
-            if ($nisn !== null && Siswa::where('nisn', $nisn)->exists()) {
+            if ($nisn !== null && $this->siswaRepo->existsByNisn($nisn)) {
                 $skippedCount++;
                 continue;
             }
 
             $nis = $cleanRecord['NIS'] !== '' ? $cleanRecord['NIS'] : null;
-            if ($nis !== null && Siswa::where('nis', $nis)->exists()) {
+            if ($nis !== null && $this->siswaRepo->existsByNis($nis)) {
                 $skippedCount++;
                 continue;
             }

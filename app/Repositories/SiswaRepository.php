@@ -133,4 +133,26 @@ class SiswaRepository implements SiswaRepositoryInterface
     {
         return Siswa::where('user_id', $userId)->first();
     }
+
+    /**
+     * Check if a student exists with the given NISN.
+     *
+     * @param string $nisn
+     * @return bool
+     */
+    public function existsByNisn(string $nisn): bool
+    {
+        return Siswa::where('nisn', $nisn)->exists();
+    }
+
+    /**
+     * Check if a student exists with the given NIS.
+     *
+     * @param string $nis
+     * @return bool
+     */
+    public function existsByNis(string $nis): bool
+    {
+        return Siswa::where('nis', $nis)->exists();
+    }
 }

@@ -62,7 +62,7 @@ class AppSettingControllerTest extends TestCase
     }
 
     /**
-     * Test guest users are redirected to login.
+     * Test guest users are redirected to login for views.
      */
     public function test_guest_users_cannot_access_settings(): void
     {
@@ -72,11 +72,35 @@ class AppSettingControllerTest extends TestCase
     }
 
     /**
-     * Test non-admin users receive 403 forbidden.
+     * Test guest users cannot update settings.
+     */
+    public function test_guest_users_cannot_update_settings(): void
+    {
+        $response = $this->put(route('dashboard.app-setting.update'), [
+            'nama_sekolah' => 'Guest School Title Update',
+        ]);
+
+        $response->assertRedirect('/login');
+    }
+
+    /**
+     * Test non-admin users receive 403 forbidden for views.
      */
     public function test_non_admin_users_cannot_access_settings(): void
     {
         $response = $this->actingAs($this->nonAdminUser)->get(route('dashboard.app-setting.index'));
+
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Test non-admin users cannot update settings.
+     */
+    public function test_non_admin_users_cannot_update_settings(): void
+    {
+        $response = $this->actingAs($this->nonAdminUser)->put(route('dashboard.app-setting.update'), [
+            'nama_sekolah' => 'Non-Admin School Title Update',
+        ]);
 
         $response->assertStatus(403);
     }
@@ -145,14 +169,46 @@ class AppSettingControllerTest extends TestCase
     }
 
     /**
-     * Test settings update successfully with uploaded files.
+     * Test settings update validation fails for invalid file types.
      */
-    public function test_update_settings_with_files_successfully(): void
+    public function test_update_settings_invalid_files_validation_fails(): void
+    {
+        // Uploading a text file instead of an image
+        $textDoc = UploadedFile::fake()->create('not_an_image.txt', 100);
+
+        $invalidData = [
+            'nama_sekolah' => 'SMA Valid',
+            'nama_kepala_sekolah' => 'Kepsek Valid',
+            'sambutan_kepala_sekolah' => 'Sambutan Valid',
+            'sejarah' => 'Sejarah Valid',
+            'visi' => 'Visi Valid',
+            'misi' => 'Misi Valid',
+            'akreditasi' => 'A',
+            'nomor_telepon_kantor' => '021-111111',
+            'nomor_telepon_whatsapp' => '081111111111',
+            'email' => 'valid@sekolah.sch.id',
+            'alamat_sekolah' => 'Alamat Valid',
+            'logo_sekolah' => $textDoc, // invalid file type (should be image)
+        ];
+
+        $response = $this->actingAs($this->adminUser)
+            ->put(route('dashboard.app-setting.update'), $invalidData);
+
+        $response->assertSessionHasErrors(['logo_sekolah']);
+    }
+
+    /**
+     * Test settings update successfully with all five uploaded files.
+     */
+    public function test_update_settings_with_all_files_successfully(): void
     {
         Storage::fake('public');
 
         $logo = UploadedFile::fake()->image('logo.png');
         $hero = UploadedFile::fake()->image('hero.jpg');
+        $kepsek = UploadedFile::fake()->image('kepsek.png');
+        $struktur = UploadedFile::fake()->image('struktur.png');
+        $akreditasi = UploadedFile::fake()->image('akreditasi.jpg');
 
         $settingsData = [
             'nama_sekolah' => 'SMA Test',
@@ -168,6 +224,9 @@ class AppSettingControllerTest extends TestCase
             'alamat_sekolah' => 'Alamat Test',
             'logo_sekolah' => $logo,
             'hero_foto' => $hero,
+            'foto_kepala_sekolah' => $kepsek,
+            'struktur_organisasi' => $struktur,
+            'foto_sertifikat_akreditasi' => $akreditasi,
         ];
 
         $response = $this->actingAs($this->adminUser)
@@ -175,15 +234,74 @@ class AppSettingControllerTest extends TestCase
 
         $response->assertRedirect(route('dashboard.app-setting.index'));
 
-        // Retrieve setting records
+        // Retrieve and assert setting records are saved and present in disk
+        $fileKeys = [
+            'logo_sekolah',
+            'hero_foto',
+            'foto_kepala_sekolah',
+            'struktur_organisasi',
+            'foto_sertifikat_akreditasi',
+        ];
+
+        foreach ($fileKeys as $key) {
+            $setting = AppSetting::where('key', $key)->first();
+            $this->assertNotNull($setting);
+            $this->assertNotEmpty($setting->value);
+            Storage::disk('public')->assertExists($setting->value);
+        }
+    }
+
+    /**
+     * Test updating a setting file deletes the old file from storage.
+     */
+    public function test_updating_setting_file_deletes_old_file(): void
+    {
+        Storage::fake('public');
+
+        // Setup an existing setting with an old file path in the database
+        $oldFilePath = 'settings/old_logo.png';
+        Storage::disk('public')->put($oldFilePath, 'old_logo_content');
+
+        // Update database setting record value
         $logoSetting = AppSetting::where('key', 'logo_sekolah')->first();
-        $heroSetting = AppSetting::where('key', 'hero_foto')->first();
+        if ($logoSetting) {
+            $logoSetting->update(['value' => $oldFilePath]);
+        } else {
+            AppSetting::create(['key' => 'logo_sekolah', 'value' => $oldFilePath]);
+        }
 
-        $this->assertNotNull($logoSetting);
-        $this->assertNotNull($heroSetting);
+        // Assert old file exists before updating
+        Storage::disk('public')->assertExists($oldFilePath);
 
-        // Assert file exists in the public disk
-        Storage::disk('public')->assertExists($logoSetting->value);
-        Storage::disk('public')->assertExists($heroSetting->value);
+        // Upload a new file
+        $newLogo = UploadedFile::fake()->image('new_logo.png');
+
+        $settingsData = [
+            'nama_sekolah' => 'SMA Test',
+            'nama_kepala_sekolah' => 'Kepsek Test',
+            'sambutan_kepala_sekolah' => 'Sambutan Test',
+            'sejarah' => 'Sejarah Test',
+            'visi' => 'Visi Test',
+            'misi' => 'Misi Test',
+            'akreditasi' => 'A',
+            'nomor_telepon_kantor' => '021-111111',
+            'nomor_telepon_whatsapp' => '081111111111',
+            'email' => 'test@sekolah.sch.id',
+            'alamat_sekolah' => 'Alamat Test',
+            'logo_sekolah' => $newLogo,
+        ];
+
+        $response = $this->actingAs($this->adminUser)
+            ->put(route('dashboard.app-setting.update'), $settingsData);
+
+        $response->assertRedirect(route('dashboard.app-setting.index'));
+
+        // Assert old file was deleted from storage disk
+        Storage::disk('public')->assertMissing($oldFilePath);
+
+        // Assert new file exists in storage disk
+        $updatedLogoSetting = AppSetting::where('key', 'logo_sekolah')->first();
+        $this->assertNotEquals($oldFilePath, $updatedLogoSetting->value);
+        Storage::disk('public')->assertExists($updatedLogoSetting->value);
     }
 }

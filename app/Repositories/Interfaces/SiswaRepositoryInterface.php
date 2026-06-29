@@ -90,4 +90,20 @@ interface SiswaRepositoryInterface
      * @return Siswa|null
      */
     public function findByUserId(int|string $userId): ?Siswa;
+
+    /**
+     * Check if a student exists with the given NISN.
+     *
+     * @param string $nisn
+     * @return bool
+     */
+    public function existsByNisn(string $nisn): bool;
+
+    /**
+     * Check if a student exists with the given NIS.
+     *
+     * @param string $nis
+     * @return bool
+     */
+    public function existsByNis(string $nis): bool;
 }

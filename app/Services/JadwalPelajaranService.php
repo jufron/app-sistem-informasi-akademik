@@ -17,17 +17,17 @@ class JadwalPelajaranService implements JadwalPelajaranServiceInterface
     {
         return DB::transaction(function () use ($data) {
             return JadwalPelajaran::create([
-                'guru_id' => $data['guru_id'],
+                'guru_id'           => $data['guru_id'],
                 'mata_pelajaran_id' => $data['mata_pelajaran_id'],
-                'kelas_id' => $data['kelas_id'],
-                'rombel_id' => $data['rombel_id'],
-                'semester_id' => $data['semester_id'],
-                'ganjil_genap' => $data['ganjil_genap'],
-                'hari' => $data['hari'],
-                'jam_mulai' => $data['jam_mulai'],
-                'jam_selesai' => $data['jam_selesai'],
-                'ruangan' => $data['ruangan'] ?? null,
-                'warna' => $data['warna'] ?? '#1572e8',
+                'kelas_id'          => $data['kelas_id'],
+                'rombel_id'         => $data['rombel_id'],
+                'semester_id'       => $data['semester_id'],
+                'ganjil_genap'      => $data['ganjil_genap'],
+                'hari'              => $data['hari'],
+                'jam_mulai'         => $data['jam_mulai'],
+                'jam_selesai'       => $data['jam_selesai'],
+                'ruangan'           => $data['ruangan'] ?? null,
+                'warna'             => $data['warna'] ?? '#1572e8',
             ]);
         });
     }
@@ -39,17 +39,17 @@ class JadwalPelajaranService implements JadwalPelajaranServiceInterface
     {
         return DB::transaction(function () use ($jadwalPelajaran, $data) {
             $jadwalPelajaran->update([
-                'guru_id' => $data['guru_id'],
+                'guru_id'           => $data['guru_id'],
                 'mata_pelajaran_id' => $data['mata_pelajaran_id'],
-                'kelas_id' => $data['kelas_id'],
-                'rombel_id' => $data['rombel_id'],
-                'semester_id' => $data['semester_id'],
-                'ganjil_genap' => $data['ganjil_genap'],
-                'hari' => $data['hari'],
-                'jam_mulai' => $data['jam_mulai'],
-                'jam_selesai' => $data['jam_selesai'],
-                'ruangan' => $data['ruangan'] ?? null,
-                'warna' => $data['warna'] ?? '#1572e8',
+                'kelas_id'          => $data['kelas_id'],
+                'rombel_id'         => $data['rombel_id'],
+                'semester_id'       => $data['semester_id'],
+                'ganjil_genap'      => $data['ganjil_genap'],
+                'hari'              => $data['hari'],
+                'jam_mulai'         => $data['jam_mulai'],
+                'jam_selesai'       => $data['jam_selesai'],
+                'ruangan'           => $data['ruangan'] ?? null,
+                'warna'             => $data['warna'] ?? '#1572e8',
             ]);
 
             return $jadwalPelajaran;
@@ -90,13 +90,13 @@ class JadwalPelajaranService implements JadwalPelajaranServiceInterface
         $schedules = JadwalPelajaran::with(['guru', 'mataPelajaran', 'kelas', 'rombel', 'semester'])->get();
 
         $daysOfWeekMap = [
-            'Minggu' => [0],
-            'Senin' => [1],
-            'Selasa' => [2],
-            'Rabu' => [3],
-            'Kamis' => [4],
-            'Jumat' => [5],
-            'Sabtu' => [6],
+            'Minggu'    => [0],
+            'Senin'     => [1],
+            'Selasa'    => [2],
+            'Rabu'      => [3],
+            'Kamis'     => [4],
+            'Jumat'     => [5],
+            'Sabtu'     => [6],
         ];
 
         $events = [];
@@ -113,24 +113,24 @@ class JadwalPelajaranService implements JadwalPelajaranServiceInterface
             $ganjilGenap = $schedule->ganjil_genap ?? '-';
 
             $events[] = [
-                'id' => (string) $schedule->id,
-                'title' => $schedule->mataPelajaran->nama.' ('.$className.'-'.$rombelName.') - '.$schedule->guru->nama_lengkap,
-                'daysOfWeek' => $days,
-                'startTime' => $startTime,
-                'endTime' => $endTime,
-                'backgroundColor' => $schedule->warna,
-                'borderColor' => $schedule->warna,
-                'textColor' => '#ffffff',
-                'extendedProps' => [
-                    'ruangan' => $schedule->ruangan ?? '-',
-                    'guru' => $schedule->guru->nama_lengkap,
-                    'mataPelajaran' => $schedule->mataPelajaran->nama,
-                    'kelas' => $className,
-                    'rombel' => $rombelName,
-                    'semester' => $semesterName,
-                    'ganjilGenap' => $ganjilGenap,
-                    'hari' => $schedule->hari,
-                    'waktu' => date('H:i', strtotime($schedule->jam_mulai)).' - '.date('H:i', strtotime($schedule->jam_selesai)),
+                'id'                => (string) $schedule->id,
+                'title'             => $schedule->mataPelajaran->nama.' ('.$className.'-'.$rombelName.') - '.$schedule->guru->nama_lengkap,
+                'daysOfWeek'        => $days,
+                'startTime'         => $startTime,
+                'endTime'           => $endTime,
+                'backgroundColor'   => $schedule->warna,
+                'borderColor'       => $schedule->warna,
+                'textColor'         => '#ffffff',
+                'extendedProps'     => [
+                    'ruangan'           => $schedule->ruangan ?? '-',
+                    'guru'              => $schedule->guru->nama_lengkap,
+                    'mataPelajaran'     => $schedule->mataPelajaran->nama,
+                    'kelas'             => $className,
+                    'rombel'            => $rombelName,
+                    'semester'          => $semesterName,
+                    'ganjilGenap'       => $ganjilGenap,
+                    'hari'              => $schedule->hari,
+                    'waktu'             => date('H:i', strtotime($schedule->jam_mulai)).' - '.date('H:i', strtotime($schedule->jam_selesai)),
                 ],
             ];
         }
