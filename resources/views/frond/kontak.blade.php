@@ -61,8 +61,9 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-[#1C1C1C] dark:text-white text-lg mb-1">Alamat Sekolah</h4>
-                                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">Kota
-                                    Tambolaka, Weetabula, Kab. Sumba Barat Daya, Nusa Tenggara Timur.</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                                    {{ $kontak['alamat'] }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -82,13 +83,15 @@
                                 <i class="fas fa-phone-alt text-[#2A246B] text-xl"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-[#1C1C1C] dark:text-white text-lg mb-1">Telepon & WhatsApp
-                                </h4>
-                                <p class="text-sm text-slate-600 dark:text-slate-300 font-medium mb-1">+62 812 3456 7890
+                                <h4 class="font-bold text-[#1C1C1C] dark:text-white text-lg mb-1">Telepon & WhatsApp</h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-300 font-medium mb-1">
+                                    Telp: {{ $kontak['telepon'] }}
+                                </p>
+                                <p class="text-sm text-slate-600 dark:text-slate-300 font-medium mb-1">
+                                    WA: {{ $kontak['whatsapp'] }}
                                 </p>
                                 <span
-                                    class="inline-block px-3 py-1 bg-[#FCEE09]/20 dark:bg-[#FCEE09]/10 text-[#2A246B] dark:text-[#FCEE09] text-xs font-bold rounded-full border border-[#FCEE09]/30">Respon
-                                    Cepat</span>
+                                    class="inline-block px-3 py-1 bg-[#FCEE09]/20 dark:bg-[#FCEE09]/10 text-[#2A246B] dark:text-[#FCEE09] text-xs font-bold rounded-full border border-[#FCEE09]/30">Respon Cepat</span>
                             </div>
                         </div>
                     </div>
@@ -110,7 +113,8 @@
                             <div>
                                 <h4 class="font-bold text-[#1C1C1C] dark:text-white text-lg mb-1">Email Resmi</h4>
                                 <p class="text-sm text-slate-600 dark:text-slate-300 font-medium break-all">
-                                    info@sdkatolikweetabula.sch.id</p>
+                                    {{ $kontak['email'] }}
+                                </p>
                             </div>
                         </div>
                     </div>

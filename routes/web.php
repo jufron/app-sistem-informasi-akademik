@@ -11,7 +11,7 @@ Route::controller(PagesController::class)->group(function () {
     Route::get('tentang', 'tentang')->name('frond.tentang');
     Route::get('guru-dan-staf', 'guruDanPengajar')->name('frond.guru-dan-staf');
     Route::get('kontak', 'kontak')->name('frond.kontak');
-    Route::get('detail-guru-dan-staf', 'detailGuruDanStaf')->name('frond.guru-dan-staf.show');
+    Route::get('detail-guru-dan-staf/{id?}', 'detailGuruDanStaf')->name('frond.guru-dan-staf.show');
 });
 
 Route::get('dashboard', [DashboardController::class, 'dashboard'])->middleware('auth')->name('dashboard');

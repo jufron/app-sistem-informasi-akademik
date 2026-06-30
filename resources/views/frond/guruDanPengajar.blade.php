@@ -4,17 +4,12 @@
 
     <!-- Guru & Staf Carousel Section (Portrait Premium Glass Card - Clickable) -->
     <section
+        id="guru-section"
+        data-staff="{{ json_encode($staffList) }}"
         class="relative py-24 lg:py-32 w-full overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-700"
         x-data="{
             autoplayInterval: null,
-            staffList: [
-                { name: 'Antonius Budi, S.Pd', role: 'Wali Kelas 6', subject: 'Matematika & IPA', status: 'Guru Tetap', image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=800&h=1000&auto=format&fit=crop' },
-                { name: 'Maria Yosefina, S.Pd', role: 'Guru Bahasa Inggris', subject: 'Bahasa Asing', status: 'Guru Tetap', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&h=1000&auto=format&fit=crop' },
-                { name: 'Yohanes Don Bosco', role: 'Guru Agama', subject: 'Pend. Agama Katolik', status: 'Guru Tetap', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&h=1000&auto=format&fit=crop' },
-                { name: 'Fransiska N., S.Kom', role: 'Guru TIK', subject: 'Komputer', status: 'Tenaga Honorer', image: 'https://images.unsplash.com/photo-1531123897727-8f129e1b4eca?q=80&w=800&h=1000&auto=format&fit=crop' },
-                { name: 'Agustinus D.', role: 'Guru Penjaskes', subject: 'Olahraga', status: 'Guru Tetap', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&h=1000&auto=format&fit=crop' },
-                { name: 'Theresia Lende', role: 'Staf Perpustakaan', subject: 'Administrasi', status: 'Staf', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&h=1000&auto=format&fit=crop' }
-            ],
+            staffList: JSON.parse($el.dataset.staff),
             startAutoplay() {
                 this.autoplayInterval = setInterval(() => { this.next() }, 3000);
             },
@@ -89,9 +84,10 @@
                     <template x-for="(person, index) in staffList" :key="index">
 
                         <!-- REVISI DI SINI: Tag <div> diganti jadi <a>, dan class ditambah 'block' -->
-                        <a href="{{ route('frond.guru-dan-staf.show') }}"
+                        <a :href="'{{ url('detail-guru-dan-staf') }}/' + person.id"
+                            @click="window.location.href = '{{ url('detail-guru-dan-staf') }}/' + person.id"
                             class="block snap-start snap-always flex-none w-[75vw] sm:w-[280px] md:w-[320px] aspect-[4/5] relative group cursor-pointer rounded-[2.5rem] overflow-hidden shadow-[0_15px_40px_rgba(42,36,107,0.08)]">
-
+ 
                             <!-- Full Background Image -->
                             <img :src="person.image" :alt="person.name"
                                 class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000 ease-out">

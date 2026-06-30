@@ -53,5 +53,38 @@ buatkan menu sidebar ruangan kelas guru cuman lihat data ruangan kelas dan siswa
 ===================================================================================
 tanggung jawab guru adalah memberikan penilaian berdasarkan kurikulum merdeka dan mata pelajaran tertentu yang diambil dari relasi mata pelajaran
 
+===================================================================================
+buatkan fitur CRUD siswa
+
+sidebar tambahkan siswa 
+
+sesuaikan dengan migrasi dan model siswa 
+
+buatkan view siswa di views/admin karna ini tugas admin
+
+buatkan controller, service, repository dan class datatable
+
+buatkan route siswa di admin
+====================================================================================
+fitur untuk lihat nilai siswa dari semua kelas semua semester 
+
+tambahkan sidebar di role siswa = hasil nilai
+lalu tampilan akan menampilkan table di dalam ada kelas wali kelas tahun angkatan tahun ajaran status dan action
+untuk view menampilkan biodata semua detail siswa dan semua mata pelajaran ditampilkan dan nilai serta grade lalu ada tab semester jadi saat klik detail siswa maka tampil tab semester 1 dan semester 2 dan setiap semester ada penilaian mata pelajaran dan juga absensi nya
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

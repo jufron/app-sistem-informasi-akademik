@@ -21,7 +21,7 @@
 
             <!-- Navigation / Back Button -->
             <div class="mb-8">
-                <a href="#"
+                <a href="{{ route('frond.guru-dan-staf') }}"
                     class="inline-flex items-center space-x-2 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-[#2A246B] dark:text-slate-400 dark:hover:text-[#FCEE09] transition-colors group">
                     <div
                         class="w-8 h-8 rounded-full bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/60 dark:border-white/10 flex items-center justify-center transform group-hover:-translate-x-1 transition-transform">
@@ -51,9 +51,8 @@
                         <div class="relative z-20 w-full h-full p-3 lg:p-4 pb-0">
                             <div
                                 class="w-full h-full rounded-t-[1.5rem] lg:rounded-t-[2rem] rounded-b-[1rem] overflow-hidden relative">
-                                <!-- Ganti src dengan foto asli -->
-                                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=1000&auto=format&fit=crop"
-                                    alt="Antonius Budi, S.Pd"
+                                <img src="{{ $teacherDetail['image'] }}"
+                                    alt="{{ $teacherDetail['name'] }}"
                                     class="absolute inset-0 w-full h-full object-cover object-top filter contrast-[1.05]">
 
                                 <!-- Inner Gradient -->
@@ -67,11 +66,11 @@
                                         class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-[#2A246B] hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:border-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all shadow-lg hover:-translate-y-1">
                                         <i class="fab fa-linkedin-in text-lg"></i>
                                     </a>
-                                    <a href="#"
+                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $teacherDetail['phone']) }}" target="_blank"
                                         class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-[#2A246B] hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:border-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all shadow-lg hover:-translate-y-1">
                                         <i class="fab fa-whatsapp text-xl"></i>
                                     </a>
-                                    <a href="#"
+                                    <a href="mailto:{{ strtolower(str_replace(' ', '', $teacherDetail['name'])) }}@weetabula.sch.id"
                                         class="w-12 h-12 rounded-2xl bg-white/20 dark:bg-slate-900/40 backdrop-blur-xl border border-white/30 dark:border-white/10 flex items-center justify-center text-white hover:bg-[#2A246B] hover:border-[#2A246B] dark:hover:bg-[#FCEE09] dark:hover:border-[#FCEE09] dark:hover:text-[#1C1C1C] transition-all shadow-lg hover:-translate-y-1">
                                         <i class="fas fa-envelope text-lg"></i>
                                     </a>
@@ -88,8 +87,7 @@
                     <div>
                         <div class="inline-flex items-center space-x-3 mb-4">
                             <span
-                                class="px-3 py-1 bg-[#2A246B]/10 dark:bg-[#FCEE09]/10 text-[#2A246B] dark:text-[#FCEE09] text-xs font-black uppercase tracking-widest rounded-full">Guru
-                                Tetap</span>
+                                class="px-3 py-1 bg-[#2A246B]/10 dark:bg-[#FCEE09]/10 text-[#2A246B] dark:text-[#FCEE09] text-xs font-black uppercase tracking-widest rounded-full">{{ $teacherDetail['status'] }}</span>
                             <div
                                 class="flex items-center space-x-1 text-xs font-bold text-slate-500 dark:text-slate-400">
                                 <i class="fas fa-circle text-[8px] text-[#2A246B] dark:text-[#FCEE09]"></i>
@@ -99,11 +97,9 @@
 
                         <h1
                             class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1C1C1C] dark:text-white leading-tight tracking-tight mb-2">
-                            Antonius Budi, <span
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-[#2A246B] to-blue-800 dark:from-[#FCEE09] dark:to-yellow-300">S.Pd</span>
+                            {{ $teacherDetail['name'] }}
                         </h1>
-                        <h3 class="text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-300">Wali Kelas 6 &
-                            Guru Matematika</h3>
+                        <h3 class="text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-300">{{ $teacherDetail['role'] }}</h3>
                     </div>
 
                     <!-- 2. Tentang / Biografi -->
@@ -112,10 +108,7 @@
                             <i class="fas fa-user-circle text-[#2A246B] dark:text-[#FCEE09] mr-2"></i> Tentang Saya
                         </h4>
                         <p class="text-base text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-                            Memiliki pengalaman lebih dari 10 tahun di dunia pendidikan dasar. Lulusan Universitas Nusa
-                            Cendana ini sangat percaya bahwa setiap anak memiliki cara unik dalam memahami angka dan
-                            logika. Bagi Bapak Antonius, matematika bukan sekadar hafalan rumus, melainkan permainan
-                            asah otak yang bisa dinikmati semua murid jika diajarkan dengan metode yang menyenangkan.
+                            {{ $teacherDetail['about'] }}
                         </p>
                     </div>
 
@@ -130,9 +123,7 @@
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <h4 class="font-bold text-[#1C1C1C] dark:text-white mb-1">Pendidikan Terakhir</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 font-medium">S1 Pendidikan Guru Sekolah
-                                Dasar (PGSD)</p>
-                            <p class="text-xs text-slate-500 mt-1">Universitas Nusa Cendana (Lulus 2014)</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 font-medium">{{ $teacherDetail['education'] }}</p>
                         </div>
 
                         <!-- Box 2: Mata Pelajaran -->
@@ -144,10 +135,12 @@
                             </div>
                             <h4 class="font-bold text-[#1C1C1C] dark:text-white mb-1">Mata Pelajaran</h4>
                             <div class="flex flex-wrap gap-2 mt-2">
-                                <span
-                                    class="px-2.5 py-1 rounded-lg bg-white/60 dark:bg-slate-700/50 text-xs font-bold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">Matematika</span>
-                                <span
-                                    class="px-2.5 py-1 rounded-lg bg-white/60 dark:bg-slate-700/50 text-xs font-bold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">IPA</span>
+                                @forelse($teacherDetail['subjects'] as $subj)
+                                    <span
+                                        class="px-2.5 py-1 rounded-lg bg-white/60 dark:bg-slate-700/50 text-xs font-bold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-600">{{ $subj }}</span>
+                                @empty
+                                    <span class="text-xs text-slate-400">Belum ditentukan</span>
+                                @endforelse
                             </div>
                         </div>
 
@@ -167,8 +160,7 @@
                             <i class="fas fa-quote-left text-4xl text-[#FCEE09]/20 absolute top-0 left-0"></i>
                             <p
                                 class="text-lg md:text-xl text-white font-medium leading-relaxed italic relative z-10 pl-6 border-l-2 border-[#FCEE09] mt-2">
-                                "Pendidikan bukan sekadar mentransfer ilmu pengetahuan, melainkan proses membimbing
-                                anak-anak menemukan potensi terbaik dalam diri mereka dengan logika dan cinta kasih."
+                                "Pendidikan bukan sekadar mentransfer ilmu pengetahuan, melainkan proses membimbing anak-anak menemukan potensi terbaik dalam diri mereka dengan logika dan cinta kasih."
                             </p>
                         </div>
                     </div>

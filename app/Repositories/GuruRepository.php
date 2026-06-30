@@ -23,9 +23,7 @@ class GuruRepository implements GuruRepositoryInterface
      */
     public function getAll(): Collection
     {
-        return Cache::remember('guru_all', now()->addDays(7), function () {
-            return Guru::all();
-        });
+        return Guru::query()->latest()->get();
     }
 
     /**
